@@ -6,7 +6,7 @@
 #    By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/11 23:48:51 by rmrok             #+#    #+#              #
-#    Updated: 2024/12/12 00:48:07 by rmrok            ###   ########.fr        #
+#    Updated: 2024/12/12 00:55:19 by rmrok            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
 # source files and object files
-SRC = ft_isstaff.c ft_memset.c
-OBJS = $(SRC:.c = .o)
+SRC = ft_isstaff.c #ft_memset.c
+OBJS = $(SRC:.c=.o)
 
 # rules
 all: $(NAME)

@@ -1,0 +1,12 @@
+ar rcs
+    r: replace or add files to the archive
+    c: create the archive if it doesnt't exist
+    s: write an index to the archive
+
+
+ar rcs archive.a file.o file2.o
+
+cc -Wall -Wextra -Werror -o test test.c -L. -lft
+
+-L. : search in local directory
+-lft: 
