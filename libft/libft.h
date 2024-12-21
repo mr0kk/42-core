@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2024/12/11 23:49:16 by rmrok            ###   ########.fr       */
+/*   Updated: 2024/12/21 21:54:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 
 # include <ctype.h>
 # include <stdio.h>
+#include <stdlib.h>
 # include <string.h>
+#include <limits.h>
 
 int		ft_isalpha(char c);
 int		ft_isdigit(char c);
 int		ft_isalnum(char c);
 int		ft_isprint(char c);
 size_t	ft_strlen(char *str);
+int ft_tolower(int c);
+int ft_toupper(int c);
+int ft_atoi(const char *nptr);
+char *ft_strchr(const char *s, int c);
 
 #endif
