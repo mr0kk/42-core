@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2024/12/22 18:28:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/22 18:38:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_isprint(char c);
 size_t	ft_strlen(char *str);
 void	*ft_memset(void *str, int c, size_t n);
 void ft_bzero(void *s, size_t n);
+void *ft_memcpy(void *dest, const void *src, size_t n);
 
 int ft_tolower(int c);
 int ft_toupper(int c);
