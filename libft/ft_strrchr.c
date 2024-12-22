@@ -18,14 +18,14 @@ char *ft_strrchr(const char *s, int c)
     return (NULL);
 }
 
-int main(void)
-{
-    char *test = "ala ma kota ala koty ma";
-    printf("%s\n", ft_strrchr(test, 'k'));
-    printf("%s\n", strrchr(test, 'k'));
+// int main(void)
+// {
+//     char *test = "ala ma kota ala koty ma";
+//     printf("%s\n", ft_strrchr(test, 'k'));
+//     printf("%s\n", strrchr(test, 'k'));
 
-    if (strrchr(test, 'x') == NULL)
-        printf("NULL\n");
-    if (ft_strrchr(test, 'x') == NULL)
-        printf("NULL\n");
-}
+//     if (strrchr(test, 'x') == NULL)
+//         printf("NULL\n");
+//     if (ft_strrchr(test, 'x') == NULL)
+//         printf("NULL\n");
+// }
