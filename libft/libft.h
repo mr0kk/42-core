@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2024/12/29 22:09:34 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/29 23:05:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 # include <string.h>
 #include <limits.h>
+#include <stdint.h>
 
 int		ft_isalpha(char c);
 int		ft_isdigit(char c);
@@ -35,12 +36,10 @@ int ft_strncmp(const char *s1, const char*s2, size_t n);
 void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
 char *ft_strnstr(const char *big, const char *small, size_t len);
-
-
 int ft_tolower(int c);
 int ft_toupper(int c);
 int ft_atoi(const char *nptr);
 char *ft_strchr(const char *s, int c);
 char *ft_strrchr(const char *s, int c);
-
+void *ft_calloc(size_t nmemb, size_t size);
 #endif
