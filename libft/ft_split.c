@@ -44,7 +44,10 @@ char **ft_split(char const *s, char c)
     words = count_words(s, c);
     res = (char **)malloc(words * sizeof(char *) + 1);
     if (res == NULL)
+    {
+        free(res);
         return (NULL);
+    }
     write_words(res, words, c, s);
     return (res);
 }
