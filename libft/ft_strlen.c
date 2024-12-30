@@ -1,6 +1,6 @@
-#include "stdlib.h"
+#include "libft.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t len;
 
@@ -9,3 +9,8 @@ size_t	ft_strlen(char *str)
 		len++;
 	return (len);
 }
+
+// int main()
+// {
+// 	printf("len: %ld\n", ft_strlen("123456789"));
+// }

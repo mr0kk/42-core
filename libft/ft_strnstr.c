@@ -1,22 +1,12 @@
 #include "libft.h"
 
-size_t	leng(const char *str)
-{
-	size_t len;
-
-	len = 0;
-	while (*str++)
-		len++;
-	return (len);
-}
-
 char *ft_strnstr(const char *big, const char *small, size_t len)
 {
     unsigned int i;
     unsigned int j;
     size_t big_len;
 
-    big_len = leng(big);
+    big_len = ft_strlen(big);
     if (!small[0])
         return ((char *)big);
     i = 0;
