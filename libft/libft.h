@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2024/12/30 10:22:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/30 11:20:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <limits.h>
 #include <stdint.h>
 
+// PART I
 int		ft_isalpha(char c);
 int		ft_isdigit(char c);
 int		ft_isalnum(char c);
@@ -42,4 +43,10 @@ int ft_atoi(const char *nptr);
 char *ft_strchr(const char *s, int c);
 char *ft_strrchr(const char *s, int c);
 void *ft_calloc(size_t nmemb, size_t size);
+char *ft_strdup(const char *s);
+
+// PART II
+char *ft_substr(char const *s, unsigned int start, size_t len);
+
+
 #endif
