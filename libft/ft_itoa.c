@@ -5,6 +5,11 @@ static int count_len(int n)
     int len;
 
     len = 0;
+    if (n < 0)
+    {
+        len++;
+        n *= -1;
+    }
     while (n)
     {
         len++;
@@ -13,48 +18,53 @@ static int count_len(int n)
     return (len);
 }
 
-static void ft_swap(char *res, int len)
-{
-    int i;
-    char tmp;
-
-    i = 0;
-    while (i < len)
-    {
-        tmp = res[i];
-        res[i] = res[len];
-        res[len] = tmp;
-        i++;
-        len--;
-    }
-}
-
 char *ft_itoa(int n)
 {
     char *res;
     int len;
-    int i;
-
-    i = 0;
+    
+    if (n == 0)
+        return ("0");
+    if (n == -2147483648)
+        return ("-2147483648");
     len = count_len(n);
-    res = (char *)malloc(len * sizeof(char) + 1);
+    res = (char *)malloc((len + 1) * sizeof(char));
     if (res == NULL)
         return (NULL);
-    while (n)
+    res[len] = '\0';
+    if (n < 0)
     {
-        res[i] = (char)(n % 10 + 48);
-        n /= 10;
-        i++;
+        res[0] = '-';
+        n *= -1;
     }
-    ft_swap(res, len - 1);
+    while ((len - 1) >= 0 && n > 0)
+    {
+        res[len - 1] = n % 10 + 48;
+        n /= 10;
+        len--;
+    }
     return (res);
 }
 
 // int main()
 // {
-//     int n = 123456789;
+//     int tests[] = {
+//         123456789,
+//         -123456789,
+//         -2147483648,
+//         2147483647,
+//         0,
+//         23
+//     };
 //     char *str;
-
-//     str = ft_itoa(n);
-//     printf("%s\n", str);
+//     int i = 0;
+//     while (i < sizeof(tests) / sizeof(int))
+//     {
+//         printf("number:\t\t%d\n", tests[i]);
+//         str = ft_itoa(tests[i]);
+//         printf("as ascii:\t%s\n", str);
+//         printf("------------------------------\n");
+//         i++;
+//     }
+//     free(str);
 // }
