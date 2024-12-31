@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2024/12/31 13:55:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/31 14:07:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char *ft_itoa(int n);
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void ft_striteri(char *s, void (*f)(unsigned int, char *));
 void ft_putchar_fd(char c, int fd);
+void ft_putstr_fd(char *s, int fd);
 
 
 #endif
