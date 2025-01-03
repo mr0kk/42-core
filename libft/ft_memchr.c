@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 13:14:04 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/03 13:14:04 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void *ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-    unsigned char *ptr;
-    unsigned int i;
-    unsigned char c2;
+	unsigned char	*ptr;
+	unsigned int	i;
+	unsigned char	c2;
 
-    i = 0;
-    c2 = c;
-    ptr = (unsigned char *)s;
-    while (i < n)
-    {
-        if (*ptr == c2)
-            return ((void *)ptr);
-        ptr++;
-        i++;
-    }
-    return (NULL);
+	i = 0;
+	c2 = c;
+	ptr = (unsigned char *)s;
+	while (i < n)
+	{
+		if (*ptr == c2)
+			return ((void *)ptr);
+		ptr++;
+		i++;
+	}
+	return (NULL);
 }
 
 // int main() {
@@ -45,5 +57,5 @@ void *ft_memchr(const void *s, int c, size_t n)
 //         printf("Custom ft_memchr did not find the character.\n");
 //     }
 
-//     return 0;
+//     return (0);
 // }

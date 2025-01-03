@@ -1,48 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 12:45:28 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/03 12:45:28 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_strnstr(const char *big, const char *small, size_t len)
+
+char	*ft_strnstr(const char *big, const char *small, size_t len)
 {
-    unsigned int i;
-    unsigned int j;
-    size_t big_len;
+	unsigned int i;
+	unsigned int j;
+	size_t big_len;
 
-    big_len = ft_strlen(big);
-    if (!small[0])
-        return ((char *)big);
-    i = 0;
-    while (i < big_len && len != 0)
-    {
-        if (big[i] == small[0])
-        {
-            j = 0;
-            while (j < len && i + j < big_len)
-            {
-                if (big[i + j] != small[j])
-                    break;
-                else
-                    j++;
-            }
-            if (j == len)
-                return ((char *)big + i);
-        }
-        i++;
-    }
-    return (NULL);
+	big_len = ft_strlen(big);
+	if (!small[0])
+		return ((char *)big);
+	i = 0;
+	while (i < big_len && len != 0)
+	{
+		if (big[i] == small[0])
+		{
+			j = 0;
+			while (j < len && i + j < big_len)
+			{
+				if (big[i + j] != small[j])
+					break ;
+				else
+					j++;
+			}
+			if (j == len)
+				return ((char *)big + i);
+		}
+		i++;
+	}
+	return (NULL);
 }
-
 
 // void test_ft_strnstr() {
 //     const char *tests[][3] = {
-//         {"Hello, World!", "World", "12"},  // Test 1: Substring is found within len
-//         {"Hello, World!", "World", "5"},  // Test 2: Substring is not within len
-//         {"Hello, World!", "Hello", "12"}, // Test 3: Substring at the beginning
+//         {"Hello, World!", "World", "12"}, 
+	// Test 1: Substring is found within len
+//         {"Hello, World!", "World", "5"}, 
+	// Test 2: Substring is not within len
+//         {"Hello, World!", "Hello", "12"},
+	// Test 3: Substring at the beginning
 //         {"Hello, World!", "", "12"},      // Test 4: Empty substring
 //         {"Hello, World!", "XYZ", "12"},   // Test 5: Substring not found
 //         {"", "World", "12"},              // Test 6: Empty big string
 //         {"Hello, World!", "World", "0"},  // Test 7: len is 0
-//         {"abcabcabc", "abc", "9"},        // Test 8: Multiple occurrences of substring
+//         {"abcabcabc", "abc", "9"},       
+	// Test 8: Multiple occurrences of substring
 //         {"Hello, World!", "o, W", "12"},  // Test 9: Substring in the middle
-//         {"Hello, World!", "Hello, World!", "5"}, // Test 10: len is smaller than the substring
+//         {"Hello, World!", "Hello, World!", "5"},
+	// Test 10: len is smaller than the substring
 //     };
 
 //     printf("Testing ft_strnstr...\n");
@@ -60,7 +77,8 @@ char *ft_strnstr(const char *big, const char *small, size_t len)
 //         else
 //             printf("ft_strnstr result: NULL\n");
 
-//         // Porównanie z funkcją oryginalną strnstr (dla platform wspierających tę funkcję)
+//        
+	// Porównanie z funkcją oryginalną strnstr (dla platform wspierających tę funkcję)
 //         #ifdef __BSD_VISIBLE
 //         char *expected = strnstr(big, small, len);
 //         if (expected)

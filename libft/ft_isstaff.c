@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isstaff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 23:49:24 by rmrok             #+#    #+#             */
-/*   Updated: 2024/12/22 13:59:10 by marvin           ###   ########.fr       */
+/*   Created: 2025/01/03 12:23:23 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/03 12:44:03 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_isprint(int c)
 	return (c >= '!' && c <= '~');
 }
 
-int ft_isascii(int c)
+int	ft_isascii(int c)
 {
 	return (c >= 0 && c <= 127);
 }
@@ -51,6 +51,6 @@ int ft_isascii(int c)
 // 	c = ' ';
 // 	printf("%c\t%d\t%d\n", c, isprint(c), ft_isprint(c));
 // 	c = 'd';
-// 	printf("%c\t%d\t%d\n", c, isprint(c), ft_isprint(c));	
+// 	printf("%c\t%d\t%d\n", c, isprint(c), ft_isprint(c));
 // 	return (0);
 // }

@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 12:44:32 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/03 13:28:43 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void *ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-    unsigned char *d;
-    unsigned char *s;
-    size_t i;
-    
-    i = 0;
-    d = (unsigned char *)dest;
-    s = (unsigned char *)src;
-    if (d == s)
-        return (dest);
-    else if (d < s)
-    {
-        while (n--)
-            *d++ = *s++;
-    }
-    else
-    {
-        d += n;
-        s += n;
-        while (n--)
-            *(--d) = *(--s);
-    }
-    return (dest);
+	unsigned char	*d;
+	unsigned char	*s;
+	size_t			i;
+
+	i = 0;
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	if (d == s)
+		return (dest);
+	else if (d < s)
+	{
+		while (n--)
+			*d++ = *s++;
+	}
+	else
+	{
+		d += n;
+		s += n;
+		while (n--)
+			*(--d) = *(--s);
+	}
+	return (dest);
 }
 
 // int main(void)
@@ -35,7 +47,6 @@ void *ft_memmove(void *dest, const void *src, size_t n)
 //     char str2[] = "123456789";
 //     memmove(str2 + 3, str2, 4);
 //     printf("%s\n\n", str2);
-
 
 //     char str3[] = "123456789";
 //     memmove(str3, str3 + 3, 4);

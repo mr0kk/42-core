@@ -1,25 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 13:49:43 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/03 13:49:43 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+// static void	to_uppercase(unsigned int i, char *c)
+// {
+// 	if (*c >= 'a' && *c <= 'z')
+// 	{
+// 		*c = *c - 32;
+// 	}
+// }
 
-
-void to_uppercase(unsigned int i, char *c)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-    if (*c >= 'a' && *c <= 'z') {
-        *c = *c - 32; 
-    }
-}
+	unsigned int i;
 
-void ft_striteri(char *s, void (*f)(unsigned int, char *))
-{
-    unsigned int i;
-
-    i = 0;
-    if (!s || !f)
-        return ;
-    while (s[i])
-    {
-        f(i, &s[i]);
-        i++;
-    }
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
 
 // int main(void)

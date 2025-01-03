@@ -1,29 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 13:21:39 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/03 13:22:26 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    unsigned int i;
-    unsigned char *str1;
-    unsigned char * str2;
+	unsigned int	i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-    str1 = (unsigned char *)s1;
-    str2 = (unsigned char *)s2;
-    i = 0;
-
-    if (n == 0)
-        return (0);
-    while (i < n)
-    {
-        printf("s1: %c\ts2: %c\n", *str1, *str2);
-        if (*str1 != *str2)
-            return (*str1 - *str2);
-        if (!str1 || !str2)
-            break;
-        str1++;
-        str2++;
-        i++;
-    }
-    return (0);
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i < n)
+	{
+		printf("s1: %c\ts2: %c\n", *str1, *str2);
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		if (!str1 || !str2)
+			break ;
+		str1++;
+		str2++;
+		i++;
+	}
+	return (0);
 }
 
 // int main()
