@@ -6,7 +6,7 @@
 #    By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/11 23:48:51 by rmrok             #+#    #+#              #
-#    Updated: 2025/01/03 13:46:34 by rmrok            ###   ########.fr        #
+#    Updated: 2025/01/03 14:14:06 by rmrok            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,11 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
 SRC	= ft_atoi.c\
-	ft_isstaff.c\
+	ft_isalpha.c\
+	ft_isdigit.c\
+	ft_isalnum.c\
+	ft_isascii.c\
+	ft_isprint.c\
 	ft_strlen.c\
 	ft_memset.c\
 	ft_memcpy.c\
@@ -27,7 +31,8 @@ SRC	= ft_atoi.c\
 	ft_memchr.c\
 	ft_memcmp.c\
 	ft_strnstr.c\
-	ft_upper_lower.c\
+	ft_toupper.c\
+	ft_tolower.c\
 	ft_atoi.c\
 	ft_strchr.c\
 	ft_strrchr.c\
