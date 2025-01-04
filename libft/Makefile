@@ -6,7 +6,7 @@
 #    By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/11 23:48:51 by rmrok             #+#    #+#              #
-#    Updated: 2025/01/03 14:14:06 by rmrok            ###   ########.fr        #
+#    Updated: 2025/01/03 22:01:35 by rmrok            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC	= ft_atoi.c\
 	ft_isascii.c\
 	ft_isprint.c\
 	ft_strlen.c\
+	ft_bzero.c\
 	ft_memset.c\
 	ft_memcpy.c\
 	ft_memmove.c\

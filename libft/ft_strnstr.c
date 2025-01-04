@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
 /*   Created: 2025/01/03 12:45:28 by rmrok             #+#    #+#             */
 /*   Updated: 2025/01/03 12:45:28 by rmrok            ###   ########.fr       */
 /*                                                                            */
@@ -17,86 +20,113 @@ char	*ft_strnstr(const char *big, const char *small, size_t len)
 {
 	unsigned int i;
 	unsigned int j;
-	size_t big_len;
 
-	big_len = ft_strlen(big);
 	if (!small[0])
 		return ((char *)big);
+	if (!len)
+		return (NULL);
 	i = 0;
-	while (i < big_len && len != 0)
+	while (big[i] && i < len)
 	{
 		if (big[i] == small[0])
 		{
 			j = 0;
-			while (j < len && i + j < big_len)
+			while (big[i + j] == small[j] && i + j < len)
 			{
-				if (big[i + j] != small[j])
-					break ;
-				else
-					j++;
+				if (!small[j + 1])
+					return ((char *)big + i);
+				j++;
 			}
-			if (j == len)
-				return ((char *)big + i);
 		}
 		i++;
 	}
 	return (NULL);
 }
 
-// void test_ft_strnstr() {
-//     const char *tests[][3] = {
-//         {"Hello, World!", "World", "12"}, 
-	// Test 1: Substring is found within len
-//         {"Hello, World!", "World", "5"}, 
-	// Test 2: Substring is not within len
-//         {"Hello, World!", "Hello", "12"},
-	// Test 3: Substring at the beginning
-//         {"Hello, World!", "", "12"},      // Test 4: Empty substring
-//         {"Hello, World!", "XYZ", "12"},   // Test 5: Substring not found
-//         {"", "World", "12"},              // Test 6: Empty big string
-//         {"Hello, World!", "World", "0"},  // Test 7: len is 0
-//         {"abcabcabc", "abc", "9"},       
-	// Test 8: Multiple occurrences of substring
-//         {"Hello, World!", "o, W", "12"},  // Test 9: Substring in the middle
-//         {"Hello, World!", "Hello, World!", "5"},
-	// Test 10: len is smaller than the substring
-//     };
+// void	test_ft_strnstr(void)
+// {
+// 	char big[30] = "aaabcabcd";
+// 	char small[] = "aabc";
+// 	size_t len = 0;
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", small);
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", (char *)NULL);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(big, small, len));
 
-//     printf("Testing ft_strnstr...\n");
-//     for (int i = 0; i < 10; i++) {
-//         const char *big = tests[i][0];
-//         const char *small = tests[i][1];
-//         size_t len = (size_t)atoi(tests[i][2]);
+// 	len = -1;
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", small);
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", big + 1);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(big, small, len));
 
-//         printf("\nTest %d:\n", i + 1);
-//         printf("big: \"%s\"\nsmall: \"%s\"\nlen: %zu\n", big, small, len);
+// 	len = -1;
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", "a");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", big);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(big, "a", len));
 
-//         char *result = ft_strnstr(big, small, len);
-//         if (result)
-//             printf("ft_strnstr result: \"%s\"\n", result);
-//         else
-//             printf("ft_strnstr result: NULL\n");
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", "c");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", big + 4);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(big, "c", len));
 
-//        
-	// Porównanie z funkcją oryginalną strnstr (dla platform wspierających tę funkcję)
-//         #ifdef __BSD_VISIBLE
-//         char *expected = strnstr(big, small, len);
-//         if (expected)
-//             printf("strnstr (original) result: \"%s\"\n", expected);
-//         else
-//             printf("strnstr (original) result: NULL\n");
-//         #endif
-//     }
+// 	char *empty = (char *)"";
+// 	printf("big:\t\t%s\n", empty);
+// 	printf("small:\t\t%s\n", "");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", empty);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(empty, "", len));
+
+// 	len = 0;
+// 	printf("big:\t\t%s\n", empty);
+// 	printf("small:\t\t%s\n", "");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", empty);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(empty, "", len));
+
+// 	len = -1;
+// 	printf("big:\t\t%s\n", empty);
+// 	printf("small:\t\t%s\n", "coucou");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", (char *)NULL);
+// 	printf("got:\t\t%s\n\n\n", ft_strnstr(empty, "coucou", len));
+
+// 	len = 5;
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", "aaabc");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", big);
+// 	printf("got:\t\t\t%s\n\n\n", ft_strnstr(big, "aaabc", len));
+
+// 	len = 5;
+// 	printf("big:\t\t%s\n", empty);
+// 	printf("small:\t\t%s\n", "12345");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", (char *)NULL);
+// 	printf("got:\t\t\t%s\n\n\n", ft_strnstr(big, "12345", len));
+
+// 	len = 9;
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", "abcd");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\t\t%s\n", big + 5);
+// 	printf("got:\t\t\t%s\n\n\n", ft_strnstr(big, "abcd", len));
+
+// 	len = 8;
+// 	printf("big:\t\t%s\n", big);
+// 	printf("small:\t\t%s\n", "cd");
+// 	printf("len:\t\t%lu\n", len);
+// 	printf("expected:\tNULL\n");
+// 	printf("got:\t\t\t%s\n\n\n", ft_strnstr(big, "cd", len));
 // }
 
-// int main()
+// int	main(void)
 // {
-//     // char str1[] = "alicja ma kopa";
-//     // char str2[] = "kota";
-
-//     // printf("%s\n", str1);
-//     // printf("ft_strnstr: %s\n", ft_strnstr(str1, str2, 2));
-//     // printf("test: %s\n", str1 + 10);
-
-//     test_ft_strnstr();
+// 	// printf("atoi -1: %d\n", atoi("-1"));
+// 	// printf("atoi as size_t: %lu\n", (size_t)atoi("-1"));
+// 	test_ft_strnstr();
 // }

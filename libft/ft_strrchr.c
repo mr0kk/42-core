@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2025/01/03 12:45:31 by rmrok             #+#    #+#             */
 /*   Updated: 2025/01/03 12:45:31 by rmrok            ###   ########.fr       */
 /*                                                                            */
@@ -20,7 +23,7 @@ char	*ft_strrchr(const char *s, int c)
 	ans = NULL;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			ans = (char *)s;
 		s++;
 	}
