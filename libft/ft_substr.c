@@ -27,12 +27,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start > s_len)
 		return (ft_strdup(""));
 	if (start + len > s_len)
-		len -= s_len - start;
+		len = s_len - start;
 	res = (char *)malloc((len + 1) * sizeof(char));
 	if (res == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i < len && s[start + i])
 	{
 		res[i] = s[start + i];
 		i++;
