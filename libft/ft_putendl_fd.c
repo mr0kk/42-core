@@ -12,11 +12,9 @@
 
 #include "libft.h"
 
-
 void	ft_putendl_fd(char *s, int fd)
 {
-	unsigned int i;
-	char c;
+	unsigned int	i;
 
 	i = 0;
 	if (!s || !fd)
@@ -26,8 +24,7 @@ void	ft_putendl_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 		i++;
 	}
-	c = '\n';
-	write(fd, &c, 1);
+	write(fd, "\n", 1);
 }
 
 // int main()
