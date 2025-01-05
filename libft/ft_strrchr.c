@@ -2,23 +2,19 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2025/01/03 12:45:31 by rmrok             #+#    #+#             */
-/*   Updated: 2025/01/03 12:45:31 by rmrok            ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 20:55:49 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/05 20:55:49 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
 char	*ft_strrchr(const char *s, int c)
 {
-	char *ans;
+	char	*ans;
 
 	ans = NULL;
 	while (*s)

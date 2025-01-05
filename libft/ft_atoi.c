@@ -2,14 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+
-	+:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+
-	+#+        */
-/*                                                +#+#+#+#+#+
-	+#+           */
-/*   Created: 2025/01/03 12:43:44 by rmrok             #+#    #+#             */
-/*   Updated: 2025/01/03 12:43:44 by rmrok            ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 21:05:59 by rmrok             #+#    #+#             */
+/*   Updated: 2025/01/05 21:05:59 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +14,24 @@
 
 int	ft_atoi(const char *nptr)
 {
-	int	result;
-	int	sign;
+	unsigned int	result;
+	int				i;
+	int				sign;
 
 	sign = 1;
 	result = 0;
-	while (!ft_isprint(*nptr))
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+	i = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (*nptr == '-')
+		if (nptr[i] == '-')
 			sign = -1;
-		nptr++;
+		i++;
 	}
-	else if (!ft_isdigit(*nptr))
-		return (result);
-	else
-	{
-		result = *nptr - 48;
-		nptr++;
-	}
-	while (*nptr && ft_isdigit(*nptr))
-		result = result * 10 + (*nptr++ - 48);
-	return (result * sign);
+	while (ft_isdigit(nptr[i]))
+		result = result * 10 + (nptr[i++] - 48);
+	return ((int)result * sign);
 }
 
 // void	tester(const char *str)

@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-
 char	change(unsigned int i, char c)
 {
 	if (c >= 'a' && c <= 'z')
@@ -21,17 +20,17 @@ char	change(unsigned int i, char c)
 		c = (c - 'A' + i) % 26 + 'A';
 	return (c);
 }
+
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int len;
-	unsigned int i;
-	char *res;
+	unsigned int	len;
+	unsigned int	i;
+	char			*res;
 
 	len = ft_strlen(s);
 	res = (char *)malloc((len + 1) * sizeof(s[0]));
 	if (res == NULL)
 		return (NULL);
-
 	i = 0;
 	while (i < len)
 	{

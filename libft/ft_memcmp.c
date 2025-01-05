@@ -25,7 +25,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		return (0);
 	while (i < n)
 	{
-		printf("s1: %c\ts2: %c\n", *str1, *str2);
 		if (*str1 != *str2)
 			return (*str1 - *str2);
 		if (!str1 || !str2)

@@ -12,11 +12,10 @@
 
 #include "libft.h"
 
-
 size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
-	unsigned int src_len;
-	size_t i;
+	unsigned int	src_len;
+	size_t			i;
 
 	src_len = 0;
 	while (src[src_len] != '\0')

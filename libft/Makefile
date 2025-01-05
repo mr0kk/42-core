@@ -6,7 +6,7 @@
 #    By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/11 23:48:51 by rmrok             #+#    #+#              #
-#    Updated: 2025/01/03 22:01:35 by rmrok            ###   ########.fr        #
+#    Updated: 2025/01/05 22:49:07 by rmrok            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC	= ft_atoi.c\
 	ft_strnstr.c\
 	ft_toupper.c\
 	ft_tolower.c\
-	ft_atoi.c\
 	ft_strchr.c\
 	ft_strrchr.c\
 	ft_calloc.c\

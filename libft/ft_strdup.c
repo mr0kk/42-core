@@ -12,12 +12,11 @@
 
 #include "libft.h"
 
-
 char	*ft_strdup(const char *s)
 {
-	unsigned int len;
-	unsigned int i;
-	char *ptr;
+	unsigned int	len;
+	unsigned int	i;
+	char			*ptr;
 
 	i = 0;
 	len = ft_strlen(s);

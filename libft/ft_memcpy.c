@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:44:29 by rmrok             #+#    #+#             */
-/*   Updated: 2025/01/03 12:44:30 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/01/05 21:30:04 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
 	i = 0;
-	while (i < n)
+	while (i < n && (s || d))
 	{
 		d[i] = s[i];
 		i++;

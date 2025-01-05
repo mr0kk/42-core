@@ -11,17 +11,10 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-// static void	to_uppercase(unsigned int i, char *c)
-// {
-// 	if (*c >= 'a' && *c <= 'z')
-// 	{
-// 		*c = *c - 32;
-// 	}
-// }
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	if (!s || !f)
