@@ -15,33 +15,30 @@
 
 #include "libft.h"
 
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *ptr;
-	unsigned int i;
-	size_t s_len;
+	size_t	i;
+	size_t	s_len;
+	char	*res;
 
-	i = 0;
-	s_len = ft_strlen(s);
 	if (!s)
-	{
 		return (NULL);
-	}
-	if (start >= s_len)
-	{
+	s_len = ft_strlen(s);
+	if (start > s_len)
 		return (ft_strdup(""));
-	}
-
-	ptr = (char *)malloc((len + 1) * sizeof(char));
-	if (ptr == NULL)
+	if (start + len > s_len)
+		len -= s_len - start;
+	res = (char *)malloc((len + 1) * sizeof(char));
+	if (res == NULL)
 		return (NULL);
-	while (i < len && s[start])
+	i = 0;
+	while (i < len)
 	{
-		ptr[i++] = s[start++];
+		res[i] = s[start + i];
+		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	res[i] = '\0';
+	return (res);
 }
 
 // int main(void)
@@ -50,5 +47,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 //     char *ptr;
 
 //     ptr = ft_substr(s, 5, 7);
-//     printf("%s\n", ptr);
+//     if (ptr)
+// 		printf("%s\n", ptr);
+// 	else
+// 		printf("NULL\n");
 // }
