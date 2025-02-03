@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 19:03:26 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/02 22:11:34 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/03 23:22:34 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,22 @@
     % → Prints a literal % character 
 */
 
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-    return (1);
-}
-
-int    ft_putstr(char *s)
-{
-    size_t  i;
-
-    i = 0;
-    while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-    }
-    return (i);
-}
-
 int read_format(const char f, va_list args)
 {
     if (f == 'c')
         return(ft_putchar(va_arg(args, int)));
     else if (f == 's')
         return(ft_putstr(va_arg(args, char *)));
-    
+    else if (f == 'p')
+        return (put_pointer(va_arg(args, uintptr_t)));
+    else if (f == 'd' || f == 'i')
+        return (put_int(va_arg(args, int)));
+    else if (f == 'u')
+        return (put_u_int(va_arg(args, unsigned int)));
+    else if (f == 'x' || f == 'X')
+        return (put_hex(va_arg(args, unsigned int), f));
+    else if (f == '%')
+        return (ft_putchar('%'));
     return (0);
 }
 
@@ -94,10 +84,3 @@ int ft_printf(const char *format, ...)
     va_end(args);    
     return (length);
 }
-
-int main(void)
-{
-    int res = ft_printf("hello %c world %s\n", 'f', "dziala\n");
-    printf("%d\n", res);
-}
-

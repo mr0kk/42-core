@@ -1,42 +1,106 @@
 #include "libftprintf.h"
 
-/*
-    %c - character 
-    %s - string
-    %f - float 
-    %lf - double 
-    %d - intiger 
-
-    %.1 - deciman precision
-    %1 - minimmum fild width
-    %- - left align
-
-    va_list args;  
-    va_start(args, count);
-    va_arg(args, int);
-    va_end(args); 
-*/
-
-int sum(int count, ...)
+void int_test()
 {
-    va_list args;   // Declare a variable to hold the arguments
-    va_start(args, count);
+    int res;
+    int min = INT_MIN;
+    int max = INT_MAX;
 
-    int result = 0;
-    int i = 0;
-    while (i < count)
-    {
-        result += va_arg(args, int);
-        i++;
-    }
-    va_end(args);
+    res = printf("%d", 0);
+    printf("\tlen = %d\tprintf\n", res);
 
-    return (result);
+    res = ft_printf("%d", 0);
+    printf("\tlen = %d\tft_printf\n\n", res);
+
+    res = printf("%d", min);
+    printf("\tlen = %d\tprintf\n", res);
+
+    res = ft_printf("%d", min);
+    printf("\tlen = %d\tft_printf\n\n", res);
+    
+    res = printf("%d", max);
+    printf("\tlen = %d\tprintf\n", res);
+
+    res = ft_printf("%i", max);
+    printf("\tlen = %d\tft_printf\n\n", res);
+}
+void uint_test()
+{
+    int umax = UINT_MAX;
+    int res;
+
+    res = printf("%d", 0);
+    printf("\tlen = %d\tprintf\n", res);
+
+    res = ft_printf("%d", 0);
+    printf("\tlen = %d\tft_printf\n\n", res);
+
+    res = printf("%u", umax);
+    printf("\tlen = %d\tprintf\n", res);
+
+    res = ft_printf("%u", umax);
+    printf("\tlen = %d\tft_printf\n\n", res);
+}
+
+void hex_test()
+{
+    unsigned int x;
+    int len;
+
+    ft_printf("if x:\n");
+    x = 125;
+    ft_printf("int: %u\n", x);
+    len = printf("%x", x);
+    printf("\tlen = %d\t\tprintf\n", len);
+    len = ft_printf("%x", x);
+    ft_printf("\tlen = %d\t\tft_printf\n\n", len);
+
+    x = UINT_MAX;
+    ft_printf("int: %u\n", x);
+    len = printf("%x", x);
+    printf("\tlen = %d\t\tprintf\n", len);
+    len = ft_printf("%x", x);
+    ft_printf("\tlen = %d\t\tft_printf\n\n", len);
+
+    x = 0;
+    ft_printf("int: %u\n", x);
+    len = printf("%x", x);
+    printf("\tlen = %d\t\tprintf\n", len);
+    len = ft_printf("%x", x);
+    ft_printf("\tlen = %d\t\tft_printf\n\n", len);
+
+    x = -40;
+    ft_printf("int: %u\n", x);
+    len = printf("%x", x);
+    printf("\tlen = %d\t\tprintf\n", len);
+    len = ft_printf("%x", x);
+    ft_printf("\tlen = %d\t\tft_printf\n\n", len);
+
+    ft_printf("if X:\n");
+    x = UINT_MAX;
+    ft_printf("int: %u\n", x);
+    len = printf("%X", x);
+    printf("\tlen = %d\t\tprintf\n", len);
+    len = ft_printf("%X", x);
+    ft_printf("\tlen = %d\t\tft_printf\n\n", len);
+}
+
+void test()
+{
+    // %d and %i
+    ft_printf("intiger printing test:\n\n");
+    int_test();
+
+    // %u
+    ft_printf("unsigned intiger printing test:\n\n");
+    uint_test();
+
+    // %x and %X
+    // ft_printf("hex conversion testing:\n\n");
+    // hex_test();
 }
 
 int main(void)
 {
-    printf("sum: %d\n", sum(3, 4, 5, 1));
-
-    printf("%c\n", ft_tolower('A'));
+    test();
 }
