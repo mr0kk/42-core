@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   put_uint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:44:09 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/08 13:32:55 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/08 16:26:46 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 static int	count_len(unsigned int n)
 {
