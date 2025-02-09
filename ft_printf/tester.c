@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void int_test()
 {
@@ -85,17 +85,59 @@ void hex_test()
     ft_printf("\tlen = %d\t\tft_printf\n\n", len);
 }
 
+void s_test()
+{
+    char *s = NULL;
+    int res;
+
+    res = printf(" NULL %s NULL ", s);
+    printf("\tlen: %d\t\t:printf\n", res);
+    res = ft_printf(" NULL %s NULL ", s);
+    printf("\tlen: %d\t\t:ft_printf\n\n\n", res);
+
+    res = printf("%s", s);
+    printf("\tlen: %d\t\t:printf\n", res);
+    res = ft_printf("%s", s);
+    printf("\tlen: %d\t\t:ft_printf\n", res);
+}
+
+void    p_test()
+{
+    int x = 5;
+    int *p = &x;
+    int res;
+
+    res = printf("%p", p);
+    printf("\t\tlen: %d\t:printf\n",res);
+    res = ft_printf("%p", p);
+    printf("\t\tlen: %d\t:ft_printf\n\n\n", res);
+
+    p = NULL;
+    res = printf("%p", p);
+    printf("\t\tlen: %d\t:printf\n", res);
+    res = ft_printf("%p", p);
+    printf("\t\tlen: %d\t:ft_printf\n\n\n", res);
+}
+
 void test()
 {
-    // %d and %i
-    ft_printf("intiger printing test:\n\n");
-    int_test();
+    // // %s
+    // ft_printf("string test:\n\n");
+    // s_test();
 
-    // %u
-    ft_printf("unsigned intiger printing test:\n\n");
-    uint_test();
+    // // %p
+    // ft_printf("pointer test:\n\n");
+    // p_test();
 
-    // %x and %X
+    // // %d and %i
+    // ft_printf("intiger printing test:\n\n");
+    // int_test();
+
+    // // %u
+    // ft_printf("unsigned intiger printing test:\n\n");
+    // uint_test();
+
+    // // %x and %X
     // ft_printf("hex conversion testing:\n\n");
     // hex_test();
 }

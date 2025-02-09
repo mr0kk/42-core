@@ -6,28 +6,13 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 19:03:26 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/08 16:26:35 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/09 16:45:50 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
 /*
-    %c - character 
-    %s - string
-    %f - float 
-    %lf - double 
-    %d - intiger 
-
-    %.1 - deciman precision
-    %1 - minimmum fild width
-    %- - left align
-
-    va_list args;  
-    va_start(args, count);
-    va_arg(args, int);
-    va_end(args); 
-
     c → Character (char)
     s → String (char *)
     p → Pointer (memory address, typically printed in hexadecimal)
@@ -69,7 +54,6 @@ int ft_printf(const char *format, ...)
     length = 0;
     i = 0;
     va_start(args, format);
-    
     while(format[i])
     {
         if (format[i] == '%')

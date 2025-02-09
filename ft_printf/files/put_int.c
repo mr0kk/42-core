@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_uint.c                                         :+:      :+:    :+:   */
+/*   put_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 22:44:09 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/09 17:51:21 by rmrok            ###   ########.fr       */
+/*   Created: 2025/02/09 17:45:43 by rmrok             #+#    #+#             */
+/*   Updated: 2025/02/09 17:57:27 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static int count_len(unsigned int n)
+static int count_len(int n)
 {
 	int len;
 
@@ -32,7 +32,7 @@ static int count_len(unsigned int n)
 	return (len);
 }
 
-int ft_utoa(unsigned int n)
+int ft_itoa_printf(int n)
 {
 	char *res;
 	int len;
@@ -44,7 +44,12 @@ int ft_utoa(unsigned int n)
 		return (0);
 	if (n == 0)
 		res[0] = '0';
-	num = n;
+	num = (unsigned int)n;
+	if (n < 0)
+	{
+		res[0] = '-';
+		num = (unsigned int)n * -1;
+	}
 	res[len] = '\0';
 	while (len - 1 >= 0 && num > 0)
 	{
@@ -52,16 +57,15 @@ int ft_utoa(unsigned int n)
 		num /= 10;
 		len--;
 	}
-	len = ft_strlen(res);
 	ft_putstr(res);
 	free(res);
-	return (len);
+	return (count_len(n));
 }
 
-int put_u_int(unsigned int num)
+int put_int(int num)
 {
 	int len;
 
-	len = ft_utoa(num);
+	len = ft_itoa_printf(num);
 	return (len);
 }

@@ -6,14 +6,14 @@
 #    By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/08 14:57:12 by rmrok             #+#    #+#              #
-#    Updated: 2025/02/08 16:26:23 by rmrok            ###   ########.fr        #
+#    Updated: 2025/02/09 17:46:53 by rmrok            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 LIBFT		= ./libft/libft.a
 LIBFTDIR	= ./libft
@@ -21,7 +21,7 @@ LIBFTDIR	= ./libft
 SRC = ./files
 
 PRINTF_SRC = ft_printf.c printf_helpers.c\
-				hex_conv.c put_uint.c
+				put_int.c hex_conv.c put_uint.c
 
 OBJS = $(PRINTF_SRC:.c=.o)
 
