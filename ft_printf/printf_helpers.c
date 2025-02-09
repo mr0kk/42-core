@@ -6,45 +6,43 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:01:58 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/03 23:02:34 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/09 20:41:59 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int put_pointer(unsigned long long ptr)
+int	put_pointer(unsigned long long ptr)
 {
-    int len;
+	int	len;
 
-    len = 2;
-    write(1, "0x", 2);
-    len += ft_putstr(hex_conv(ptr, 'x'));
-    return (len);
-}
-
-int put_int(int num)
-{
-    int len;
-    
-    len = ft_putstr(ft_itoa(num));
-    return (len);
+	if (!ptr)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
+	len = 2;
+	write(1, "0x", 2);
+	len += hex_conv(ptr, 'x');
+	return (len);
 }
 
 int	ft_putchar(char c)
 {
 	write(1, &c, 1);
-    return (1);
+	return (1);
 }
 
-int    ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
-    size_t  i;
+	size_t	len;
 
-    i = 0;
-    while (s[i])
+	if (!s)
 	{
-		write(1, &s[i], 1);
-		i++;
-    }
-    return (i);
+		write(1, "(null)", 6);
+		return (6);
+	}
+	len = ft_strlen(s);
+	write(1, s, len);
+	return (len);
 }
