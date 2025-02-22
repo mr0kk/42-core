@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:42:57 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/19 19:01:53 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/22 00:28:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 size_t	ft_strlen(const char *s)
 {
 	size_t	len;
-
+	
 	len = 0;
+	if (!s)
+		return (len);
 	while (s[len])
 		len++;
 	return (len);
@@ -31,7 +33,7 @@ char	*ft_strchr(const char *s, int c)
 	{
 		if (*s == (char)c)
 		{
-			res = (char *)s;
+			res = (char *)(s + 1);
 			return (res);
 		}
 		s++;
