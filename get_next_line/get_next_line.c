@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:43:07 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/22 23:55:26 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/23 00:10:28 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,18 @@ char	*get_next_line(int fd)
 		return (NULL); // maybe also free(res)?
 	read_fd = read(fd, buff, BUFFER_SIZE);
 	buff[BUFFER_SIZE] = '\0';
+	if (read_fd <= 0)
+	{
+		free(buff);
+		return (NULL);
+	}
+	printf("read_fd: %d\n", read_fd);
 	printf("buff: |%s|\n", buff);
 	printf("buff[0]: %d\n", buff[0]);
 	tmp = ft_strchr(buff, '\n');
 	printf("tmp: |%s|\n", tmp);
 
-	if (tmp)
-	{
-		res = ft_strjoin(res, create_res(buff, tmp));
-		leftovers = ft_strdup(tmp);
-		free(buff);
-		return (res);
-	}
+	
 	while (!tmp && read_fd == BUFFER_SIZE)
 	{
 		new_buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -114,66 +114,89 @@ char	*get_next_line(int fd)
 		free(tmp);
 		tmp = ft_strchr(buff, '\n');
 	}
+
+	res = ft_strjoin(res, create_res(buff, tmp));
+	leftovers = ft_strdup(tmp);
+	free(buff);
+	return (res);
+
 	printf("read_fd: %d\n", read_fd);
 	printf("buff: |%s|\n", buff);
 	printf("tmp: |%s|\n", tmp);
-	if (read_fd < BUFFER_SIZE)
-	{
-		res = ft_strjoin(res, buff);
-		free(buff);
-		return (res);
-	}
+	// if (read_fd < BUFFER_SIZE)
+	// {
+	// 	res = ft_strjoin(res, buff);
+	// 	free(buff);
+	// 	return (res);
+	// }
 	printf("\n----------------------------\n");
 	return (NULL);
 }
 
-int main()
+void tester()
 {
 	int fd = open("test3.txt", O_RDONLY | O_CREAT);
-	char	*res;
+	char *res;
 
-	res = get_next_line(fd);
-	printf("\n<-------------I--------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-
-	res = get_next_line(fd);
-	printf("\n<-------------II-------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-
-	
-	res = get_next_line(fd);
-	printf("\n<------------III-------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-
-	res = get_next_line(fd);
-	printf("\n<------------IV--------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-
-	res = get_next_line(fd);
-	printf("\n<-------------V--------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-	
-	res = get_next_line(fd);
-	printf("\n<-------------VI--------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-
-	res = get_next_line(fd);
-	printf("\n<-------------VII--------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
-
-	res = get_next_line(fd);
-	printf("\n<-------------VIII--------------->\n");
-	printf("%s", res);
-	printf("\n<----------------------------->\n");
+	while (res)
+	{
+		res = get_next_line(fd);
+		printf("%s", res);
+		free(res);
+	}
 
 	free(res);
 	close(fd);
+}
+
+int main()
+{
+	tester();
+	// int fd = open("test3.txt", O_RDONLY | O_CREAT);
+	// char	*res;
+
+	// res = get_next_line(fd);
+	// printf("\n<-------------I--------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	// res = get_next_line(fd);
+	// printf("\n<-------------II-------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	
+	// res = get_next_line(fd);
+	// printf("\n<------------III-------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	// res = get_next_line(fd);
+	// printf("\n<------------IV--------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	// res = get_next_line(fd);
+	// printf("\n<-------------V--------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+	
+	// res = get_next_line(fd);
+	// printf("\n<-------------VI--------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	// res = get_next_line(fd);
+	// printf("\n<-------------VII--------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	// res = get_next_line(fd);
+	// printf("\n<-------------VIII--------------->\n");
+	// printf("%s", res);
+	// printf("\n<----------------------------->\n");
+
+	// free(res);
+	// close(fd);
 	return (0);
 }
