@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:42:57 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/22 20:55:29 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/23 13:32:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strchr(const char *s, int c)
 	{
 		if (*s == (char)c)
 		{
-			res = (char *)(s + 1);
+			res = (char *)s;
 			return (res);
 		}
 		s++;
@@ -112,19 +112,3 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	dest[i] = '\0';
 	return (src_len);
 }
-
-// int main(void)
-// {
-// 	char *s = "testowy stringos pianino.";
-// 	char *b = "123456789";
-// 	printf("len: %zu\n", ft_strlen(s));
-// 	printf("len: %zu\n", ft_strlen(b));
-// 	printf("%s\n", s);
-// 	printf("%s\n", ft_strchr(s, 's'));
-
-// 	char *res;
-// 	res = ft_strdup(s);
-// 	printf("%s\n", res);
-
-// 	printf("%s\n", ft_strjoin(s, b));
-// }
