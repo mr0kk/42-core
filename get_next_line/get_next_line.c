@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:43:07 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/23 16:30:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/23 20:00:08 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
-
-# include "get_next_line.h"
+#include "get_next_line.h"
 
 char	*handle_leftovers(char **leftovers)
 {
@@ -58,10 +56,10 @@ char	*create_res(char *buff, char *tmp)
 	return (res);
 }
 
-char *read_buff(int fd, int *read_fd)
+char	*read_buff(int fd, int *read_fd)
 {
 	char	*buff;
-	
+
 	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
@@ -81,7 +79,7 @@ char	*handle_buffer(int fd)
 	char	*new_buff;
 	char	*tmp;
 	int		read_fd;
-	
+
 	buff = read_buff(fd, &read_fd);
 	if (!buff)
 		return (NULL);
@@ -110,8 +108,8 @@ char	*get_next_line(int fd)
 
 	res = handle_leftovers(&leftovers);
 	if (ft_strchr(res, '\n'))
-		return (res);	
-	buff =  handle_buffer(fd);
+		return (res);
+	buff = handle_buffer(fd);
 	if (!buff)
 		return (res);
 	tmp = ft_strdup(buff);
@@ -127,29 +125,25 @@ char	*get_next_line(int fd)
 	return (res);
 }
 
-void tester(char *file_name)
-{
-	int fd = open(file_name, O_RDONLY | O_CREAT);
-	char *res;
-	
-	res = get_next_line(fd);
-	while (res)
-	{
-		printf("%s", res);
-		free(res);
-		res = get_next_line(fd);
-	}
-
-	free(res);
-	close(fd);
-}
-
-int main(int argc, char *argv[])
-{	
-	if (argc == 2)	
-		tester(argv[1]);
-	else
-		tester("test3.txt");
-	
-	return (0);
-}
+// void tester(char *file_name)
+// {
+// 	int fd = open(file_name, O_RDONLY | O_CREAT);
+// 	char *res;
+// 	res = get_next_line(fd);
+// 	while (res)
+// 	{
+// 		printf("%s", res);
+// 		free(res);
+// 		res = get_next_line(fd);
+// 	}
+// 	free(res);
+// 	close(fd);
+// }
+// int main(int argc, char *argv[])
+// {	
+// 	if (argc == 2)	
+// 		tester(argv[1]);
+// 	else
+// 		tester("test3.txt");
+// 	return (0);
+// }
