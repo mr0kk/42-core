@@ -3,57 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:43:07 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/23 20:00:08 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/27 11:47:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*handle_leftovers(char **leftovers)
+char	*free_buff(char **buff)
 {
-	char	*res;
-	char	*tmp;
-	char	*new_leftovers;
-	size_t	res_len;
-
-	if (!(*leftovers))
-		return (NULL);
-	tmp = ft_strchr(*leftovers, '\n');
-	if (!tmp)
-	{
-		res = ft_strdup(*leftovers);
-		free(*leftovers);
-		*leftovers = NULL;
-		return (res);
-	}
-	res_len = tmp + 1 - *leftovers;
-	res = (char *)malloc((res_len + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	ft_strlcpy(res, *leftovers, res_len + 1);
-	new_leftovers = ft_strdup(tmp + 1);
-	free(*leftovers);
-	*leftovers = ft_strdup(new_leftovers);
-	free(new_leftovers);
-	return (res);
-}
-
-char	*create_res(char *buff, char *tmp)
-{
-	char	*res;
-	size_t	res_len;
-
-	if (tmp)
-		tmp += 1;
-	res_len = ft_strlen(buff) - ft_strlen(tmp);
-	res = (char *)malloc((res_len + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	ft_strlcpy(res, buff, res_len + 1);
-	return (res);
+	free(*buff);
+	*buff = NULL;
+	return (NULL);
 }
 
 char	*read_buff(int fd, int *read_fd)
@@ -64,64 +27,83 @@ char	*read_buff(int fd, int *read_fd)
 	if (!buff)
 		return (NULL);
 	*read_fd = read(fd, buff, BUFFER_SIZE);
-	if (*read_fd <= 0)
-	{
-		free(buff);
-		return (NULL);
-	}
+	if (*read_fd < 0)
+		return (free_buff(&buff));
 	buff[*read_fd] = '\0';
 	return (buff);
 }
 
-char	*handle_buffer(int fd)
+char	*handle_buff(int fd)
 {
-	char	*buff;
 	char	*new_buff;
+	char	*buff;
 	char	*tmp;
 	int		read_fd;
 
 	buff = read_buff(fd, &read_fd);
-	if (!buff)
-		return (NULL);
-	tmp = ft_strchr(buff, '\n');
-	while (!tmp && read_fd == BUFFER_SIZE)
+	if (!buff || read_fd == 0)
+		return (free_buff(&buff));
+	while (!ft_strchr(buff, '\n') && read_fd > 0)
 	{
 		new_buff = read_buff(fd, &read_fd);
 		if (!new_buff)
-			return (buff);
-		tmp = ft_strdup(buff);
+			return (free_buff(&buff));
+		tmp = ft_strjoin(buff, new_buff);
 		free(buff);
-		buff = ft_strjoin(tmp, new_buff);
-		free(tmp);
 		free(new_buff);
-		tmp = ft_strchr(buff, '\n');
+		if (!tmp) 
+			return (NULL);
+		buff = tmp;
 	}
 	return (buff);
 }
 
+char	*create_res(char **buff)
+{
+	char	*res;
+	char	*tmp;
+	size_t	res_len;
+
+	if (!(*buff) || (*buff)[0] == '\0')
+		return (NULL);
+	res_len = 0;
+	while ((*buff)[res_len] != '\n' && (*buff)[res_len])
+		res_len++;
+	res = (char *)malloc((res_len + 2) * sizeof(char));
+	if (!res)
+		return (free_buff(buff));
+	ft_strlcpy(res, *buff, res_len + 1);
+	if ((*buff)[res_len] == '\n')
+		res[res_len] = '\n';
+	res[res_len + 1] = '\0';
+	if ((*buff)[res_len] == '\n' && (*buff)[res_len + 1] != '\0')
+		tmp = ft_strdup(*buff + res_len + 1);
+	else
+		tmp = NULL;
+	free(*buff);
+	*buff = tmp;
+	return (res);
+}
+
 char	*get_next_line(int fd)
 {
-	static char	*leftovers = NULL;
-	char		*buff;
+	static char	*buff = NULL;
+	char		*new_buff;
 	char		*tmp;
 	char		*res;
 
-	res = handle_leftovers(&leftovers);
-	if (ft_strchr(res, '\n'))
-		return (res);
-	buff = handle_buffer(fd);
-	if (!buff)
-		return (res);
-	tmp = ft_strdup(buff);
-	free(buff);
-	buff = ft_strjoin(res, tmp);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	tmp = handle_buff(fd);
+	new_buff = ft_strjoin(buff, tmp);
+	if (!new_buff)
+		return (NULL);
 	free(tmp);
-	free(res);
-	tmp = ft_strchr(buff, '\n');
-	if (tmp)
-		leftovers = ft_strdup(tmp + 1);
-	res = create_res(buff, tmp);
 	free(buff);
+	buff = new_buff;
+	res = create_res(&buff);
+	if (!res)
+		return (NULL);
 	return (res);
 }
 
@@ -129,14 +111,26 @@ char	*get_next_line(int fd)
 // {
 // 	int fd = open(file_name, O_RDONLY | O_CREAT);
 // 	char *res;
+// 	int i = 1;
+// 	char  *buff;
+
 // 	res = get_next_line(fd);
-// 	while (res)
+// 	while (res && i < 15)
 // 	{
+// 		// printf("\n<---------------%d---------------->\n", i);
 // 		printf("%s", res);
+// 		// printf("\n<------------------------------->\n");
 // 		free(res);
 // 		res = get_next_line(fd);
+// 		i++;
 // 	}
+// 	res = get_next_line(fd);
+
+// 	// printf("\n<---------------%d---------------->\n", i);
+// 	printf("%s", res);
+// 	// printf("\n<------------------------------->\n");
 // 	free(res);
+	
 // 	close(fd);
 // }
 // int main(int argc, char *argv[])
@@ -144,6 +138,6 @@ char	*get_next_line(int fd)
 // 	if (argc == 2)	
 // 		tester(argv[1]);
 // 	else
-// 		tester("test3.txt");
+// 		printf("nothing happened\n");
 // 	return (0);
 // }
