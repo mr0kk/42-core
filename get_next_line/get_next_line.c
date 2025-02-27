@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:43:07 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/27 11:47:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/27 15:30:22 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*handle_buff(int fd)
 		tmp = ft_strjoin(buff, new_buff);
 		free(buff);
 		free(new_buff);
-		if (!tmp) 
+		if (!tmp)
 			return (NULL);
 		buff = tmp;
 	}
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	char		*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	tmp = handle_buff(fd);
 	new_buff = ft_strjoin(buff, tmp);
@@ -113,7 +113,7 @@ char	*get_next_line(int fd)
 // 	char *res;
 // 	int i = 1;
 // 	char  *buff;
-
+// 	printf("%d\n", BUFFER_SIZE);
 // 	res = get_next_line(fd);
 // 	while (res && i < 15)
 // 	{
@@ -125,12 +125,10 @@ char	*get_next_line(int fd)
 // 		i++;
 // 	}
 // 	res = get_next_line(fd);
-
 // 	// printf("\n<---------------%d---------------->\n", i);
 // 	printf("%s", res);
 // 	// printf("\n<------------------------------->\n");
 // 	free(res);
-	
 // 	close(fd);
 // }
 // int main(int argc, char *argv[])
