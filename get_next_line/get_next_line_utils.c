@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:42:57 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/27 13:18:19 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/28 20:29:34 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
+	len1 = (long)ft_strlen(s1);
+	len2 = (long)ft_strlen(s2);
 	res = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!res)
 		return (NULL);

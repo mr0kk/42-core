@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:43:07 by rmrok             #+#    #+#             */
-/*   Updated: 2025/02/27 15:30:22 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/02/28 20:58:02 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*handle_buff(int fd)
 	int		read_fd;
 
 	buff = read_buff(fd, &read_fd);
-	if (!buff || read_fd == 0)
+	if (!buff || read_fd <= 0)
 		return (free_buff(&buff));
 	while (!ft_strchr(buff, '\n') && read_fd > 0)
 	{
@@ -76,10 +76,9 @@ char	*create_res(char **buff)
 	if ((*buff)[res_len] == '\n')
 		res[res_len] = '\n';
 	res[res_len + 1] = '\0';
+	tmp = NULL;
 	if ((*buff)[res_len] == '\n' && (*buff)[res_len + 1] != '\0')
 		tmp = ft_strdup(*buff + res_len + 1);
-	else
-		tmp = NULL;
 	free(*buff);
 	*buff = tmp;
 	return (res);
