@@ -1,37 +1,50 @@
-
-NAME = so_long
+# Compiler and Flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror# -lm -I include -I $(MINILIBX)
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 
-LIBFT = ./libft/libft.a
-LIBFT_DIR = ./libft
+# Directories
+SRC_DIR = src
+OBJ_DIR = obj
+INC_DIR = include
+MLX_DIR = minilibx-linux
+LIBFT_DIR = libft
 
-SRC_DIR = ./src
-SRC = main.c
-SRCS = $(addprefix $(SRC_DIR)/, $(SRC))
-OBJ = $(SRCS:.c=.o)
+# Libraries
+MLX_LIB = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11
+LIBFT_LIB = -L$(LIBFT_DIR) -lft
 
-RM = rm -f
-CP = cp
-AR = ar rcs
+# Files
+NAME = so_long
+SRCS = $(SRC_DIR)/main.c  # Add other source files here
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: $(NAME)
+# Rules
+all: $(MLX_DIR)/libmlx.a $(LIBFT_DIR)/libft.a $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-			$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT): $(LIBFT_DIR)
-			@$(MAKE) -C $(LIBFT_DIR)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-%.o: %.c
-			$(CC) $(CFLAGS) -Imlx -c -o $@ $<
+$(MLX_DIR)/libmlx.a:
+	$(MAKE) -C $(MLX_DIR)
+
+$(LIBFT_DIR)/libft.a:
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_LIB) $(LIBFT_LIB)
 
 clean:
-			@$(MAKE) clean -C $(LIBFT_DIR)
-			@$(RM) $(OBJ)
+	$(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-			@$(MAKE) fclean -C $(LIBFT_DIR)
-			@$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
