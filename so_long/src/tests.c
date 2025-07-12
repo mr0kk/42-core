@@ -50,54 +50,34 @@ void write_circle(t_data *img, int x_center, int y_center, int r, int color)
     my_mlx_pixel_put(img, x_center, y_center, 0x0000FF00);
 }
 
-int create_trgb(int t, int r, int g, int b)
-{
-    return (t << 24 | r << 16 | g << 8 | b);
-}
-
-unsigned int add_shape(double shading, int color)
-{
-    unsigned int res;
-
-    res = 0xFF;
-    return (res << 24);
-    
-}
-
 int main(void)
 {
-    // void *mlx;
-    // void *mlx_win;
-    // t_data img;
+    void *mlx;
+    void *mlx_win;
+    t_data img;
 
-    // mlx = mlx_init();
-    // mlx_win = mlx_new_window(mlx, 500, 500, "hello world again");
-    // img.img = mlx_new_image(mlx, 500, 500);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-    //     &img.endian);
+    mlx = mlx_init();
+    mlx_win = mlx_new_window(mlx, 500, 500, "hello world again");
+    img.img = mlx_new_image(mlx, 500, 500);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+        &img.endian);
 
-    // //my_mlx_pixel_put(&img, 50, 50, 0x00FF0000);
+    //my_mlx_pixel_put(&img, 50, 50, 0x00FF0000);
 
-    // int i = 15;
-    // while (i <= 120){
-    //     if (i % 2)
-    //         write_circle(&img, 250, 250, i, 0x00FF0000);
-    //     else
-    //         write_circle(&img, 250, 250, i, 0x0000FF00);
-    //     i+=15;
-    // }
-
-
-    // mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-    // mlx_loop(mlx);
+    int i = 15;
+    while (i <= 120){
+        if (i % 2)
+            write_circle(&img, 250, 250, i, 0x00FF0000);
+        else
+            write_circle(&img, 250, 250, i, 0x0000FF00);
+        i+=15;
+    }
 
 
-    unsigned int color;
+    mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+    mlx_loop(mlx);
 
-    color = create_trgb(255, 1, 1, 1);
-    printf("color: %#X\n", color);
-    printf("color: %#X\n\n", color);
+    free(mlx);
+    free(mlx_win);
 
-    color = add_shape(0.5, 1);
-    printf("color: %#X\n", color);
 }

@@ -15,7 +15,7 @@ LIBFT_LIB = -L$(LIBFT_DIR) -lft
 
 # Files
 NAME = so_long
-SRCS = $(SRC_DIR)/tests.c  # Add other source files here
+SRCS = $(SRC_DIR)/main.c  #tests.c  # Add other source files here
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Rules
