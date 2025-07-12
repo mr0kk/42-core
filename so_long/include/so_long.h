@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/03/20 00:09:38 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/17 21:48:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 #include "../libft/libft.h"
-// #include "../minilibx-linux/mlx.h"
-# include <mlx.h>
+#include "../minilibx-linux/mlx.h"
+// # include <mlx.h>
 
 #endif
