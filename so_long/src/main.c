@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 13:02:52 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/12 23:37:48 by rmrok            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/so_long.h"
 
 // handler function - every time a key is pressed this function is called
@@ -89,4 +77,6 @@ int main(void)
 	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
+
+	return (0);
 }
