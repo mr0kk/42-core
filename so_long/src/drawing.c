@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 23:07:17 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/12 23:08:57 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/12 23:37:42 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,17 @@ void write_circle(t_img *img, int x_center, int y_center, int r, int color)
 		y++;
 	}
 	my_mlx_pixel_put(img, x_center, y_center, 0x0000FF00);
+}
+
+void circle_shield(t_img *img)
+{
+	int i = 15;
+	while (i <= 120)
+	{
+		if (i % 2)
+			write_circle(img, 250, 250, i, 0x00FF0000);
+		else
+			write_circle(img, 250, 250, i, 0x0000FF00);
+		i += 15;
+	}
 }

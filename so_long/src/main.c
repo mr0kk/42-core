@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:02:52 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/12 23:15:15 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/12 23:37:48 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,6 @@ void my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	circle_shield(t_img *img)
-{
-	int i = 15;
-	while (i <= 120)
-	{
-		if (i % 2)
-			write_circle(img, 250, 250, i, 0x00FF0000);
-		else
-			write_circle(img, 250, 250, i, 0x0000FF00);
-		i += 15;
-	}
 }
 
 int main(void)

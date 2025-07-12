@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/12 23:11:38 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/12 23:38:23 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ typedef struct s_mlx_data
 	t_img img;
 } t_mlx_data;
 
-void my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void write_circle(t_img *img, int x_center, int y_center,
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	write_circle(t_img *img, int x_center, int y_center,
 					  int r, int color);
-int ft_sqrt(int num);
+void	circle_shield(t_img *img);
+int	ft_sqrt(int num);
 
 #endif
