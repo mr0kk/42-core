@@ -39,8 +39,8 @@ char    **copy_map(t_map *map)
     new_map = (char **)malloc((map->map_height + 1) * sizeof(char *));
     if (!new_map)
         exit_with_error("Malloc Error");
-    y = 0;
-    while (y < map->map_height)
+    y = -1;
+    while (++y < map->map_height)
     {
         
         new_map[y] = (char *)malloc((map->map_width + 1) * sizeof(char));
@@ -51,20 +51,11 @@ char    **copy_map(t_map *map)
             free(new_map);
             exit_with_error("Error map copying");
         }
-        y++;
-    }
-
-    y = 0;
-    while (y < map->map_height)
-    {
-        x = 0;
-        while (x < map->map_width)
-        {
+        x = -1;
+        while (++x < map->map_width)
             new_map[y][x] = map->map_ptr[y][x];
-            x++;
-        }
-        y++;
     }
+    new_map[y] = NULL;
     return (new_map);
 }
 
