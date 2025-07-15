@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/15 22:48:09 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/16 00:46:24 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	write_circle(t_img *img, int x_center, int y_center,
 void	circle_shield(t_img *img);
 int	ft_sqrt(int num);
 void    read_map(char *file_name, t_map *map);
-void free_map(t_map *map);
-// void free_map(char **map, int map_height, int map_width);
+// void free_map(t_map *map);
+void free_map(char **map, size_t map_height);
 void print_map(t_map *map);
 int	validate_map(t_map *map);
 void exit_with_error(char *message);

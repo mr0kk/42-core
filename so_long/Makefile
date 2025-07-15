@@ -1,6 +1,6 @@
 # Compiler and Flags
-CC = gcc
-CFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR) # -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR) #-Wall -Wextra -Werror
 
 # Directories
 SRC_DIR = src

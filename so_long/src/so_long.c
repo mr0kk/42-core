@@ -20,9 +20,10 @@ int main(int argc, char *argv[])
     else
         ft_printf("map is NOT valid\n");
 
-    free_map(&map);
 
+    free_map(map.map_ptr, map.map_height);
     printf("collectibles to get: %d\n", map.collectibles);
+    printf("start position: (%d, %d)\n", map.player_start.x, map.player_start.y);
 
     exit(0); // it can also close fd
 }
