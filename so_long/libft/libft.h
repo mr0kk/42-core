@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2025/03/10 13:49:15 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/14 00:38:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-#include <stdarg.h>
+# include <stdarg.h>
 
 /*
 	PART I
@@ -81,7 +81,7 @@ int hex_conv(unsigned long num, char f);
 /*
 	get_next_line
 */
-size_t ft_strlen(const char *s);
+size_t	ft_countlen(const char *s);
 char *get_next_line(int fd);
 char *ft_strchr(const char *s, int c);
 char *ft_strdup(const char *s);

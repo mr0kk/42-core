@@ -1,4 +1,4 @@
-#include "../include/so_long.h"
+#include "so_long.h"
 
 // handler function - every time a key is pressed this function is called
 int handle_input(int keysym, t_mlx_data *data)
@@ -77,6 +77,5 @@ int main(void)
 	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-
-	return (0);
+	exit(0);
 }

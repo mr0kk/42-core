@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/12 23:38:23 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/15 02:58:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
 #include <X11/keysym.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+// #include <errno.h>
 // # include <mlx.h>
 #define WIN_HEIGHT 500
 #define WIN_WIDTH 500
@@ -43,10 +47,23 @@ typedef struct s_mlx_data
 	t_img img;
 } t_mlx_data;
 
+typedef struct s_map
+{
+    char    **map_ptr;
+    size_t  map_width;
+    size_t  map_height;
+	int		collectibles;
+}           t_map;
+
+
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	write_circle(t_img *img, int x_center, int y_center,
 					  int r, int color);
 void	circle_shield(t_img *img);
 int	ft_sqrt(int num);
+void    read_map(char *file_name, t_map *map);
+void free_map(t_map *map);
+void print_map(t_map *map);
+int	validate_map(t_map *map);
 
 #endif

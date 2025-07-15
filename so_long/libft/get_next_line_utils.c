@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 21:42:57 by rmrok             #+#    #+#             */
-/*   Updated: 2025/03/10 13:53:20 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/14 00:38:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_countlen(const char *s)
 {
 	size_t	len;
 
@@ -53,7 +53,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
+	len = ft_countlen(s);
 	res = (char *)malloc((len + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
@@ -76,8 +76,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	len1 = (long)ft_strlen(s1);
-	len2 = (long)ft_strlen(s2);
+	len1 = (long)ft_countlen(s1);
+	len2 = (long)ft_countlen(s2);
 	res = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
