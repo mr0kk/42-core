@@ -3,8 +3,9 @@
 int main(int argc, char *argv[])
 {
     t_map map;
-    int is_map_valid;
     
+    int is_map_valid;
+
     if (argc != 2)
     {
         printf("Usage: %s <map_file.ber>\n", argv[0]);
@@ -23,5 +24,5 @@ int main(int argc, char *argv[])
 
     printf("collectibles to get: %d\n", map.collectibles);
 
-    exit(0); // it can also close fd 
+    exit(0); // it can also close fd
 }

@@ -18,8 +18,6 @@ NAME = so_long
 SRCS = $(SRC_DIR)/so_long.c\
 		$(SRC_DIR)/handle_map.c\
 		$(SRC_DIR)/validate_map.c
-# 		$(SRC_DIR)/main.c \		
-#		$(SRC_DIR)/drawing.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Rules

@@ -3,7 +3,7 @@
 void free_map(t_map *map)
 {
     int y = 0;
-    
+
     if (map->map_ptr)
     {
         while (y < map->map_height)
@@ -16,7 +16,7 @@ void free_map(t_map *map)
     }
 }
 
-void    exit_with_error(char *message)
+void exit_with_error(char *message)
 {
     perror(message);
     exit(1);
@@ -24,7 +24,7 @@ void    exit_with_error(char *message)
 
 int is_ber_file(char *filename)
 {
-    size_t  len;
+    size_t len;
 
     if (!filename)
         return (0);
@@ -33,20 +33,20 @@ int is_ber_file(char *filename)
         return (0); // .ber and 1 char at least
     if (ft_strncmp(filename + len - 4, ".ber", 4) == 0)
         return (1);
-    return (0);    
+    return (0);
 }
-void    reset_gnl(int fd, char *line)
+void reset_gnl(int fd, char *line)
 {
-     while (line)
+    while (line)
     {
         free(line);
         line = get_next_line(fd);
     }
 }
-void   get_map_size(int fd, t_map *map)
+void get_map_size(int fd, t_map *map)
 {
-    char    *line;
-    size_t  line_len;
+    char *line;
+    size_t line_len;
 
     map->map_height = 0;
     line = get_next_line(fd);
@@ -61,7 +61,7 @@ void   get_map_size(int fd, t_map *map)
         if (line_len > 0 && line[line_len - 1] == '\n')
             line_len--;
         if (line_len != map->map_width)
-        { 
+        {
             reset_gnl(fd, line);
             exit_with_error("Map must be rectangular");
         }
@@ -71,13 +71,13 @@ void   get_map_size(int fd, t_map *map)
     }
 }
 
-char    **create_map(t_map *map, int fd)
+char **create_map(t_map *map, int fd)
 {
     int y;
     int j;
-    char    **empty_map;
+    char **empty_map;
 
-    empty_map = (char **)malloc((map->map_height + 1) * sizeof(char *) );
+    empty_map = (char **)malloc((map->map_height + 1) * sizeof(char *));
     if (!empty_map)
         exit_with_error("Malloc Error");
     y = 0;
@@ -101,7 +101,7 @@ char    **create_map(t_map *map, int fd)
 void print_map(t_map *map)
 {
     int y;
-    
+
     if (!map || !map->map_ptr)
     {
         perror("Error: No map to print");
@@ -115,7 +115,7 @@ void print_map(t_map *map)
         printf("%i | ", y);
         printf("%s", map->map_ptr[y]);
         if (map->map_ptr[y][ft_strlen(map->map_ptr[y]) - 1] != '\n')
-            printf("\n"); 
+            printf("\n");
         y++;
     }
     ft_printf("----------------\n");
@@ -132,7 +132,7 @@ int open_file(char *file_name)
         exit_with_error("Map must have .ber extension");
     return (fd);
 }
-void    read_map(char *file_name, t_map *map)
+void read_map(char *file_name, t_map *map)
 {
     int fd;
     int fd2;
@@ -148,7 +148,7 @@ void    read_map(char *file_name, t_map *map)
 // int main(int argc, char *argv[])
 // {
 //     t_map map;
-    
+
 //     if (argc != 2)
 //     {
 //         printf("Usage: %s <map_file.ber>\n", argv[0]);
@@ -162,5 +162,5 @@ void    read_map(char *file_name, t_map *map)
 //     print_map(&map);
 
 //     free_map(&map);
-//     exit(0); // it can also close fd 
+//     exit(0); // it can also close fd
 // }
