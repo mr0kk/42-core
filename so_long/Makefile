@@ -1,5 +1,5 @@
 # Compiler and Flags
-CC = cc
+CC = gcc
 CFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR) #-Wall -Wextra -Werror
 
 # Directories
