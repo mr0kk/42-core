@@ -17,7 +17,8 @@ LIBFT_LIB = -L$(LIBFT_DIR) -lft
 NAME = so_long
 SRCS = $(SRC_DIR)/so_long.c\
 		$(SRC_DIR)/handle_map.c\
-		$(SRC_DIR)/validate_map.c
+		$(SRC_DIR)/validate_map.c\
+		$(SRC_DIR)/helper_functions.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Rules

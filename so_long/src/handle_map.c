@@ -1,42 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/16 19:17:39 by rmrok             #+#    #+#             */
+/*   Updated: 2025/07/16 19:17:39 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-
-// void free_map(t_map *map)
-// {
-// 	size_t y = 0;
-
-// 	if (map->map_ptr)
-// 	{
-// 		while (y < map->map_height)
-// 		{
-// 			free(map->map_ptr[y]);
-// 			y++;
-// 		}
-// 		free(map->map_ptr);
-// 		map->map_ptr = NULL;
-// 	}
-// }
-
-void free_map(char **map, size_t map_height)
-{
-	size_t y = 0;
-
-	if (map)
-	{
-		while (y < map_height)
-		{
-			free(map[y]);
-			y++;
-		}
-		free(map);
-		map = NULL;
-	}
-}
-
-void exit_with_error(char *message)
-{
-	perror(message);
-	exit(1);
-}
 
 int is_ber_file(char *filename)
 {
@@ -116,40 +90,6 @@ char **create_map(t_map *map, int fd)
 	return (empty_map);
 }
 
-void print_map(t_map *map)
-{
-	size_t y;
-
-	if (!map || !map->map_ptr)
-	{
-		perror("Error: No map to print");
-		return;
-	}
-	printf("map size: %lu x %lu\n", map->map_width, map->map_height);
-	ft_printf("----------------\n");
-	y = 0;
-	while (y < map->map_height)
-	{
-		printf("%li | ", y);
-		printf("%s", map->map_ptr[y]);
-		if (map->map_ptr[y][ft_strlen(map->map_ptr[y]) - 1] != '\n')
-			printf("\n");
-		y++;
-	}
-	ft_printf("----------------\n");
-}
-
-int open_file(char *file_name)
-{
-	int fd;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		exit_with_error("Error opening a file");
-	if (is_ber_file(file_name) == 0)
-		exit_with_error("Map must have .ber extension");
-	return (fd);
-}
 void read_map(char *file_name, t_map *map)
 {
 	int fd;
@@ -162,23 +102,3 @@ void read_map(char *file_name, t_map *map)
 	map->map_ptr = create_map(map, fd2);
 	close(fd2);
 }
-
-// int main(int argc, char *argv[])
-// {
-//     t_map map;
-
-//     if (argc != 2)
-//     {
-//         printf("Usage: %s <map_file.ber>\n", argv[0]);
-//         return (1);
-//     }
-
-//     read_map(argv[1], &map);
-//     printf("map width in main: %lu\n", map.map_width);
-//     printf("map height in main: %lu\n\n", map.map_height);
-
-//     print_map(&map);
-
-//     free_map(&map);
-//     exit(0); // it can also close fd
-// }
