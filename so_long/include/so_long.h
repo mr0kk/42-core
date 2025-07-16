@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/16 20:55:21 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/16 23:51:38 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void free_map(char **map, size_t map_height);
 int validate_map(t_map *map);
 void exit_with_error(char *message);
 char **copy_map(t_map *map);
+int handle_input(int keysym, t_mlx_data *data);
+void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 #endif
