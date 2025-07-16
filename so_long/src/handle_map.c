@@ -6,27 +6,27 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:17:39 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/16 19:17:39 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/16 20:23:25 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int is_ber_file(char *filename)
+int	is_ber_file(char *filename)
 {
-	size_t len;
+	size_t	len;
 
 	if (!filename)
 		return (0);
 	len = ft_strlen(filename);
 	if (len < 5)
-		return (0); // .ber and 1 char at least
+		return (0);
 	if (ft_strncmp(filename + len - 4, ".ber", 4) == 0)
 		return (1);
 	return (0);
 }
 
-void reset_gnl(int fd, char *line)
+void	reset_gnl(int fd, char *line)
 {
 	while (line)
 	{
@@ -34,10 +34,11 @@ void reset_gnl(int fd, char *line)
 		line = get_next_line(fd);
 	}
 }
-void get_map_size(int fd, t_map *map)
+
+void	get_map_size(int fd, t_map *map)
 {
-	char *line;
-	size_t line_len;
+	char	*line;
+	size_t	line_len;
 
 	map->map_height = 0;
 	line = get_next_line(fd);
@@ -63,11 +64,11 @@ void get_map_size(int fd, t_map *map)
 	free(line);
 }
 
-char **create_map(t_map *map, int fd)
+char	**create_map(t_map *map, int fd)
 {
-	size_t y;
-	size_t j;
-	char **empty_map;
+	size_t	y;
+	size_t	j;
+	char	**empty_map;
 
 	empty_map = (char **)malloc((map->map_height + 1) * sizeof(char *));
 	if (!empty_map)
@@ -90,10 +91,10 @@ char **create_map(t_map *map, int fd)
 	return (empty_map);
 }
 
-void read_map(char *file_name, t_map *map)
+void	read_map(char *file_name, t_map *map)
 {
-	int fd;
-	int fd2;
+	int	fd;
+	int	fd2;
 
 	fd = open_file(file_name);
 	get_map_size(fd, map);
