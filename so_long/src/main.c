@@ -63,7 +63,7 @@ int main(void)
 	 */
 	mlx_key_hook(data.win_ptr, handle_input, &data);
 
-	// writing circle
+	// writing circles
 	circle_shield(&data.img);
 
 	// putting image to window

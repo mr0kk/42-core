@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/16 19:37:40 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/16 20:55:21 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /**
  * 	this struct contains information about an image
  */
-typedef struct s_data
+typedef struct s_img
 {
 	void *img;
 	char *addr;
