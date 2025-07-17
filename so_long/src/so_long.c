@@ -64,12 +64,15 @@ int main(int argc, char *argv[])
         void *img2;
         int height = 50;
         int width = 50;
-        printf("here\n");
-        img2 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/dino.xpm", &width, &height);
-        printf("here2\n");
-        // mlx_key_hook(vars.win_ptr, handle_input, &vars);
-        mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, img2, 0, 0); // vars.img.img
-        printf("here3\n");
+
+        void *img1 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/grass2.xpm", &width, &height);;
+        mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, img1, 0, 0); // vars.img.img
+        // img2 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/dino.xpm", &width, &height);
+    
+        mlx_key_hook(vars.win_ptr, handle_input, &vars);
+    
+        // mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, img2, 0, 0); // vars.img.img
+
         mlx_loop(vars.mlx_ptr);
 
         mlx_destroy_image(vars.mlx_ptr, img2); //  vars.img.img
