@@ -61,24 +61,18 @@ int main(int argc, char *argv[])
         //     exit_with_error("MLX img addr ERROR");
         // }
 
-        void *img2;
         int height = 64;
         int width = 64;
-
-        void *img1 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/dino.xpm", &width, &height);;
-        mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, img1, 0, 0); // vars.img.img
-        // img2 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/dino.xpm", &width, &height);
+        map_rendering(&vars, &map);
     
-        mlx_key_hook(vars.win_ptr, handle_input, &vars);
-    
-        // mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, img2, 0, 0); // vars.img.img
+        // mlx_key_hook(vars.win_ptr, handle_input, &vars);
+        // mlx_loop(vars.mlx_ptr);
 
-        mlx_loop(vars.mlx_ptr);
-
-        mlx_destroy_image(vars.mlx_ptr, img2); //  vars.img.img
-        mlx_destroy_window(vars.mlx_ptr, vars.win_ptr);
-        mlx_destroy_display(vars.mlx_ptr);
-        free(vars.mlx_ptr);
+        // mlx_destroy_image(vars.mlx_ptr, img); //  vars.img.img
+        
+        // mlx_destroy_window(vars.mlx_ptr, vars.win_ptr);
+        // mlx_destroy_display(vars.mlx_ptr);
+        // free(vars.mlx_ptr);
     }
     else
         ft_printf("map is NOT valid\n");

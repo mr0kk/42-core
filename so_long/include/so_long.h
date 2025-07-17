@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/16 23:51:38 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/18 01:54:08 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ typedef struct s_map
 	int collectibles;
 	int exit_counter;
 	t_point player_start;
+	char *wall_img;
+	char *exit_img;
+	char *player_img;
+	char *coll_img;
+	char *backgrd_img;
+	size_t block_size;
 } t_map;
 
 void print_map(t_map *map); // to delete later
@@ -78,5 +84,6 @@ void exit_with_error(char *message);
 char **copy_map(t_map *map);
 int handle_input(int keysym, t_mlx_data *data);
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void map_rendering(t_mlx_data *vars, t_map *map);
 
 #endif

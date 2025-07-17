@@ -19,7 +19,8 @@ SRCS = $(SRC_DIR)/so_long.c\
 		$(SRC_DIR)/handle_map.c\
 		$(SRC_DIR)/validate_map.c\
 		$(SRC_DIR)/helper_functions.c\
-		$(SRC_DIR)/handle_mlx.c
+		$(SRC_DIR)/handle_mlx.c\
+		$(SRC_DIR)/render_map.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Rules
