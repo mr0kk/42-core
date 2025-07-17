@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
         if (vars.mlx_ptr == NULL)
             exit_with_error("MLX init ERROR");
-        block_size = 50;
+        block_size = 64;
         int x = (int)(map.map_width * block_size);
         int y = (int)(map.map_height * block_size);
         vars.win_ptr = mlx_new_window(vars.mlx_ptr, x, y, "so_long");
@@ -62,10 +62,10 @@ int main(int argc, char *argv[])
         // }
 
         void *img2;
-        int height = 50;
-        int width = 50;
+        int height = 64;
+        int width = 64;
 
-        void *img1 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/grass2.xpm", &width, &height);;
+        void *img1 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/dino.xpm", &width, &height);;
         mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, img1, 0, 0); // vars.img.img
         // img2 = mlx_xpm_file_to_image(vars.mlx_ptr, "textures/dino.xpm", &width, &height);
     
