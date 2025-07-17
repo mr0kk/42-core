@@ -61,6 +61,11 @@ int main(int argc, char *argv[])
             exit_with_error("MLX img addr ERROR");
         }
 
+        char * img2;
+        int height;
+        int width;
+        img2 = mlx_xpm_file_to_image(vars.mlx_ptr, "textutes/grass.xpm", &width, &height);
+
         mlx_key_hook(vars.win_ptr, handle_input, &vars);
         mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img.img, 0, 0);
         mlx_loop(vars.mlx_ptr);
