@@ -6,25 +6,25 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:17:28 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/16 19:34:21 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/19 22:06:17 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_map(char **map, size_t map_height)
+void free_map(t_map *map, size_t map_height)
 {
 	size_t y = 0;
 
-	if (map)
+	if (map->map_ptr)
 	{
 		while (y < map_height)
 		{
-			free(map[y]);
+			free(map->map_ptr[y]);
 			y++;
 		}
-		free(map);
-		map = NULL;
+		free(map->map_ptr);
+		map->map_ptr = NULL;
 	}
 }
 

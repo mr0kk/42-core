@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
     t_map map;
     t_mlx_data vars;
     int is_map_valid;
-    size_t  block_size;
 
     if (argc != 2)
     {
@@ -31,54 +30,15 @@ int main(int argc, char *argv[])
     if (is_map_valid)
     {
         ft_printf("map is valid\n");
-        vars.mlx_ptr = mlx_init();
 
-        if (vars.mlx_ptr == NULL)
-            exit_with_error("MLX init ERROR");
-        block_size = 64;
-        int x = (int)(map.map_width * block_size);
-        int y = (int)(map.map_height * block_size);
-        vars.win_ptr = mlx_new_window(vars.mlx_ptr, x, y, "so_long");
-        if (vars.win_ptr == NULL)
-        {
-            mlx_destroy_display(vars.mlx_ptr);
-            free(vars.mlx_ptr);
-            exit_with_error("MLX window ERROR");
-        }
-        // vars.img.img = mlx_new_image(vars.mlx_ptr, x, y);
-        // if (vars.img.img == NULL)
-        // {
-        //     mlx_destroy_display(vars.mlx_ptr);
-        //     free(vars.mlx_ptr);
-        //     exit_with_error("MLX image ERROR");
-        // }
-        // vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_length, &vars.img.endian);
-        // if (vars.img.addr == NULL)
-        // {
-        //     mlx_destroy_image(vars.win_ptr, vars.img.img);
-        //     mlx_destroy_display(vars.mlx_ptr);
-        //     free(vars.mlx_ptr);
-        //     exit_with_error("MLX img addr ERROR");
-        // }
-
-        int height = 64;
-        int width = 64;
-        map_rendering(&vars, &map);
-    
-        // mlx_key_hook(vars.win_ptr, handle_input, &vars);
-        // mlx_loop(vars.mlx_ptr);
-
-        // mlx_destroy_image(vars.mlx_ptr, img); //  vars.img.img
-        
-        // mlx_destroy_window(vars.mlx_ptr, vars.win_ptr);
-        // mlx_destroy_display(vars.mlx_ptr);
-        // free(vars.mlx_ptr);
+        // set_map_values(&map);
+        // create_mlx(&vars, &map);
+        // map_rendering(&vars, &map);
     }
     else
         ft_printf("map is NOT valid\n");
 
-
-    free_map(map.map_ptr, map.map_height);
+    free_map(&map, map.map_height);
     printf("collectibles to get: %d\n", map.collectibles);
     printf("start position: (%d, %d)\n", map.player_start.x, map.player_start.y);
 

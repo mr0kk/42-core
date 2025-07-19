@@ -6,32 +6,47 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 01:04:30 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/18 01:58:22 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/19 21:50:48 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_map(t_map *map)
+void	set_map_values(t_map *map)
 {
-	map->wall_img = "textures/wall.xpm";
-	map->player_img = "textures/dino.xpm";
-	map->coll_img = "textures/duck.xpm";
-	map->exit_img = "textures/exit.xpm";
-	map->backgrd_img = "textures/grass.xpm";
+	// map->wall_xpm = "textures/wall.xpm";
+	// map->player_xpm = "textures/dino.xpm";
+	// map->coll_xpm = "textures/duck.xpm";
+	// map->exit_xpm = "textures/exit.xpm";
+	// map->backgrd_xpm = "textures/grass.xpm";
 	map->block_size = 64;
+	map->win_height = (int)(map->block_size * map->map_height);
+	map->win_width = (int)(map->block_size * map->map_width);
+}
+void	create_images(t_mlx_data *vars, t_map *map)
+{
+	int h;
+	int w;
+
+	vars->grass = mlx_xpm_file_to_image(vars->mlx_ptr, "textures/grass.xpm", &w, &h);
+	vars->wall = mlx_xpm_file_to_image(vars->mlx_ptr, "textures/wall.xpm", &w, &h);
+	vars->dino = mlx_xpm_file_to_image(vars->mlx_ptr, "textures/dino.xpm", &w, &h);
+	vars->exit = mlx_xpm_file_to_image(vars->mlx_ptr, "textures/exit.xpm", &w, &h);
+	vars->duck = mlx_xpm_file_to_image(vars->mlx_ptr, "textures/duck.xpm", &w, &h);
+	if (!vars->grass || !vars->wall || !vars->dino || !vars->exit || !vars->duck)
+	{
+		destroy_images(vars);
+		exit_with_error("Error: Failed to load  image\n");
+	}
 }
 
-void	put_block(int x, int y, t_map *map, t_mlx_data *vars, char *img_name)
+void	destroy_images(t_mlx_data *vars)
 {
-	void	*img;
-	int height;
-	int width;
-
-	height = (int)map->block_size;
-	width = (int)map->block_size;
-	img = mlx_xpm_file_to_image(vars->mlx_ptr, img_name, &width, &height);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, img, x, y);
+	mlx_destroy_image(vars->mlx_ptr, vars->grass);
+	mlx_destroy_image(vars->mlx_ptr, vars->dino);
+	mlx_destroy_image(vars->mlx_ptr, vars->wall);
+	mlx_destroy_image(vars->mlx_ptr, vars->duck);
+	mlx_destroy_image(vars->mlx_ptr, vars->exit);
 }
 
 void	draw_map(t_map *map, t_mlx_data *vars)
@@ -50,19 +65,20 @@ void	draw_map(t_map *map, t_mlx_data *vars)
 		while (x < w)
 		{
 			if (map->map_ptr[y][x] == '1')
-				put_block(x * map->block_size, y * map->block_size, map, vars, map->wall_img);
+				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->wall, x * map->block_size, y * map->block_size);
 			if (map->map_ptr[y][x] == 'C')
-				put_block(x * map->block_size, y * map->block_size, map, vars, map->coll_img);
-			if (map->map_ptr[y][x] == 'P')
-				put_block(x * map->block_size, y * map->block_size, map, vars, map->player_img);
+				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->duck, x * map->block_size, y * map->block_size);
 			if (map->map_ptr[y][x] == '0')
-				put_block(x * map->block_size, y * map->block_size, map, vars, map->backgrd_img);
+				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->grass, x * map->block_size, y * map->block_size);
 			if (map->map_ptr[y][x] == 'E')
-				put_block(x * map->block_size, y * map->block_size, map, vars, map->exit_img);
+				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->exit, x * map->block_size, y * map->block_size);
+			if (map->map_ptr[y][x] == 'P')
+				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->dino, x * map->block_size, y * map->block_size);
 			x++;
 		}
 		y++;
 	}
+	// mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->dino, map->player_start.x * 64,64 * map->player_start.y);
 }
 
 void	map_rendering(t_mlx_data *vars, t_map *map)
@@ -71,9 +87,7 @@ void	map_rendering(t_mlx_data *vars, t_map *map)
 	int		height;
 	int		width;
 	
-	set_map(map);
-	height = width = (int)map->block_size;
-	
+	create_images(vars, map);
 	draw_map(map, vars);
 	
 	mlx_key_hook(vars->win_ptr, handle_input, vars);
@@ -82,6 +96,5 @@ void	map_rendering(t_mlx_data *vars, t_map *map)
 	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 	mlx_destroy_display(vars->mlx_ptr);
 	free(vars->mlx_ptr);
-	free(img);
 
 }
