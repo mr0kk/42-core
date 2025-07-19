@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/19 22:06:39 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/20 01:13:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int ft_sqrt(int num);
 int is_ber_file(char *filename);
 int open_file(char *file_name);
 void read_map(char *file_name, t_map *map);
-void free_map(t_map *map, size_t map_height);
+void free_map(char **map, size_t map_height);
 int validate_map(t_map *map);
 void exit_with_error(char *message);
 char **copy_map(t_map *map);

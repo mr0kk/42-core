@@ -26,16 +26,13 @@ int	is_ber_file(char *filename)
 	return (0);
 }
 
-void	reset_gnl(int fd)
+void	reset_gnl(int fd, char *line)
 {
-	char *line;
-
-	line = get_next_line(fd);
 	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
+    {
+        free(line);
+        line = get_next_line(fd);
+    }
 	close(fd);
 }
 
@@ -58,7 +55,7 @@ void	get_map_size(int fd, t_map *map)
 			line_len--;
 		if (line_len != map->map_width)
 		{
-			reset_gnl(fd);
+			reset_gnl(fd, line);
 			exit_with_error("Map must be rectangular");
 		}
 		map->map_height++;
@@ -86,13 +83,12 @@ char	**create_map(t_map *map, int fd)
 			j = 0;
 			while (j < y)
 				free(empty_map[j++]);
-			reset_gnl(fd);
+			reset_gnl(fd, empty_map[y]);
 			free(empty_map);
 			exit_with_error("Error reading map");
 		}
 		y++;
 	}
-	free(empty_map);
 	empty_map[y] = NULL;
 	return (empty_map);
 }

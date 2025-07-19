@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:17:28 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/19 22:06:17 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/20 01:14:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_map(t_map *map, size_t map_height)
+void free_map(char **map, size_t map_height)
 {
 	size_t y = 0;
 
-	if (map->map_ptr)
+	if (map)
 	{
 		while (y < map_height)
 		{
-			free(map->map_ptr[y]);
+			free(map[y]);
 			y++;
 		}
-		free(map->map_ptr);
-		map->map_ptr = NULL;
+		free(map);
+		map = NULL;
 	}
 }
 
