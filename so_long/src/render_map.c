@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 01:04:30 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/19 21:50:48 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/21 17:01:25 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	set_map_values(t_map *map)
 {
-	// map->wall_xpm = "textures/wall.xpm";
-	// map->player_xpm = "textures/dino.xpm";
-	// map->coll_xpm = "textures/duck.xpm";
-	// map->exit_xpm = "textures/exit.xpm";
-	// map->backgrd_xpm = "textures/grass.xpm";
 	map->block_size = 64;
 	map->win_height = (int)(map->block_size * map->map_height);
 	map->win_width = (int)(map->block_size * map->map_width);
@@ -36,6 +31,7 @@ void	create_images(t_mlx_data *vars, t_map *map)
 	if (!vars->grass || !vars->wall || !vars->dino || !vars->exit || !vars->duck)
 	{
 		destroy_images(vars);
+		free_map(map->map_ptr, map->map_height);
 		exit_with_error("Error: Failed to load  image\n");
 	}
 }
@@ -93,6 +89,8 @@ void	map_rendering(t_mlx_data *vars, t_map *map)
 	mlx_key_hook(vars->win_ptr, handle_input, vars);
 	mlx_loop(vars->mlx_ptr);
 
+	// this is not executing 
+	printf("im here in mlx\n");
 	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 	mlx_destroy_display(vars->mlx_ptr);
 	free(vars->mlx_ptr);

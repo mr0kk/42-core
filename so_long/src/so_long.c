@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
     else
         ft_printf("map is NOT valid\n");
 
+    printf("here after program\n");
     free_map(map.map_ptr, map.map_height);
     exit(0); // it can also close fd
 }

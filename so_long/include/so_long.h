@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/20 01:13:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/21 17:36:14 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,6 @@
 #include <string.h>
 // #include <errno.h>
 // # include <mlx.h>
-#define WIN_HEIGHT 500
-#define WIN_WIDTH 500
-
-/**
- * 	this struct contains information about an image
- */
-typedef struct s_img
-{
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-} t_img;
-
-/**
- *  this struct contains all the mlx stuff
- * 	and the image where we buffer pixels
- */
-typedef struct s_mlx_data
-{
-	void *mlx_ptr;
-	void *win_ptr;
-	void	*grass;
-	void	*wall;
-	void	*dino;
-	void	*duck;
-	void	*exit;
-	t_img img;
-} t_mlx_data;
 
 typedef struct s_point
 {
@@ -66,21 +36,28 @@ typedef struct s_map
 	int collectibles;
 	int exit_counter;
 	t_point player_start;
-	char *wall_xpm;
-	char *exit_xpm;
-	char *player_xpm;
-	char *coll_xpm;
-	char *backgrd_xpm;
 	size_t block_size;
-	int	win_height;
+	int win_height;
 	int win_width;
 } t_map;
 
+/**
+ *  this struct contains all the mlx stuff
+ * 	and the image where we buffer pixels
+ */
+typedef struct s_mlx_data
+{
+	void *mlx_ptr;
+	void *win_ptr;
+	void	*grass;
+	void	*wall;
+	void	*dino;
+	void	*duck;
+	void	*exit;
+} t_mlx_data;
+
+
 void print_map(t_map *map); // to delete later
-void my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void write_circle(t_img *img, int x_center, int y_center,
-				  int r, int color);
-void circle_shield(t_img *img);
 int ft_sqrt(int num);
 int is_ber_file(char *filename);
 int open_file(char *file_name);
@@ -90,7 +67,6 @@ int validate_map(t_map *map);
 void exit_with_error(char *message);
 char **copy_map(t_map *map);
 int handle_input(int keysym, t_mlx_data *data);
-void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void map_rendering(t_mlx_data *vars, t_map *map);
 void set_map_values(t_map *map);
 void create_mlx(t_mlx_data *vars, t_map *map);

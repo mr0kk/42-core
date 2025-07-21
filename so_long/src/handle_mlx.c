@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 23:46:33 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/19 21:51:57 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/21 17:34:07 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int handle_input(int keysym, t_mlx_data *data)
 	printf("the %d key has been pressed\n\n", keysym);
 }
 
-void my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char *dst;
+// void my_mlx_pixel_put(t_img *data, int x, int y, int color)
+// {
+// 	char *dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int *)dst = color;
+// }
 
 void	create_mlx(t_mlx_data *vars, t_map *map)
 {
@@ -44,6 +44,7 @@ void	create_mlx(t_mlx_data *vars, t_map *map)
 	{
 		mlx_destroy_display(vars->mlx_ptr);
 		free(vars->mlx_ptr);
+		free_map(map->map_ptr, map->map_height);
 		exit_with_error("MLX window ERROR");
 	}
 }
