@@ -23,26 +23,22 @@ int main(int argc, char *argv[])
         printf("Usage: %s <map_file.ber>\n", argv[0]);
         exit(1);
     }
-    read_map(argv[1], &map);
-    print_map(&map);
-    is_map_valid = validate_map(&map);
+    read_map(argv[1], &vars.map);
+    print_map(&vars.map);
+    is_map_valid = validate_map(&vars.map);
 
     if (is_map_valid)
     {
         ft_printf("map is valid\n");
-        printf("collectibles to get: %d\n", map.collectibles);
-        printf("start position: (%d, %d)\n", map.player_start.x, map.player_start.y);
-       
-       
-        set_map_values(&map);
-        create_mlx(&vars, &map);
-        map_rendering(&vars, &map);
-
+        printf("collectibles to get: %d\n", vars.map.collectibles);
+        printf("player start position: (%u, %u)\n", vars.map.player_start.x, vars.map.player_start.y);
+        printf("exit start position: (%u, %u)\n", vars.map.exit_point.x, vars.map.exit_point.y);
+        map_rendering(&vars);
     }
     else
         ft_printf("map is NOT valid\n");
 
     printf("here after program\n");
-    free_map(map.map_ptr, map.map_height);
+    free_map(vars.map.map_ptr, vars.map.map_height);
     exit(0); // it can also close fd
 }

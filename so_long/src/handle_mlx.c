@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 23:46:33 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/21 17:34:07 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/21 20:59:54 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,18 @@ int handle_input(int keysym, t_mlx_data *data)
 	printf("the %d key has been pressed\n\n", keysym);
 }
 
-// void my_mlx_pixel_put(t_img *data, int x, int y, int color)
-// {
-// 	char *dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int *)dst = color;
-// }
-
-void	create_mlx(t_mlx_data *vars, t_map *map)
+void	create_mlx(t_mlx_data *vars)
 {
 	vars->mlx_ptr = mlx_init();
 	if (vars->mlx_ptr == NULL)
 		exit_with_error("MLX init ERROR");
-	vars->win_ptr = mlx_new_window(vars->mlx_ptr, map->win_width, map->win_height, "so_long");
+	create_images(vars);
+	vars->win_ptr = mlx_new_window(vars->mlx_ptr, vars->map.win_width, vars->map.win_height, "so_long");
 	if (vars->win_ptr == NULL)
 	{
 		mlx_destroy_display(vars->mlx_ptr);
 		free(vars->mlx_ptr);
-		free_map(map->map_ptr, map->map_height);
+		free_map(vars->map.map_ptr, vars->map.map_height);
 		exit_with_error("MLX window ERROR");
 	}
 }

@@ -50,32 +50,35 @@ int	is_accessible(t_map *map)
 	return (1);
 }
 
+void	set_point(t_point *item, size_t w, size_t h, int *counter)
+{
+	item->x = w;
+	item->y = h;
+	*counter += 1;
+}
+
 int	fields_counter(t_map *map)
 {
 	size_t		i;
 	size_t		j;
-	int			p_counter;
 
-	p_counter = 0;
-	i = -1;
-	while (++i < map->map_height - 1)
+	map->p_counter = 0;
+	i = 1;
+	while (i < map->map_height - 1)
 	{
 		j = 1;
 		while (j < map->map_width - 1)
 		{
 			if (map->map_ptr[i][j] == 'E')
-				map->exit_counter++;
+				set_point(&map->exit_point, j, i, &map->exit_counter);
 			if (map->map_ptr[i][j] == 'P')
-			{
-				p_counter++;
-				map->player_start.x = j;
-				map->player_start.y = i;
-			}
+				set_point(&map->player_start, j, i, &map->p_counter);
 			if (map->map_ptr[i][j++] == 'C')
 				map->collectibles++;
 		}
+		i++;
 	}
-	return ((p_counter == 1)
+	return ((map->p_counter == 1)
 		&& map->exit_counter == 1 && map->collectibles > 0);
 }
 
