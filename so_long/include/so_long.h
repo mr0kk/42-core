@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/21 21:21:26 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/21 22:41:37 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_map
 	size_t block_size;
 	int win_height;
 	int win_width;
+	int	moves_counter;
 } t_map;
 
 typedef struct s_mlx_data
@@ -69,5 +70,10 @@ void map_rendering(t_mlx_data *vars);
 void create_mlx(t_mlx_data *vars);
 void create_images(t_mlx_data *vars);
 void destroy_images(t_mlx_data *vars);
+void go_up(t_mlx_data *vars);
+void go_down(t_mlx_data *vars);
+void go_left(t_mlx_data *vars);
+void go_right(t_mlx_data *vars);
+void draw_map(t_mlx_data *vars);
 
 #endif

@@ -14,7 +14,6 @@
 
 int main(int argc, char *argv[])
 {
-    t_map map;
     t_mlx_data vars;
     int is_map_valid;
 

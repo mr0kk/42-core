@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 01:04:30 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/21 20:59:49 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/21 22:28:15 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,6 @@ void	create_images(t_mlx_data *vars)
 	vars->map.win_width = (int)(vars->map.block_size * vars->map.map_width);
 }
 
-void	destroy_images(t_mlx_data *vars)
-{
-	mlx_destroy_image(vars->mlx_ptr, vars->grass);
-	mlx_destroy_image(vars->mlx_ptr, vars->dino);
-	mlx_destroy_image(vars->mlx_ptr, vars->wall);
-	mlx_destroy_image(vars->mlx_ptr, vars->duck);
-	mlx_destroy_image(vars->mlx_ptr, vars->exit);
-}
-
 void	draw_map(t_mlx_data *vars)
 {
 	int	x;
@@ -63,29 +54,22 @@ void	draw_map(t_mlx_data *vars)
 		{
 			if (vars->map.map_ptr[y][x] == '1')
 				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->wall, x * vars->map.block_size, y * vars->map.block_size);
-			if (vars->map.map_ptr[y][x] == 'C')
+			else if (vars->map.map_ptr[y][x] == 'C')
 				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->duck, x * vars->map.block_size, y * vars->map.block_size);
-			if (vars->map.map_ptr[y][x] == '0')
+			else if (vars->map.map_ptr[y][x] == '0')
 				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->grass, x * vars->map.block_size, y * vars->map.block_size);
-			if (vars->map.map_ptr[y][x] == 'E')
-				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->exit, x * vars->map.block_size, y * vars->map.block_size);
-			if (vars->map.map_ptr[y][x] == 'P')
-				mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->dino, x * vars->map.block_size, y * vars->map.block_size);
 			x++;
 		}
 		y++;
 	}
-	// mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->dino, map->player_start.x * 64,64 * map->player_start.y);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->dino, vars->map.player_start.x * vars->map.block_size, vars->map.player_start.y * vars->map.block_size);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->exit, vars->map.exit_point.x * vars->map.block_size, vars->map.exit_point.y * vars->map.block_size);
 }
 
 void	map_rendering(t_mlx_data *vars)
 {
-	void	*img;
-	int		height;
-	int		width;
-	
-
-	printf("here0\n");
+	vars->map.moves_counter = 0;
+	printf("current move amount: %d\n", vars->map.moves_counter);
 	create_mlx(vars);
 	draw_map(vars);
 	
@@ -93,7 +77,6 @@ void	map_rendering(t_mlx_data *vars)
 	mlx_loop(vars->mlx_ptr);
 
 	// this is not executing 
-	printf("im here in mlx\n");
 	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 	mlx_destroy_display(vars->mlx_ptr);
 	free(vars->mlx_ptr);
