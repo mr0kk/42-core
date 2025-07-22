@@ -16,7 +16,7 @@ void	flood_fill(char **map, size_t x, size_t y, t_map *data)
 {
 	char	current;
 
-	if (y < 0 || x < 0 || y >= data->map_height || x >= data->map_width)
+	if (y >= data->map_height || x >= data->map_width)
 		return ;
 	if (map[y][x] == '1' || map[y][x] == 'X')
 		return ;

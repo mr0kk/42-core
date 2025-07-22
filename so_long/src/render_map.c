@@ -6,17 +6,11 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 01:04:30 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 22:26:53 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/23 00:06:00 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	put_image(t_mlx_data *vars, void *texture, int x, int y)
-{
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, texture,
-		x * vars->map.block_size, y * vars->map.block_size);
-}
 
 int	image_check(t_mlx_data *vars)
 {
@@ -50,7 +44,6 @@ void	create_images(t_mlx_data *vars)
 			"textures/duck.xpm", &w, &h);
 	if (image_check(vars))
 	{
-		destroy_images(vars);
 		free_map(vars->map.map_ptr, vars->map.map_height);
 		exit_with_error();
 	}
@@ -60,6 +53,26 @@ void	create_images(t_mlx_data *vars)
 		vars->map.block_size = 64;
 	vars->map.win_height = (int)(vars->map.block_size * vars->map.map_height);
 	vars->map.win_width = (int)(vars->map.block_size * vars->map.map_width);
+}
+
+void	images_to_window(t_mlx_data *vars, int x, int y)
+{
+	if (vars->map.map_ptr[y][x] == '1')
+		put_image(vars, vars->wall, x, y);
+	else if (vars->map.map_ptr[y][x] == 'C')
+		put_image(vars, vars->duck, x, y);
+	else if (vars->map.map_ptr[y][x] == '0')
+		put_image(vars, vars->grass, x, y);
+	else if (vars->map.map_ptr[y][x] == 'P')
+		put_image(vars, vars->dino, x, y);
+	else if (vars->map.map_ptr[y][x] == 'E')
+		put_image(vars, vars->exit, x, y);
+	else
+		map_error("Unknown component", &vars->map);
+	put_image(vars, vars->exit, vars->map.exit_point.x,
+		vars->map.exit_point.y);
+	put_image(vars, vars->dino, vars->map.player_start.x,
+		vars->map.player_start.y);
 }
 
 void	draw_map(t_mlx_data *vars)
@@ -76,19 +89,8 @@ void	draw_map(t_mlx_data *vars)
 	{
 		x = -1;
 		while (++x < w)
-		{
-			if (vars->map.map_ptr[y][x] == '1')
-				put_image(vars, vars->wall, x, y);
-			else if (vars->map.map_ptr[y][x] == 'C')
-				put_image(vars, vars->duck, x, y);
-			else if (vars->map.map_ptr[y][x] == '0')
-				put_image(vars, vars->grass, x, y);
-		}
+			images_to_window(vars, x, y);
 	}
-	put_image(vars, vars->dino, vars->map.player_start.x,
-		vars->map.player_start.y);
-	put_image(vars, vars->exit, vars->map.exit_point.x,
-		vars->map.exit_point.y);
 }
 
 void	map_rendering(t_mlx_data *vars)

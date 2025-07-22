@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 22:37:59 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/23 00:07:08 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_mlx_data
 	void	*exit;
 }		t_mlx_data;
 
-int		ft_sqrt(int num);
 int		is_ber_file(char *filename);
 int		open_file(char *file_name);
 void	read_map(char *file_name, t_map *map);
@@ -71,6 +70,7 @@ void	map_rendering(t_mlx_data *vars);
 void	create_mlx(t_mlx_data *vars);
 void	create_images(t_mlx_data *vars);
 void	destroy_images(t_mlx_data *vars);
+void	put_image(t_mlx_data *vars, void *texture, int x, int y);
 void	go_up(t_mlx_data *vars);
 void	go_down(t_mlx_data *vars);
 void	go_left(t_mlx_data *vars);

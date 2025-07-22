@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 23:46:33 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 22:02:31 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 23:14:25 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 		go_right(data);
 	else if (keysym == XK_Escape)
 		handle_close(data);
+	return (0);
 }
 
 void	create_mlx(t_mlx_data *vars)

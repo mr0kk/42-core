@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:17:28 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 22:04:59 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 23:12:34 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**copy_map(t_map *map)
 	if (!new_map)
 		exit_with_error();
 	y = -1;
-	while (++y < map->map_height)
+	while (++y < (int)map->map_height)
 	{
 		new_map[y] = (char *)malloc((map->map_width + 1) * sizeof(char));
 		if (!new_map[y])
@@ -64,7 +64,7 @@ char	**copy_map(t_map *map)
 			exit_with_error();
 		}
 		x = -1;
-		while (++x < map->map_width)
+		while (++x < (int)map->map_width)
 			new_map[y][x] = map->map_ptr[y][x];
 	}
 	new_map[y] = NULL;

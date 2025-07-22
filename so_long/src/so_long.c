@@ -12,6 +12,12 @@
 
 #include "so_long.h"
 
+void	put_image(t_mlx_data *vars, void *texture, int x, int y)
+{
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, texture,
+		x * vars->map.block_size, y * vars->map.block_size);
+}
+
 void	set_point(t_point *item, size_t w, size_t h, int *counter)
 {
 	item->x = w;
