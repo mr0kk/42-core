@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 01:04:30 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/21 22:28:15 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 19:36:13 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	create_images(t_mlx_data *vars)
 	{
 		destroy_images(vars);
 		free_map(vars->map.map_ptr, vars->map.map_height);
-		exit_with_error("Error: Failed to load  image\n");
+		exit_with_error();
 	}
 	if (w == h)
 		vars->map.block_size = w;
@@ -69,16 +69,8 @@ void	draw_map(t_mlx_data *vars)
 void	map_rendering(t_mlx_data *vars)
 {
 	vars->map.moves_counter = 0;
-	printf("current move amount: %d\n", vars->map.moves_counter);
 	create_mlx(vars);
 	draw_map(vars);
-	
 	mlx_key_hook(vars->win_ptr, handle_input, vars);
 	mlx_loop(vars->mlx_ptr);
-
-	// this is not executing 
-	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
-	mlx_destroy_display(vars->mlx_ptr);
-	free(vars->mlx_ptr);
-
 }

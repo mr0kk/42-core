@@ -57,7 +57,7 @@ void	set_point(t_point *item, size_t w, size_t h, int *counter)
 	*counter += 1;
 }
 
-int	fields_counter(t_map *map)
+void	fields_counter(t_map *map)
 {
 	size_t		i;
 	size_t		j;
@@ -78,8 +78,6 @@ int	fields_counter(t_map *map)
 		}
 		i++;
 	}
-	return ((map->p_counter == 1)
-		&& map->exit_counter == 1 && map->collectibles > 0);
 }
 
 int	enclosed_in_walls(t_map *map)
@@ -109,6 +107,16 @@ int	validate_map(t_map *map)
 {
 	map->exit_counter = 0;
 	map->collectibles = 0;
-	return (enclosed_in_walls(map)
-		&& fields_counter(map) && is_accessible(map));
+	if (!enclosed_in_walls(map))
+		map_error("Map is not enclosed in walls!");
+	fields_counter(map);
+	if (map->p_counter != 1)
+		map_error("Invalid amount of player's starting points");
+	if (map->exit_counter != 1)
+		map_error("Invalid amount of exits");
+	if (map->collectibles == 0)
+		map_error("Invalid amount of collectibles");
+	if (!is_accessible(map))
+		map_error("Collectibles or exit are NOT accessible");
+	return (1);
 }

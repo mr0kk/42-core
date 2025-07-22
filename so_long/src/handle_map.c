@@ -44,11 +44,11 @@ void	get_map_size(int fd, t_map *map)
 	map->map_height = 0;
 	line = get_next_line(fd);
 	if (!line)
-		exit_with_error("Map file is empty");
+		map_error("Map file is empty");
 	map->map_width = ft_strlen(line);
 	if (line[map->map_width - 1] == '\n')
 		map->map_width--;
-	while (line && line[0] != 10) /// im not sure if map file ends with endline its ok?
+	while (line && line[0] != 10)
 	{
 		line_len = ft_strlen(line);
 		if (line_len > 0 && line[line_len - 1] == '\n')
@@ -56,7 +56,7 @@ void	get_map_size(int fd, t_map *map)
 		if (line_len != map->map_width)
 		{
 			reset_gnl(fd, line);
-			exit_with_error("Map must be rectangular");
+			map_error("Map must be rectangular");
 		}
 		map->map_height++;
 		free(line);
@@ -73,7 +73,7 @@ char	**create_map(t_map *map, int fd)
 
 	empty_map = (char **)malloc((map->map_height + 1) * sizeof(char *));
 	if (!empty_map)
-		exit_with_error("Malloc Error");
+		exit_with_error();
 	y = 0;
 	while (y < map->map_height)
 	{
@@ -85,7 +85,7 @@ char	**create_map(t_map *map, int fd)
 				free(empty_map[j++]);
 			reset_gnl(fd, empty_map[y]);
 			free(empty_map);
-			exit_with_error("Error reading map");
+			exit_with_error();
 		}
 		y++;
 	}

@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 22:03:04 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/21 23:27:42 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 19:23:07 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	handle_exit(t_mlx_data *vars)
 {
-	printf("collectibles when E: %d\n", vars->map.collectibles);
 	if (vars->map.collectibles == 0)
 	{
 		destroy_images(vars);
@@ -22,8 +21,7 @@ void	handle_exit(t_mlx_data *vars)
 		mlx_destroy_display(vars->mlx_ptr);
 		free_map(vars->map.map_ptr, vars->map.map_height);
 		free(vars->mlx_ptr);
-		ft_printf("you win!\n");
-		ft_printf("you did %d moves\n", vars->map.moves_counter);
+		ft_printf("You won!\n");
 		exit(0);
 	}
 }
@@ -35,7 +33,6 @@ void	go_up(t_mlx_data *vars)
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
-	ft_printf("going up!\n");
 	if (vars->map.map_ptr[y - 1][x] != '1' )
 	{
 		if (vars->map.map_ptr[y - 1][x] == 'C')
@@ -49,6 +46,7 @@ void	go_up(t_mlx_data *vars)
 			draw_map(vars);
 		}
 	}
+	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }
 
 void go_down(t_mlx_data *vars)
@@ -58,7 +56,6 @@ void go_down(t_mlx_data *vars)
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
-	ft_printf("going down!\n");
 	if (vars->map.map_ptr[y + 1][x] != '1')
 	{
 		if (vars->map.map_ptr[y + 1][x] == 'E')
@@ -74,6 +71,7 @@ void go_down(t_mlx_data *vars)
 			draw_map(vars);
 		}
 	}
+	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }
 
 void go_left(t_mlx_data *vars)
@@ -83,7 +81,6 @@ void go_left(t_mlx_data *vars)
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
-	ft_printf("going left!\n");
 	if (vars->map.map_ptr[y][x - 1] != '1')
 	{
 		if (vars->map.map_ptr[y][x - 1] == 'E')
@@ -99,6 +96,7 @@ void go_left(t_mlx_data *vars)
 			draw_map(vars);
 		}
 	}
+	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }
 
 void go_right(t_mlx_data *vars)
@@ -108,7 +106,6 @@ void go_right(t_mlx_data *vars)
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
-	ft_printf("going left!\n");
 	if (vars->map.map_ptr[y][x + 1] != '1')
 	{
 		if (vars->map.map_ptr[y][x + 1] == 'E')
@@ -124,4 +121,5 @@ void go_right(t_mlx_data *vars)
 		}
 		draw_map(vars);
 	}
+	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }

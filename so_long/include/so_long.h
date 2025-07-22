@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:00:10 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/21 22:41:37 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 19:18:00 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-// #include <errno.h>
+#include <errno.h>
 // # include <mlx.h>
 
 typedef struct s_point
@@ -63,7 +63,8 @@ int open_file(char *file_name);
 void read_map(char *file_name, t_map *map);
 void free_map(char **map, size_t map_height);
 int validate_map(t_map *map);
-void exit_with_error(char *message);
+void map_error(char *message);
+void exit_with_error(void);
 char **copy_map(t_map *map);
 int handle_input(int keysym, t_mlx_data *data);
 void map_rendering(t_mlx_data *vars);
