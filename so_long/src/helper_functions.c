@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:17:28 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 19:18:26 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 20:17:16 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void exit_with_error(void)
 	exit(1);
 }
 
-void	map_error(char *message)
+void	map_error(char *message, t_map *map)
 {
+	if (map)
+		free_map(map->map_ptr, map->map_height);
 	ft_printf("Error\n%s\n", message);
 	exit(1);
 }
@@ -77,6 +79,6 @@ int open_file(char *file_name)
 	if (fd == -1)
 		exit_with_error();
 	if (is_ber_file(file_name) == 0)
-		map_error("Map must have .ber extension");
+		map_error("Map must have .ber extension", NULL);
 	return (fd);
 }

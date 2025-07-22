@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 23:46:33 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 19:43:36 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 20:05:30 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void destroy_images(t_mlx_data *vars)
 	mlx_destroy_image(vars->mlx_ptr, vars->exit);
 }
 
-void handle_close(t_mlx_data *data)
+int handle_close(t_mlx_data *data)
 {
 	destroy_images(data);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
@@ -29,6 +29,7 @@ void handle_close(t_mlx_data *data)
 	free_map(data->map.map_ptr, data->map.map_height);
 	free(data->mlx_ptr);
 	exit(0);
+	return (0);
 }
 
 int handle_input(int keysym, t_mlx_data *data)

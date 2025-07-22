@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 01:04:30 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 19:36:13 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 20:09:58 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	map_rendering(t_mlx_data *vars)
 	vars->map.moves_counter = 0;
 	create_mlx(vars);
 	draw_map(vars);
+	mlx_hook(vars->win_ptr, 17, 0, handle_close, vars);
 	mlx_key_hook(vars->win_ptr, handle_input, vars);
 	mlx_loop(vars->mlx_ptr);
 }

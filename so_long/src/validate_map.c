@@ -107,16 +107,18 @@ int	validate_map(t_map *map)
 {
 	map->exit_counter = 0;
 	map->collectibles = 0;
+	if (map->map_height <= 2)
+		map_error("Map should be at least height of 3", map);
 	if (!enclosed_in_walls(map))
-		map_error("Map is not enclosed in walls!");
+		map_error("Map is not enclosed in walls!", map);
 	fields_counter(map);
 	if (map->p_counter != 1)
-		map_error("Invalid amount of player's starting points");
+		map_error("Invalid amount of player's starting points", map);
 	if (map->exit_counter != 1)
-		map_error("Invalid amount of exits");
+		map_error("Invalid amount of exits", map);
 	if (map->collectibles == 0)
-		map_error("Invalid amount of collectibles");
+		map_error("Invalid amount of collectibles", map);
 	if (!is_accessible(map))
-		map_error("Collectibles or exit are NOT accessible");
+		map_error("Collectibles or exit are NOT accessible", map);
 	return (1);
 }
