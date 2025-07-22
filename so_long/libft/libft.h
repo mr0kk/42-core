@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:49:12 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/14 00:38:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/22 22:40:46 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,21 @@ void	ft_putnbr_fd(int n, int fd);
 /*
 	ft_printf
 */
-int ft_printf(const char *format, ...);
-int ft_putchar(char c);
-int ft_putstr(char *s);
-int put_pointer(unsigned long long ptr);
-int put_int(int num);
-int put_u_int(unsigned int num);
-int put_hex(unsigned int num, char f);
-int hex_conv(unsigned long num, char f);
+int		ft_printf(const char *format, ...);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
+int		put_pointer(unsigned long long ptr);
+int		put_int(int num);
+int		put_u_int(unsigned int num);
+int		put_hex(unsigned int num, char f);
+int		hex_conv(unsigned long num, char f);
 /*
 	get_next_line
 */
 size_t	ft_countlen(const char *s);
-char *get_next_line(int fd);
-char *ft_strchr(const char *s, int c);
-char *ft_strdup(const char *s);
-char *ft_strjoin(char const *s1, char const *s2);
-size_t ft_strlcpy(char *dest, const char *src, size_t size);
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 #endif

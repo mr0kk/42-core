@@ -50,13 +50,6 @@ int	is_accessible(t_map *map)
 	return (1);
 }
 
-void	set_point(t_point *item, size_t w, size_t h, int *counter)
-{
-	item->x = w;
-	item->y = h;
-	*counter += 1;
-}
-
 void	fields_counter(t_map *map)
 {
 	size_t		i;

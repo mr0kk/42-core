@@ -28,15 +28,14 @@ int	is_ber_file(char *filename)
 
 void	reset_gnl(int fd, char *line)
 {
-	
 	if (line)
 		free(line);
 	line = get_next_line(fd);
 	while (line)
-    {
-        free(line);
-        line = get_next_line(fd);
-    }
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 }
 

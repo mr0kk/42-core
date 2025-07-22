@@ -6,16 +6,17 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:17:28 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 20:17:16 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 22:04:59 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_map(char **map, size_t map_height)
+void	free_map(char **map, size_t map_height)
 {
-	size_t y = 0;
+	size_t	y;
 
+	y = 0;
 	if (map)
 	{
 		while (y < map_height)
@@ -28,7 +29,7 @@ void free_map(char **map, size_t map_height)
 	}
 }
 
-void exit_with_error(void)
+void	exit_with_error(void)
 {
 	ft_printf("Error\n%s\n", strerror(errno));
 	exit(1);
@@ -42,11 +43,11 @@ void	map_error(char *message, t_map *map)
 	exit(1);
 }
 
-char **copy_map(t_map *map)
+char	**copy_map(t_map *map)
 {
-	char **new_map;
-	int y;
-	int x;
+	char	**new_map;
+	int		y;
+	int		x;
 
 	new_map = (char **)malloc((map->map_height + 1) * sizeof(char *));
 	if (!new_map)
@@ -54,7 +55,6 @@ char **copy_map(t_map *map)
 	y = -1;
 	while (++y < map->map_height)
 	{
-
 		new_map[y] = (char *)malloc((map->map_width + 1) * sizeof(char));
 		if (!new_map[y])
 		{
@@ -71,9 +71,9 @@ char **copy_map(t_map *map)
 	return (new_map);
 }
 
-int open_file(char *file_name)
+int	open_file(char *file_name)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)

@@ -6,13 +6,13 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 23:46:33 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 20:05:30 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 22:02:31 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void destroy_images(t_mlx_data *vars)
+void	destroy_images(t_mlx_data *vars)
 {
 	mlx_destroy_image(vars->mlx_ptr, vars->grass);
 	mlx_destroy_image(vars->mlx_ptr, vars->dino);
@@ -21,7 +21,7 @@ void destroy_images(t_mlx_data *vars)
 	mlx_destroy_image(vars->mlx_ptr, vars->exit);
 }
 
-int handle_close(t_mlx_data *data)
+int	handle_close(t_mlx_data *data)
 {
 	destroy_images(data);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
@@ -32,7 +32,7 @@ int handle_close(t_mlx_data *data)
 	return (0);
 }
 
-int handle_input(int keysym, t_mlx_data *data)
+int	handle_input(int keysym, t_mlx_data *data)
 {
 	if (keysym == XK_w)
 		go_up(data);
@@ -46,13 +46,14 @@ int handle_input(int keysym, t_mlx_data *data)
 		handle_close(data);
 }
 
-void create_mlx(t_mlx_data *vars)
+void	create_mlx(t_mlx_data *vars)
 {
 	vars->mlx_ptr = mlx_init();
 	if (vars->mlx_ptr == NULL)
 		exit_with_error();
 	create_images(vars);
-	vars->win_ptr = mlx_new_window(vars->mlx_ptr, vars->map.win_width, vars->map.win_height, "so_long");
+	vars->win_ptr = mlx_new_window(vars->mlx_ptr,
+			vars->map.win_width, vars->map.win_height, "so_long");
 	if (vars->win_ptr == NULL)
 	{
 		mlx_destroy_display(vars->mlx_ptr);

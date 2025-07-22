@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 22:03:04 by rmrok             #+#    #+#             */
-/*   Updated: 2025/07/22 19:23:07 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/07/22 22:00:42 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	go_up(t_mlx_data *vars)
 	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }
 
-void go_down(t_mlx_data *vars)
+void	go_down(t_mlx_data *vars)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
@@ -74,10 +74,10 @@ void go_down(t_mlx_data *vars)
 	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }
 
-void go_left(t_mlx_data *vars)
+void	go_left(t_mlx_data *vars)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
@@ -99,10 +99,10 @@ void go_left(t_mlx_data *vars)
 	ft_printf("moves amount: %d\n", vars->map.moves_counter);
 }
 
-void go_right(t_mlx_data *vars)
+void	go_right(t_mlx_data *vars)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = vars->map.player_start.x;
 	y = vars->map.player_start.y;
