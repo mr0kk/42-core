@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR) -g -Wall -Wextra -Werror
+CFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR) -g # -Wall -Wextra -Werror
 
 SRC_DIR = src
 OBJ_DIR = obj
