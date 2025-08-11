@@ -10,73 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
-typedef struct s_node
-{
-	int	value;
-	struct s_node	*next;
-}		t_node;
-
-t_node	*create_node(int value)
-{
-	t_node	*new_node;
-
-	new_node = (t_node *)malloc(sizeof(t_node));
-	if (!new_node)
-	{
-		printf("error in malloc\n");
-		exit(1);
-	}
-	new_node->value = value;
-	new_node->next = NULL;
-	return (new_node);
-
-}
-
-void	add_node(t_node	**head, int value)
-{
-	t_node	*new;
-	t_node	*tmp;
-
-	new = create_node(value);
-	if(!(*head))
-	{
-		*head = new;
-		return ;
-	}
-	tmp = *head;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-
-}
-
-void	print_stack(t_node	*head)
-{
-	while (head->next)
-	{
-		ft_printf("%d\n", head->value);
-		head = head->next; 
-	}
-}
-
-void	free_stack(t_node *head)
-{
-	t_node	*tmp;
-
-	while(head)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp);
-	}
-}
-
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_node	*node;
 	t_node	*head;
+	t_node	*head_b;
+
 	int		i;
 
 	if (argc < 2)
@@ -85,13 +26,29 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	head = create_node(ft_atoi(argv[1]));
-		i = 2;
-	while (argv[i])
+	i = 2;
+	while (i < argc)
 	{
 		add_node(&head, ft_atoi(argv[i]));
 		i++;
 	}
+	ft_printf("stack a:\n");
+	print_stack(head);
+
+	head_b = create_node(99);
+	add_node(&head_b, 83);
+	ft_printf("stack b:\n");
+	print_stack(head_b);
+
+
+	ft_printf("---------\n");
+	head = pa(head, head_b);
+	ft_printf("stack a:\n");
 
 	print_stack(head);
+	ft_printf("stack b:\n");
+	print_stack(head_b);
+
 	free_stack(head);
+	free_stack(head_b);
 }

@@ -17,4 +17,21 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+typedef struct s_node
+{
+	struct s_node	*prev;
+	int	value;
+	int	index;
+	struct s_node	*next;
+}		t_node;
+
+t_node	*create_node(int value);
+void	add_node(t_node	**head, int value);
+void	print_stack(t_node	*head);
+void	free_stack(t_node *head);
+
+void	swap(t_node *head);
+void	ss(t_node *head_a, t_node *head_b);
+t_node	*pa(t_node *head_a, t_node *head_b);
+
 # endif
