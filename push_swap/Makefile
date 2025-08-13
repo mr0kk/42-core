@@ -9,9 +9,10 @@ LIBFT_DIR = libft
 LIBFT_LIB = -L$(LIBFT_DIR) -lft
 
 NAME = push_swap
-SRCS = $(SRC_DIR)/push_swap.c \
+SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/operations.c \
-			$(SRC_DIR)/list_handling.c
+			$(SRC_DIR)/list_handling.c \
+			$(SRC_DIR)/validate_input.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:  $(LIBFT_DIR)/libft.a $(NAME)

@@ -12,43 +12,34 @@
 
 #include "push_swap.h"
 
+
+// t_node	*read_input(int argc, char *argv[])
+// {
+
+// }
+
+void	exit_with_error(t_node **head_a, t_node **head_b)
+{
+	
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_node	*node;
-	t_node	*head;
-	t_node	*head_b;
 
+	t_node	*head_a;
+	t_node	*head_b;
 	int		i;
+	unsigned int	words;
 
 	if (argc < 2)
-	{
-		ft_printf("wrong amount of arguments\n");
-		exit(1);
-	}
-	head = create_node(ft_atoi(argv[1]));
-	i = 2;
-	while (i < argc)
-	{
-		add_node(&head, ft_atoi(argv[i]));
-		i++;
-	}
-	ft_printf("stack a:\n");
-	print_stack(head);
+		return (0);
+	if (!valid_input(argc, argv))
+		exit_with_error(NULL, NULL);
+		ft_printf("git\n");
+	i = 1;
+	head_b = NULL;
+	// head_a = read_input(argc, argv);
 
-	head_b = create_node(99);
-	add_node(&head_b, 83);
-	ft_printf("stack b:\n");
-	print_stack(head_b);
-
-
-	ft_printf("---------\n");
-	head = pa(head, head_b);
-	ft_printf("stack a:\n");
-
-	print_stack(head);
-	ft_printf("stack b:\n");
-	print_stack(head_b);
-
-	free_stack(head);
-	free_stack(head_b);
 }

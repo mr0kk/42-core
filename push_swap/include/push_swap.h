@@ -25,6 +25,8 @@ typedef struct s_node
 	struct s_node	*next;
 }		t_node;
 
+int	valid_input(int argc, char *argv[]);
+
 t_node	*create_node(int value);
 void	add_node(t_node	**head, int value);
 void	print_stack(t_node	*head);
