@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR) -g # -Wall -Wextra -Werror
+CFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR) -g #-Wall -Wextra -Werror
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -12,7 +12,9 @@ NAME = push_swap
 SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/validate_input.c \
 			$(SRC_DIR)/read_input.c \
-			$(SRC_DIR)/swap.c
+			$(SRC_DIR)/swap.c \
+			$(SRC_DIR)/push.c \
+			$(SRC_DIR)/rotate.c 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:  $(LIBFT_DIR)/libft.a $(NAME)
