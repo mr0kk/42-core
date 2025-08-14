@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 21:44:30 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/14 22:10:44 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	exit_with_error(t_node **head_a, t_node **head_b)
 {
-	// free stacks
-
 	if (head_a && *head_a)
 		free_stack(head_a);
 	if (head_b && *head_b)
@@ -24,8 +22,22 @@ void	exit_with_error(t_node **head_a, t_node **head_b)
 	exit(1);
 }
 
+int	get_stack_size(t_node *stack)
+{
+	int	res;
+
+	res = 1;
+	while (stack->next)
+	{
+		res++;
+		stack = stack->next;
+	}
+	return (res);
+}
+
 void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 {
+	print_stack(*head_a); // for tests
 	
 }
 
@@ -34,7 +46,7 @@ int main(int argc, char *argv[])
 
 	t_node	*head_a;
 	t_node	*head_b;
-	int		i;
+	int		stack_size;
 
 	if (argc < 2)
 		return (0);
@@ -42,9 +54,9 @@ int main(int argc, char *argv[])
 		exit_with_error(NULL, NULL);
 	head_a = read_input(argc, argv);
 	head_b = NULL;
-	print_stack(head_a); // for tests
-
-	// push_swap(head_a, head_b, argc - 1);
+	stack_size = get_stack_size(head_a);
+	
+	push_swap(&head_a, &head_b, stack_size);
 	
 	free_stack(&head_a);
 	free_stack(&head_b);

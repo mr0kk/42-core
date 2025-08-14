@@ -11,7 +11,8 @@ LIBFT_LIB = -L$(LIBFT_DIR) -lft
 NAME = push_swap
 SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/validate_input.c \
-			$(SRC_DIR)/read_input.c
+			$(SRC_DIR)/read_input.c \
+			$(SRC_DIR)/swap.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:  $(LIBFT_DIR)/libft.a $(NAME)

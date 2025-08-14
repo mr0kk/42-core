@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:38:54 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 20:21:51 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/14 21:50:24 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ t_node *create_node(int value)
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
-	{
-		printf("error in malloc\n");
-		exit(1);
-	}
+		exit_with_error(NULL, NULL);
 	new_node->prev = NULL;
 	new_node->value = value;
 	new_node->next = NULL;
