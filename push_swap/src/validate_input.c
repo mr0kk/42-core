@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_input.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/14 15:32:15 by rmrok             #+#    #+#             */
+/*   Updated: 2025/08/14 20:12:53 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	is_digit(char c)
@@ -12,10 +24,10 @@ int	is_sign(char c)
 
 int	is_number(char *s)
 {
-	int	i;
-	char *num;
+	int		i;
+	char	*num;
 
-	num = ft_strtrim(s, " ");
+	num = ft_strtrim(s, " \t");
 	i = 0;
 	if (is_sign(num[0]))
 		i++;
@@ -35,27 +47,27 @@ int	nbr_cmp(const char *s1, const char *s2)
 	char	*num2;
 	int		i;
 	int		j;
+	int		res;
 
-	num1 = ft_strtrim(s1, " ");
-	num2 = ft_strtrim(s2, " ");
+	num1 = ft_strtrim(s1, " \t");
+	num2 = ft_strtrim(s2, " \t");
 	i = 0;
 	j = 0;
 	if (num1[0] == '+')
-	{
 		if (num2[i] != '+')
 			i++;
-	}
 	else
-	{
 		if (num2[0] == '+')
 			j++;
-	}
 	while (num1[i] == num2[j] && (num1[i] && num2[j]))
 	{
 		i++;
 		j++;
-	}	
-	return ((unsigned char)num1[i] - (unsigned char)num2[j]);
+	}
+	res = (unsigned char)num1[i] - (unsigned char)num2[j];
+	free(num1);
+	free(num2);
+	return (res);
 }
 
 int	have_duplicates(char *argv[], int argc)
