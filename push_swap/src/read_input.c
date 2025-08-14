@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:38:54 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 20:18:53 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/14 20:21:51 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void free_stack(t_node **head)
 {
 	t_node *tmp;
 
+	if (!(*head) || !head)
+		return ;
 	while (*head)
 	{
 		tmp = (*head)->next;

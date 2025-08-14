@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:48 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 20:16:06 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/14 21:12:10 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_node
 {
@@ -28,6 +29,8 @@ typedef struct s_node
 int	valid_input(int argc, char *argv[]);
 
 t_node *read_input(int argc, char *argv[]);
+
+void push_swap(t_node **head_a, t_node **head_b, int stack_size);
 
 t_node *create_node(int value);
 void	add_node(t_node	**head, int value);

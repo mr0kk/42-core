@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:32:15 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 20:12:53 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/14 21:42:55 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,29 @@ int	is_digit(char c)
 int	is_sign(char c)
 {
 	return (c == '-' || c == '+');
+}
+
+int	fits_int(char *s)
+{
+	size_t	len;
+	char	*num;
+	int res;
+	
+	num = ft_strtrim(s, "+ \t");
+	len = ft_strlen(num);
+	if (num[0] == '-') 
+	{
+		if (len > 11)
+			return (0);
+		else if (len == 11)
+			res = ft_strncmp("-2147483648", num, len);
+	}
+	else if (len > 10)
+		return (0);
+	else if (len == 10)
+		res = ft_strncmp("2147483647", num, len);
+	free(num);
+	return (!(res < 0));
 }
 
 int	is_number(char *s)
@@ -101,6 +124,8 @@ int	valid_input(int argc, char *argv[])
 	{
 		if (!is_number(argv[i]))
 			return (0);
+		if (!fits_int(argv[i]))
+			return (0);
 		if (ft_atoi(argv[i]) == 0)
 			zeros++;
 		i++;
@@ -111,7 +136,3 @@ int	valid_input(int argc, char *argv[])
 		return (0);
 	return (1);
 }
-
-// how to check if its fit in int?
-// -2147483648
-//  2147483647

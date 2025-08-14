@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 20:19:06 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/14 21:44:30 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ void	exit_with_error(t_node **head_a, t_node **head_b)
 	exit(1);
 }
 
-int	main(int argc, char *argv[])
+void push_swap(t_node **head_a, t_node **head_b, int stack_size)
+{
+	
+}
+
+int main(int argc, char *argv[])
 {
 
 	t_node	*head_a;
@@ -35,13 +40,13 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!valid_input(argc, argv))
 		exit_with_error(NULL, NULL);
-	ft_printf("input git\n");
-
 	head_a = read_input(argc, argv);
 	head_b = NULL;
+	print_stack(head_a); // for tests
 
-	print_stack(head_a);
-	exit_with_error(&head_a, NULL);
+	// push_swap(head_a, head_b, argc - 1);
+	
 	free_stack(&head_a);
+	free_stack(&head_b);
 	exit(0);
 }
