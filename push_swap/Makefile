@@ -14,7 +14,8 @@ SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/read_input.c \
 			$(SRC_DIR)/swap.c \
 			$(SRC_DIR)/push.c \
-			$(SRC_DIR)/rotate.c 
+			$(SRC_DIR)/rotate.c \
+			$(SRC_DIR)/r_rotate.c 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:  $(LIBFT_DIR)/libft.a $(NAME)

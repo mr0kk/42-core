@@ -37,7 +37,7 @@ int	get_stack_size(t_node *stack)
 
 void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 {
-	print_stack(*head_a); // for tests
+
 	
 }
 

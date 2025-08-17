@@ -38,9 +38,16 @@ void	print_stack(t_node	*head);
 void	free_stack(t_node **head);
 
 /* operations */
-void	swap(t_node *stack);
 void	sa(t_node *stack_a);
 void	sb(t_node *stack_b);
 void	ss(t_node *stack_a, t_node *stack_b);
+void	pa(t_node **stack_a, t_node	**stack_b);
+void	pb(t_node **stack_a, t_node	**stack_b);
+void	ra(t_node **stack);
+void	rb(t_node **stack);
+void	rr(t_node **stack_a, t_node **stack_b);
+void	r_ra(t_node **stack);
+void	r_rb(t_node **stack);
+void	rrr(t_node **stack_a, t_node **stack_b);
 
 # endif
