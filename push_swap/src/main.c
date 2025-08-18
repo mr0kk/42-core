@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 22:16:24 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/18 16:33:43 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,23 @@ int	get_stack_size(t_node *stack)
 	return (res);
 }
 
+void	sort_three(t_node **stack)
+{
+	
+}
+
 void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 {
 	if (stack_size == 2)
+	{
 		if ((*head_a)->value > (*head_a)->next->value)
 			sa(*head_a);
+	}
 	else if (stack_size == 3)
-	{
-		
-	}
-	else if (stack_size == 4)
-	{
-
-	}
-	else if (stack_size == 5)
-	{
-
-	}
+		sort_three(head_a);
 	else
 	{
-
+		print_stack(*head_a);
 	}
 }
 
