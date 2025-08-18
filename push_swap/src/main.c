@@ -37,8 +37,25 @@ int	get_stack_size(t_node *stack)
 
 void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 {
+	if (stack_size == 2)
+		if ((*head_a)->value > (*head_a)->next->value)
+			sa(*head_a);
+	else if (stack_size == 3)
+	{
+		
+	}
+	else if (stack_size == 4)
+	{
 
-	
+	}
+	else if (stack_size == 5)
+	{
+
+	}
+	else
+	{
+
+	}
 }
 
 int main(int argc, char *argv[])
