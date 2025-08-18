@@ -113,14 +113,35 @@ int	have_duplicates(char *argv[], int argc)
 	return (0);
 }
 
+unsigned int	count_words(char const *s, char c)
+{
+	unsigned int	words;
+	unsigned int	i;
+
+	i = 0;
+	words = 0;
+	while (s[i])
+	{
+		while (s[i] == c && s[i])
+			i++;
+		while (s[i] != c && s[i])
+		{
+			if (s[i + 1] == c || !s[i + 1])
+				words++;
+			i++;
+		}
+	}
+	return (words);
+}
+
 int	valid_input(int argc, char *argv[])
 {
 	int	i;
 	int	zeros;
 
-	i = 1;
+	i = 0;
 	zeros = 0;
-	while (i < argc)
+	while (argv[i])
 	{
 		if (!is_number(argv[i]))
 			return (0);

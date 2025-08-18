@@ -37,7 +37,31 @@ int	get_stack_size(t_node *stack)
 
 void	sort_three(t_node **stack)
 {
-	
+	int	top;
+	int	mid;
+	int	bot;
+
+	top = (*stack)->value;
+	mid = (*stack)->next->value;
+	bot = (*stack)->next->next->value;
+	if (top < mid && mid > bot)
+		if (top < bot)
+		{
+			sa(stack);
+			ra(stack);
+		}
+		else
+			rra(stack);
+	else if (top > mid)
+		if (mid > bot)
+		{
+			ra(stack);
+			sa(stack);
+		}
+		else if (top < bot)
+			sa(stack);
+		else
+			ra(stack);
 }
 
 void push_swap(t_node **head_a, t_node **head_b, int stack_size)
@@ -45,14 +69,14 @@ void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 	if (stack_size == 2)
 	{
 		if ((*head_a)->value > (*head_a)->next->value)
-			sa(*head_a);
+			sa(head_a);
 	}
 	else if (stack_size == 3)
 		sort_three(head_a);
-	else
-	{
-		print_stack(*head_a);
-	}
+	// else
+	// {
+
+	// }
 }
 
 int main(int argc, char *argv[])
@@ -71,7 +95,8 @@ int main(int argc, char *argv[])
 	stack_size = get_stack_size(head_a);
 	
 	push_swap(&head_a, &head_b, stack_size);
-	
+	print_stack(head_a);
+
 	free_stack(&head_a);
 	free_stack(&head_b);
 	exit(0);

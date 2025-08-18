@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	r_rotate(t_node **stack)
+void	rrotate(t_node **stack)
 {
 	t_node	*old_head;
 	t_node	*new_head;
@@ -30,21 +30,21 @@ void	r_rotate(t_node **stack)
 	*stack = new_head;	
 }
 
-void	r_ra(t_node **stack)
+void	rra(t_node **stack)
 {
-	r_rotate(stack);
+	rrotate(stack);
 	ft_putstr("rra\n");
 }
 
-void	r_rb(t_node **stack)
+void	rrb(t_node **stack)
 {
-	r_rotate(stack);
+	rrotate(stack);
 	ft_putstr("rrb\n");
 }
 
 void	rrr(t_node **stack_a, t_node **stack_b)
 {
-	r_rotate(stack_a);
-	r_rotate(stack_b);
+	rrotate(stack_a);
+	rrotate(stack_b);
 	ft_putstr("rrr\n");
 }
