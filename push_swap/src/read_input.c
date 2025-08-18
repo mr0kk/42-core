@@ -72,9 +72,13 @@ t_node	*read_input(int argc, char *argv[])
 	int		i;
 	t_node	*head;
 
-	head = create_node(ft_atoi(argv[1]));
-	i = 2;
-	while (i < argc)
+	if (argc == 2)
+		i = 0;
+	else
+		i = 1;
+	head = create_node(ft_atoi(argv[i]));
+	i++;
+	while (argv[i])
 	{
 		add_node(&head, ft_atoi(argv[i]));
 		i++;

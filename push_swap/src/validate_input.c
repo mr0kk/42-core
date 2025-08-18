@@ -64,35 +64,6 @@ int	is_number(char *s)
 	return (1);
 }
 
-int	nbr_cmp(const char *s1, const char *s2)
-{
-	char	*num1;
-	char	*num2;
-	int		i;
-	int		j;
-	int		res;
-
-	num1 = ft_strtrim(s1, " \t");
-	num2 = ft_strtrim(s2, " \t");
-	i = 0;
-	j = 0;
-	if (num1[0] == '+')
-		if (num2[i] != '+')
-			i++;
-	else
-		if (num2[0] == '+')
-			j++;
-	while (num1[i] == num2[j] && (num1[i] && num2[j]))
-	{
-		i++;
-		j++;
-	}
-	res = (unsigned char)num1[i] - (unsigned char)num2[j];
-	free(num1);
-	free(num2);
-	return (res);
-}
-
 int	have_duplicates(char *argv[], int argc)
 {
 	int	i;
@@ -104,7 +75,7 @@ int	have_duplicates(char *argv[], int argc)
 		j = 1;
 		while (j < argc)
 		{
-			if (j != i && !nbr_cmp(argv[i], argv[j]))
+			if (j != i && ft_atoi(argv[i]) == ft_atoi(argv[j]))
 				return (1);
 			j++;
 		}
@@ -136,10 +107,14 @@ unsigned int	count_words(char const *s, char c)
 
 int	valid_input(int argc, char *argv[])
 {
-	int	i;
-	int	zeros;
+	static int	i = 1;
+	int			zeros;
 
-	i = 0;
+	if (argc == 2 && i == 1)
+	{
+		i = 0;
+		return (valid_input(count_words(argv[1], ' '), ft_split(argv[1], ' ')));
+	}
 	zeros = 0;
 	while (argv[i])
 	{

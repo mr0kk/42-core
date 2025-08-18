@@ -90,7 +90,10 @@ int main(int argc, char *argv[])
 		return (0);
 	if (!valid_input(argc, argv))
 		exit_with_error(NULL, NULL);
-	head_a = read_input(argc, argv);
+	if (argc == 2)
+		head_a = read_input(argc, ft_split(argv[1], ' '));
+	else
+		head_a = read_input(argc, argv);
 	head_b = NULL;
 	stack_size = get_stack_size(head_a);
 	
