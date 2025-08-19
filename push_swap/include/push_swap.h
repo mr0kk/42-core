@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:48 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 17:55:53 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/19 20:44:44 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_node
 {
 	struct s_node	*prev;
 	int				value;
+	int				index;
+	int				cost;
 	struct s_node	*target;
 	struct s_node	*next;
 }		t_node;
