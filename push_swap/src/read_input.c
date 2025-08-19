@@ -6,35 +6,11 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:38:54 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 21:50:24 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/19 17:55:36 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void free_stack(t_node **head)
-{
-	t_node *tmp;
-
-	if (!(*head) || !head)
-		return ;
-	while (*head)
-	{
-		tmp = (*head)->next;
-		free(*head);
-		*head = tmp;
-	}
-	*head = NULL;
-}
-
-void print_stack(t_node *head)
-{
-	while (head)
-	{
-		ft_printf("%d\n", head->value);
-		head = head->next;
-	}
-}
 
 void add_node(t_node **head, int value)
 {
@@ -64,6 +40,7 @@ t_node *create_node(int value)
 	new_node->prev = NULL;
 	new_node->value = value;
 	new_node->next = NULL;
+	new_node->target = NULL;
 	return (new_node);
 }
 
