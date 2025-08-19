@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:48 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 20:44:44 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/19 22:38:34 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_stack(t_node **head);
 int		get_stack_size(t_node *stack);
 
 	/* operations */
-	void sa(t_node **stack_a);
+void	sa(t_node **stack_a);
 void	sb(t_node **stack_b);
 void	ss(t_node **stack_a, t_node **stack_b);
 void	pa(t_node **stack_a, t_node	**stack_b);

@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 22:27:18 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/19 22:48:54 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 	else
 		turk_algorithm(head_a, head_b);
 
+	// sa(head_a);
+	// ra(head_a);
 	// print_stacks(*head_a, *head_b); // delete later
 }
 
@@ -59,6 +61,8 @@ int main(int argc, char *argv[])
 	print_stacks(head_a, head_b); // delete later
 	if (!is_sorted(head_a))
 		push_swap(&head_a, &head_b, stack_size);
+
+	print_stacks(head_a, head_b);
 
 	free_stack(&head_a);
 	free_stack(&head_b);
