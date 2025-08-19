@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:46:55 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 21:33:26 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/19 22:26:25 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,14 +151,8 @@ void print_stacks2(t_node *a, t_node *b)
 	printf(" a\tb\n");
 }
 
-void	count_cost(t_node *a, t_node *b)
+void	count_cost(t_node *a, t_node *b, int a_len, int b_len)
 {
-	int	a_len;
-	int	b_len;
-	int	move_cost;
-
-	a_len = get_stack_size(a);
-	b_len = get_stack_size(b);
 	while (b)
 	{
 		if (b->target->index <= a_len / 2)
@@ -173,16 +167,93 @@ void	count_cost(t_node *a, t_node *b)
 	}
 }
 
+int	cheapest_index(t_node *b)
+{
+	int	cheapest;
+	int	index;
+	
+	cheapest = b->cost;
+	index = 1;
+	b = b->next;
+	while (b)
+	{
+		if (b->cost < cheapest)
+		{
+			cheapest = b->cost;
+			index = b->index;
+		}
+		b = b->next;
+	}
+	return (index);
+}
+
+void	push_cheapest(t_node **a, t_node **b, int c_index, int a_len, int b_len)
+{
+	if ((*b)->target->index <= a_len && c_index <= b_len / 2)
+	{
+		while ((*b)->target->index && c_index)
+		{
+			rr(a, b);
+			(*b)->target->index--;
+			c_index--;
+		}
+		while (c_index--)
+			rb(b);
+		while ((*b)->target->index--)
+			ra(a);
+	}
+	else if ((*b)->target->index > a_len && c_index > b_len / 2)
+	{
+		while ((*b)->target->index <= a_len && c_index <= b_len)
+		{
+			rrr(a, b);
+			(*b)->target->index++;
+			c_index++;
+		}
+		while (c_index++ <= b_len)
+			rrb(b);
+		while ((*b)->target->index++ <= a_len)
+			rra(a);
+	}
+	else{
+		if ((*b)->target->index <= a_len)
+			while ((*b)->target->index--)
+				ra(a);
+		else
+			while ((*b)->target->index++ <= a_len)
+				rra(a);
+		if (c_index <= b_len / 2)
+			while (c_index--)
+				rb(b);
+		else
+			while (c_index++ <= b_len)
+				rrb(b);
+	}
+	pa(a, b);
+}
+
 void	turk_algorithm(t_node **a, t_node **b)
 {
+	int	cheap_index;
+	int a_len;
+	int b_len;
+
 	printf("turk start\n\n");
 	while (get_stack_size(*a) > 3)
 		pb(a, b);
 	sort_three(a);
-	// print_stacks(*a, *b);
-	set_targets(*a, *b);
-	set_indexes(*a);
-	set_indexes(*b);
-	count_cost(*a, *b);
-	// print_stacks2(*a, *b);
+
+	while (*b)
+	{
+		set_targets(*a, *b);
+		set_indexes(*a);
+		set_indexes(*b);
+		a_len = get_stack_size(*a);
+		b_len = get_stack_size(*b);
+		count_cost(*a, *b, a_len, b_len);
+		cheap_index = cheapest_index(*b);
+		print_stacks2(*a, *b);
+		push_cheapest(a, b, cheap_index, a_len, b_len);
+		print_stacks2(*a, *b);
+	}
 }
