@@ -169,26 +169,6 @@ void	count_cost(t_node *a, t_node *b, int a_len, int b_len)
 	}
 }
 
-int	cheapest_index(t_node *b)
-{
-	int	cheapest;
-	int	index;
-	
-	cheapest = b->cost;
-	index = 1;
-	b = b->next;
-	while (b)
-	{
-		if (b->cost < cheapest)
-		{
-			cheapest = b->cost;
-			index = b->index;
-		}
-		b = b->next;
-	}
-	return (index);
-}
-
 int	min(int a, int b)
 {
 	if (a < b)
@@ -205,74 +185,90 @@ int max(int a, int b)
 		return (b);
 }
 
-
-void	push_cheapest(t_node **a, t_node **b, int c_index, int a_len, int b_len)
+t_node	*find_cheapest(t_node *stack)
 {
-	int	i;
+	int		min_cost;
+	t_node	*cheapest;
 
-	i = 1;
-	printf("c_index: %d\n", c_index);
-	if ((*b)->target->index <= a_len / 2 && c_index <= b_len / 2)
+	min_cost = stack->cost;
+	cheapest = stack;
+	while (stack)
 	{
-		printf("\n\nUNO\n\n");
-		while (i < min((*b)->target->index, c_index))
+		if (stack->cost < min_cost)
 		{
-			printf("target index: %d\n", (*b)->target->index);
+			min_cost = stack->cost;
+			cheapest = stack;
+		}
+		stack = stack->next;
+	}
+	return (cheapest);	
+}
+
+void	push_cheapest(t_node **a, t_node **b, int a_len, int b_len)
+{
+	t_node	*cheapest;
+	int		i;
+
+	cheapest = find_cheapest(*b);
+	i = 1;
+	if (cheapest->target->index <= a_len / 2 && cheapest->index <= b_len / 2)
+	{
+		while (i < min(cheapest->target->index, cheapest->index))
+		{
 			rr(a, b);
 			i++;
 		}
-		while (i < c_index)
+		while (i < cheapest->index)
 		{
 			i++;
 			rb(b);
 		}
-		while (i < (*b)->target->index)
+		while (i < cheapest->target->index)
 		{
 			i++;
 			ra(a);
 		}
 	}
-	else if ((*b)->target->index > a_len / 2 && c_index > b_len / 2)
+	else if (cheapest->target->index > a_len / 2 && cheapest->index > b_len / 2)
 	{
-		printf("\n\nDOS\n\n");
-		while (i < min(a_len - (*b)->target->index + 1, b_len - c_index + 1))
+		while (i < min(a_len - cheapest->target->index + 1, b_len - cheapest->index + 1))
 		{
 			rrr(a, b);
 			i++;
 		}
-		while (i < b_len - c_index + 1)
+		while (i < b_len - cheapest->index + 1)
 		{
 			i++;
 			rrb(b);
 		}
-		while (i <= a_len - (*b)->target->index + 1)
+		while (i <= a_len - cheapest->target->index + 1)
 		{
 			i++;
 			rra(a);
 		}
 	}
-	else{
-		printf("\n\nTRES\n\n");
-		if ((*b)->target->index <= a_len / 2)
-			while (i < (*b)->target->index)
+	else
+	{
+		if (cheapest->target->index <= a_len / 2)
+			while (i < cheapest->target->index)
 			{
 				i++;
 				ra(a);
 			}
 		else
-			while (i <= a_len - (*b)->target->index + 1)
+			while (i <= a_len - cheapest->target->index + 1)
 			{
 				i++;
 				rra(a);
 			}
-		if (c_index <= b_len / 2)
-			while (i < c_index)
+		if (cheapest->index <= b_len / 2)
+			while (i < cheapest->index)
 			{
 				i++;
 				rb(b);
 			}
 		else
-			while (i <= b_len - c_index + 1)
+			while (i <= b_len - cheapest->index + 1)
 			{
 				i++;
 				rrb(b);
@@ -280,13 +276,31 @@ void	push_cheapest(t_node **a, t_node **b, int c_index, int a_len, int b_len)
 	}
 }
 
+int	get_min_index(t_node *s)
+{
+	int	min_index;
+	int	min_val;
+
+	min_index = s->index;
+	min_val = s->value;
+	while (s)
+	{
+		if (s->value < min_val)
+		{
+			min_val = s->value;
+			min_index - s->index;
+		}
+		s = s->next;
+	}
+	return (min_index);
+}
+
 void turk_algorithm(t_node **a, t_node **b)
 {
-	int	cheap_index;
+	int	min_index;
 	int a_len;
 	int b_len;
 
-	printf("turk start\n\n");
 	while (get_stack_size(*a) > 3)
 		pb(a, b);
 	sort_three(a);
@@ -298,10 +312,18 @@ void turk_algorithm(t_node **a, t_node **b)
 		a_len = get_stack_size(*a);
 		b_len = get_stack_size(*b);
 		count_cost(*a, *b, a_len, b_len);
-		cheap_index = cheapest_index(*b);
-		print_stacks2(*a, *b);
-		push_cheapest(a, b, cheap_index, a_len, b_len);
+		// print_stacks2(*a, *b);
+		push_cheapest(a, b, a_len, b_len);
 		pa(a, b);
-		print_stacks2(*a, *b);
+		// print_stacks2(*a, *b);
 	}
+	set_indexes(*a);
+	a_len = get_stack_size(*a);
+	min_index = get_min_index(*a);
+	if (min_index <= a_len / 2)
+		while (!is_sorted(*a))
+			ra(a);
+	else
+		while (!is_sorted(*a))
+				rra(a);
 }
