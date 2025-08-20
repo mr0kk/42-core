@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 22:48:54 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/20 18:23:39 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,26 @@ int main(int argc, char *argv[])
 		head_a = read_input(argc, argv);
 	stack_size = get_stack_size(head_a);
 
-	// print_stacks(head_a, head_b); // delete later
+	// print_stack(head_a);
+	// pb(&head_a, &head_b);
+	// pb(&head_a, &head_b);
+	// pb(&head_a, &head_b);
+	// print_stack(head_a);
+
+	// printf("B\n\n");
+	// print_stack(head_b);
+
+	// pa(&head_a, &head_b);
+	
+	// print_stack(head_a);
+	// printf("B\n\n");
+	// print_stack(head_b);
+
+	print_stacks(head_a, head_b); // delete later
 	if (!is_sorted(head_a))
 		push_swap(&head_a, &head_b, stack_size);
 
-	print_stacks(head_a, head_b);
+	// print_stacks(head_a, head_b);
 
 	free_stack(&head_a);
 	free_stack(&head_b);

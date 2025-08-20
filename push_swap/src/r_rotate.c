@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 13:51:13 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/18 13:51:16 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/20 17:37:16 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	rrotate(t_node **stack)
 	t_node	*old_head;
 	t_node	*new_head;
 
-	if (!(*stack))
+	if (!(*stack) || get_stack_size(*stack) < 2)
 		return ;
 	new_head = *stack;
 	old_head = *stack;

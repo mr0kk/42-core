@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:53:50 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 23:46:13 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/20 17:19:46 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void print_stack(t_node *head)
 {
 	while (head)
 	{
-		ft_printf("%d\n", head->value);
+		ft_printf("%d\tnext: %p\tcurrent: %p\t prev: %p\n", head->value, head->next, head, head->prev);
 		head = head->next;
 	}
 }

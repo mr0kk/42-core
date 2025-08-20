@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:46:55 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/20 00:23:54 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/20 18:32:51 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	set_targets(t_node *a, t_node *b)
 	{
 		data = b->value;
 		b->target = find_target(a, data, a_max, a_min);
-		if (!b->target)
-			exit_with_error(&a, &b);
+		// if (!b->target)
+		// 	exit_with_error(&a, &b);
 		b = b->next;
 	}
 }
@@ -169,6 +169,8 @@ void	count_cost(t_node *a, t_node *b, int a_len, int b_len)
 			b->cost = a_len - b->target->index + 1;
 		if (b->index <= b_len / 2)
 			b->cost += b->index - 1 + 1;
+		else if (b_len == 1 && b->index == 1)
+			b->cost += 1;
 		else
 			b->cost += b_len - b->index + 1 + 1;
 		b = b->next;
@@ -216,66 +218,85 @@ void	push_cheapest(t_node **a, t_node **b, int a_len, int b_len)
 	int		i;
 
 	cheapest = find_cheapest(*b);
+	printf("cheapest: %d\tC_index: %d\ttarget: %d\ttaget_index: %d\n\n", cheapest->value, cheapest->index, cheapest->target->value, cheapest->target->index);
 	i = 1;
 	if (cheapest->target->index <= a_len / 2 && cheapest->index <= b_len / 2)
 	{
+		printf("\n\nUNO\n\n");
 		while (i < min(cheapest->target->index, cheapest->index))
 		{
+			printf("I\n");
 			rr(a, b);
 			i++;
 		}
 		while (i < cheapest->index)
 		{
+			printf("II\n");
 			i++;
 			rb(b);
 		}
 		while (i < cheapest->target->index)
 		{
+			printf("III\n");
 			i++;
 			ra(a);
 		}
 	}
 	else if (cheapest->target->index > a_len / 2 && cheapest->index > b_len / 2)
 	{
+		printf("\n\nDOS\n\n");
 		while (i < min(a_len - cheapest->target->index + 1, b_len - cheapest->index + 1))
 		{
+			printf("I\n");
 			rrr(a, b);
 			i++;
 		}
+		printf("here\n");
 		while (i < b_len - cheapest->index + 1)
 		{
+			printf("II\n");
 			i++;
 			rrb(b);
 		}
+		printf("here2\n");
 		while (i <= a_len - cheapest->target->index + 1)
 		{
+			printf("III\n");
 			i++;
 			rra(a);
 		}
+		printf("here3\n");
 	}
 	else
 	{
+		printf("\n\nTRES\n\n");
 		if (cheapest->target->index <= a_len / 2)
 			while (i < cheapest->target->index)
 			{
+				printf("I\n");
 				i++;
 				ra(a);
 			}
 		else
-			while (i <= a_len - cheapest->target->index + 1)
+			while (i < a_len - cheapest->target->index + 1 + 1)
 			{
+				printf("II\n");
 				i++;
+				print_stack(*a);
 				rra(a);
+				print_stack(*a);
 			}
 		if (cheapest->index <= b_len / 2)
 			while (i < cheapest->index)
 			{
+				printf("III\n");
 				i++;
 				rb(b);
 			}
 		else
-			while (i <= b_len - cheapest->index + 1)
+			while (i < b_len - cheapest->index + 1)
 			{
+				printf("IIII\n");
 				i++;
 				rrb(b);
 			}
@@ -312,26 +333,32 @@ void turk_algorithm(t_node **a, t_node **b)
 	sort_three(a);
 	while (*b)
 	{
-		set_targets(*a, *b);
-		set_indexes(*a);
-		set_indexes(*b);
+		printf("|--------\nbefore everything\n B: %d\n\n", (*b)->value);
 		a_len = get_stack_size(*a);
 		b_len = get_stack_size(*b);
+		set_indexes(*a);
+		set_indexes(*b);
+		set_targets(*a, *b);
 		count_cost(*a, *b, a_len, b_len);
+		printf("\nafter setting indexes, targets and costs:\n\n");
 		print_stacks2(*a, *b);
 		push_cheapest(a, b, a_len, b_len);
 		pa(a, b);
+		printf("\n after push cheapeest:\n\n");
 		print_stacks2(*a, *b);
+		printf("\nend of loop\n-------|\n\n");
 	}
 	set_indexes(*a);
 	a_len = get_stack_size(*a);
 	min_index = get_min_index(*a);
-	printf("here\n");
 	if (min_index <= a_len / 2)
+	{
 		while (!is_sorted(*a))
 			ra(a);
+	}
 	else
+	{
 		while (!is_sorted(*a))
-	rra(a);
-	print_stack(*a);
+			rra(a);
+	}
 }
