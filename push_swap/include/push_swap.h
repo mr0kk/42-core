@@ -27,6 +27,14 @@ typedef struct s_node
 	struct s_node	*next;
 }		t_node;
 
+typedef struct s_rdata
+{
+	int ra_counter;
+	int rb_counter;
+	int rra_counter;
+	int rrb_counter;
+} t_rdata;
+
 void	exit_with_error(t_node **head_a, t_node **head_b);
 int		valid_input(int argc, char *argv[]);
 t_node	*read_input(int argc, char *argv[]);

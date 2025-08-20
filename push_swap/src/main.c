@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	if (!is_sorted(head_a))
 		push_swap(&head_a, &head_b, stack_size);
 
-	// print_stacks(head_a, head_b);
+	print_stacks(head_a, head_b);
 
 	free_stack(&head_a);
 	free_stack(&head_b);
