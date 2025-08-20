@@ -18,6 +18,8 @@ void sort_three(t_node **stack)
 	int mid;
 	int bot;
 
+	if (!stack || !*stack || !(*stack)->next || !(*stack)->next->next)
+        return;
 	top = (*stack)->value;
 	mid = (*stack)->next->value;
 	bot = (*stack)->next->next->value;
@@ -104,12 +106,16 @@ void	set_targets(t_node *a, t_node *b)
 	int	a_max;
 	int	a_min;
 
+	if (!a || !b)
+		return ;
 	a_max = find_max(a);
 	a_min = find_min(a);
 	while (b)
 	{
 		data = b->value;
 		b->target = find_target(a, data, a_max, a_min);
+		if (!b->target)
+			exit_with_error(&a, &b);
 		b = b->next;
 	}
 }
@@ -312,18 +318,20 @@ void turk_algorithm(t_node **a, t_node **b)
 		a_len = get_stack_size(*a);
 		b_len = get_stack_size(*b);
 		count_cost(*a, *b, a_len, b_len);
-		// print_stacks2(*a, *b);
+		print_stacks2(*a, *b);
 		push_cheapest(a, b, a_len, b_len);
 		pa(a, b);
-		// print_stacks2(*a, *b);
+		print_stacks2(*a, *b);
 	}
 	set_indexes(*a);
 	a_len = get_stack_size(*a);
 	min_index = get_min_index(*a);
+	printf("here\n");
 	if (min_index <= a_len / 2)
 		while (!is_sorted(*a))
 			ra(a);
 	else
 		while (!is_sorted(*a))
-				rra(a);
+	rra(a);
+	print_stack(*a);
 }
