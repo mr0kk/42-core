@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:46:55 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/20 18:32:51 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/20 19:48:41 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,95 +212,84 @@ t_node	*find_cheapest(t_node *stack)
 	return (cheapest);	
 }
 
+int	count_rotate(int index, int len)
+{
+	if (index <= len / 2 && index != 0)
+		return (index - 1);
+	return (0);
+}
+
+int count_rrotate(int index, int len)
+{
+	if (index > len / 2 && index != 1)
+		return (len - index + 1);
+	return (0);
+}
+
+typedef struct s_rdata
+{
+	int ra_counter;
+	int rb_counter;
+	int rra_counter;
+	int rrb_counter;
+} t_rdata;
+
+void	menage_rotation(t_rdata *data, t_node **a, t_node **b)
+{
+	printf("ra: %d\trb: %d\trra: %d\trrb: %d\n\n", data->ra_counter, data->rb_counter, data->rra_counter, data->rrb_counter);
+	while (data->ra_counter != 0 && data->rb_counter != 0)
+	{
+		rr(a, b);
+		data->ra_counter--;
+		data->rb_counter--;
+	}
+	while (data->ra_counter != 0)
+	{
+		ra(a);
+		data->ra_counter--;
+	}
+	while (data->rb_counter != 0)
+	{
+		rb(b);
+		data->rb_counter--;
+	}
+	while (data->rra_counter != 0 && data->rrb_counter != 0)
+	{
+		rrr(a, b);
+		data->rra_counter--;
+		data->rrb_counter--;
+	}
+	while (data->rra_counter != 0)
+	{
+		rra(a);
+		data->rra_counter--;
+	}
+	while (data->rrb_counter != 0)
+	{
+		rrb(a);
+		data->rrb_counter--;
+	}
+}
+
 void	push_cheapest(t_node **a, t_node **b, int a_len, int b_len)
 {
 	t_node	*cheapest;
-	int		i;
+	t_rdata rot;
 
 	cheapest = find_cheapest(*b);
-	printf("cheapest: %d\tC_index: %d\ttarget: %d\ttaget_index: %d\n\n", cheapest->value, cheapest->index, cheapest->target->value, cheapest->target->index);
-	i = 1;
-	if (cheapest->target->index <= a_len / 2 && cheapest->index <= b_len / 2)
-	{
-		printf("\n\nUNO\n\n");
-		while (i < min(cheapest->target->index, cheapest->index))
-		{
-			printf("I\n");
-			rr(a, b);
-			i++;
-		}
-		while (i < cheapest->index)
-		{
-			printf("II\n");
-			i++;
-			rb(b);
-		}
-		while (i < cheapest->target->index)
-		{
-			printf("III\n");
-			i++;
-			ra(a);
-		}
-	}
-	else if (cheapest->target->index > a_len / 2 && cheapest->index > b_len / 2)
-	{
-		printf("\n\nDOS\n\n");
-		while (i < min(a_len - cheapest->target->index + 1, b_len - cheapest->index + 1))
-		{
-			printf("I\n");
-			rrr(a, b);
-			i++;
-		}
-		printf("here\n");
-		while (i < b_len - cheapest->index + 1)
-		{
-			printf("II\n");
-			i++;
-			rrb(b);
-		}
-		printf("here2\n");
-		while (i <= a_len - cheapest->target->index + 1)
-		{
-			printf("III\n");
-			i++;
-			rra(a);
-		}
-		printf("here3\n");
-	}
-	else
-	{
-		printf("\n\nTRES\n\n");
-		if (cheapest->target->index <= a_len / 2)
-			while (i < cheapest->target->index)
-			{
-				printf("I\n");
-				i++;
-				ra(a);
-			}
-		else
-			while (i < a_len - cheapest->target->index + 1 + 1)
-			{
-				printf("II\n");
-				i++;
-				print_stack(*a);
-				rra(a);
-				print_stack(*a);
-			}
-		if (cheapest->index <= b_len / 2)
-			while (i < cheapest->index)
-			{
-				printf("III\n");
-				i++;
-				rb(b);
-			}
-		else
-			while (i < b_len - cheapest->index + 1)
-			{
-				printf("IIII\n");
-				i++;
-				rrb(b);
-			}
-	}
+	rot.ra_counter = count_rotate(cheapest->target->index, a_len);
+	rot.rb_counter = count_rotate(cheapest->index, b_len);
+	rot.rra_counter = count_rrotate(cheapest->target->index, a_len);
+	rot.rrb_counter = count_rrotate(cheapest->index, b_len);
+	printf("cheapest: %d\tc_index: %d\ttarget: %d\tt_index: %d\n", cheapest->value, cheapest->index, cheapest->target->value, cheapest->target->index);
+	menage_rotation(&rot, a, b);
+	rot.ra_counter = 0;
+	rot.rb_counter = 0;
+	rot.rra_counter = 0;
+	rot.rrb_counter = 0;
+	printf("here\n");
+	pa(a, b); // here seg fould 
+	printf("here2\n");
 }
 
 int	get_min_index(t_node *s)
@@ -343,7 +332,6 @@ void turk_algorithm(t_node **a, t_node **b)
 		printf("\nafter setting indexes, targets and costs:\n\n");
 		print_stacks2(*a, *b);
 		push_cheapest(a, b, a_len, b_len);
-		pa(a, b);
 		printf("\n after push cheapeest:\n\n");
 		print_stacks2(*a, *b);
 		printf("\nend of loop\n-------|\n\n");
