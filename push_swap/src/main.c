@@ -54,24 +54,6 @@ int main(int argc, char *argv[])
 		head_a = read_input(argc, argv);
 	stack_size = get_stack_size(head_a);
 
-	// print_stack(head_a);
-	
-	// test(&head_a);
-	// pb(&head_a, &head_b);
-	// pb(&head_a, &head_b);
-	// pb(&head_a, &head_b);
-	// print_stack(head_a);
-
-	// printf("B\n\n");
-	// print_stack(head_b);
-
-	// pa(&head_a, &head_b);
-	
-	// print_stack(head_a);
-	// printf("B\n\n");
-	// print_stack(head_b);
-
-	// print_stacks(head_a, head_b); // delete later
 	if (!is_sorted(head_a))
 		push_swap(&head_a, &head_b, stack_size);
 

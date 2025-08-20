@@ -12,24 +12,49 @@
 
 #include "push_swap.h"
 
-void	rotate(t_node **stack)
-{
-	t_node	*tmp;
-	t_node	*new_head;
-	t_node	*new_tail;
+// void	rotate(t_node **stack)
+// {
+// 	t_node	*tmp;
+// 	t_node	*new_head;
+// 	t_node	*new_tail;
 
-	if (!(*stack) || get_stack_size(*stack) < 2)
-		return ;
-	new_head = (*stack)->next;
-	new_tail = *stack;
-	tmp = *stack;
-	while (tmp->next)
-		tmp = tmp->next;
-	new_tail->prev = tmp;
-	new_tail->next = NULL;
-	tmp->next = new_tail;
-	new_head->prev = NULL;
-	*stack = new_head;
+// 	if (!(*stack) || get_stack_size(*stack) < 2)
+// 		return ;
+// 	new_head = (*stack)->next;
+// 	new_tail = *stack;
+// 	tmp = *stack;
+// 	while (tmp->next)
+// 		tmp = tmp->next;
+// 	new_tail->prev = tmp;
+// 	new_tail->next = NULL;
+// 	tmp->next = new_tail;
+// 	new_head->prev = NULL;
+// 	*stack = new_head;
+// }
+
+void rotate(t_node **stack)
+{
+    t_node *first;
+    t_node *last;
+    
+    if (!stack || !*stack || !(*stack)->next)
+        return;
+    
+    first = *stack;
+    last = *stack;
+    
+    // Find the last node
+    while (last->next)
+        last = last->next;
+    
+    // Update pointers
+    *stack = first->next;       // New head is second node
+    (*stack)->prev = NULL;      // New head has no previous
+    
+    first->next = NULL;         // Old head becomes new tail
+    first->prev = last;         // Old head's prev points to old tail
+    
+    last->next = first;         // Old tail points to new tail
 }
 
 void	ra(t_node **stack)

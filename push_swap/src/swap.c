@@ -14,13 +14,21 @@
 
 void	swap(t_node **stack)
 {
-	int	tmp;
+	t_node *first;
+    t_node *second;
 
-	if (!(*stack )|| !(*stack)->next)
+	if (!stack || !(*stack )|| !(*stack)->next)
 		return ;
-	tmp = (*stack)->value;
-	(*stack)->value = (*stack)->next->value;
-	(*stack)->next->value = tmp;
+	first = *stack;
+    second = first->next;
+    first->next = second->next;
+    second->next = first;
+    second->prev = first->prev;
+    first->prev = second;
+    if (first->next)
+        first->next->prev = first;
+    *stack = second;
+	(*stack)->prev = NULL;
 }
 
 void sa(t_node **stack_a)

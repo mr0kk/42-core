@@ -12,26 +12,22 @@
 
 #include "push_swap.h"
 
-
 void	push(t_node **src, t_node **dest)
 {
-	// printf("|-----\n in push\n");
-	t_node	*tmp;
+	t_node	*new_dest_head;
 
 	if (!(*src))
 		return ;
-
-	tmp = (*src)->next;
-	// printf("tmp: %d\n", tmp->value);
-	(*src)->next = *dest;
-	// printf("src: %d\n", (*src)->value);
-	// printf("src next: %p\n", (*src)->next);
+	new_dest_head = *src;
+	if (get_stack_size(*src) > 1)
+		*src = (*src)->next;
+	else
+		*src = NULL;
+	new_dest_head->next = *dest;
 	if (*dest)
-		(*dest)->prev = *src;
-	*dest = *src;
-	*src = tmp;
-	(*src)->prev = NULL;
-	// printf("en of push\n-----|\n");
+		(*dest)->prev = new_dest_head;
+	*dest = new_dest_head;
+	(*dest)->prev = NULL;
 }
 
 void	pa(t_node **stack_a, t_node	**stack_b)
