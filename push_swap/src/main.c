@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/20 19:44:12 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 15:16:48 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	if (!is_sorted(head_a))
 		push_swap(&head_a, &head_b, stack_size);
 
-	print_stacks(head_a, head_b);
+	// print_stacks(head_a, head_b);
 
 	free_stack(&head_a);
 	free_stack(&head_b);

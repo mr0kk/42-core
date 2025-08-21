@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:48 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 22:38:34 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 14:52:44 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,16 @@ int		is_sorted(t_node *stack);
 void	sort_three(t_node **stack);
 void	turk_algorithm(t_node **head_a, t_node **head_b);
 void	set_indexes(t_node *stack);
+
 int		max(int a, int b);
 int		min(int a, int b);
 int		find_max(t_node *stack);
 int		find_min(t_node *stack);
+
+int get_min_index(t_node *s);
+int count_rotate(int index, int len);
+int count_rrotate(int index, int len);
+void menage_rotation(t_rdata *data, t_node **a, t_node **b);
+
 
 # endif

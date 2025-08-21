@@ -18,7 +18,8 @@ SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/r_rotate.c \
 			$(SRC_DIR)/sorting.c \
 			$(SRC_DIR)/stack_utils.c \
-			$(SRC_DIR)/sort_utils.c
+			$(SRC_DIR)/sort_utils.c \
+			$(SRC_DIR)/turk_utils.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:  $(LIBFT_DIR)/libft.a $(NAME)

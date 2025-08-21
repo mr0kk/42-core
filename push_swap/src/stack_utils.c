@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:53:50 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/20 17:19:46 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 15:34:38 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,18 @@ void print_stacks2(t_node *a, t_node *b) // to delete later
 	{
 		if (a && b)
 		{
-			printf("%d: %d\t%d: %d\t target: %d\t cost: %d\n",a->index, a->value,b->index, b->value, b->target->value, b->cost);
+			printf("A: %d. %d\t target: %d\t cost: %d\tB: %d. %d\n", a->index, a->value, a->target->value, a->cost, b->index, b->value);
 			a = a->next;
 			b = b->next;
 		}
 		else if (a && !b)
 		{
-			printf("%d: %d\n",a->index, a->value);
+			printf("A: %d. %d\t target: %d\t cost: %d\n", a->index, a->value, a->target->value, a->cost);
 			a = a->next;
 		}
 		else if (!a && b)
 		{
-			printf(" \t%d: %d\t target: %d\t cost: %d\n", b->index, b->value, b->target->value, b->cost);
+			printf(" \t\t\tB: %d. %d\n", b->index, b->value);
 			b = b->next;
 		}
 	}
