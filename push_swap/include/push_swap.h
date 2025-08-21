@@ -40,8 +40,9 @@ int		valid_input(int argc, char *argv[]);
 t_node	*read_input(int argc, char *argv[]);
 t_node	*create_node(int value);
 void	add_node(t_node	**head, int value);
-void	print_stack(t_node	*head);
-void	print_stacks(t_node *a, t_node *b);
+void	print_stack(t_node	*head); //delete later
+void	print_stacks(t_node *a, t_node *b); //delete later
+void	print_stacks2(t_node *a, t_node *b); //delete later
 void	free_stack(t_node **head);
 int		get_stack_size(t_node *stack);
 
@@ -63,5 +64,10 @@ void	push_swap(t_node **head_a, t_node **head_b, int stack_size);
 int		is_sorted(t_node *stack);
 void	sort_three(t_node **stack);
 void	turk_algorithm(t_node **head_a, t_node **head_b);
+void	set_indexes(t_node *stack);
+int		max(int a, int b);
+int		min(int a, int b);
+int		find_max(t_node *stack);
+int		find_min(t_node *stack);
 
 # endif

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void print_stacks(t_node *a, t_node *b)
+void print_stacks(t_node *a, t_node *b) //delete later
 {
 	printf("\n\n");
 	while (a || b)
@@ -38,7 +38,7 @@ void print_stacks(t_node *a, t_node *b)
 	printf(" a\tb\n");
 }
 
-void print_stack(t_node *head)
+void print_stack(t_node *head) //delete later
 {
 	while (head)
 	{
@@ -71,6 +71,19 @@ int is_sorted(t_node *stack)
 	return (1);
 }
 
+void	set_indexes(t_node *stack)
+{
+	int	i;
+
+	i = 1;
+	while (stack)
+	{
+		stack->index = i;
+		stack = stack->next;
+		i++;
+	}
+}
+
 void free_stack(t_node **head)
 {
 	t_node *tmp;
@@ -84,4 +97,30 @@ void free_stack(t_node **head)
 		*head = tmp;
 	}
 	*head = NULL;
+}
+
+void print_stacks2(t_node *a, t_node *b) // to delete later
+{
+	printf("\n\n");
+	while (a || b)
+	{
+		if (a && b)
+		{
+			printf("%d: %d\t%d: %d\t target: %d\t cost: %d\n",a->index, a->value,b->index, b->value, b->target->value, b->cost);
+			a = a->next;
+			b = b->next;
+		}
+		else if (a && !b)
+		{
+			printf("%d: %d\n",a->index, a->value);
+			a = a->next;
+		}
+		else if (!a && b)
+		{
+			printf(" \t%d: %d\t target: %d\t cost: %d\n", b->index, b->value, b->target->value, b->cost);
+			b = b->next;
+		}
+	}
+	printf("----------\n");
+	printf(" a\tb\n\n");
 }

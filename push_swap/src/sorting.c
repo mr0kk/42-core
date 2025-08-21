@@ -43,33 +43,6 @@ void sort_three(t_node **stack)
 			ra(stack);
 }
 
-int find_max(t_node *stack)
-{
-	int max;
-
-	max = INT_MIN;
-	while (stack)
-	{
-		if (stack->value > max)
-			max = stack->value;
-		stack = stack->next;
-	}
-	return (max);
-}
-
-int find_min(t_node *stack)
-{
-	int min;
-
-	min = INT_MAX;
-	while (stack)
-	{
-		if (stack->value < min)
-			min = stack->value;
-		stack = stack->next;
-	}
-	return (min);
-}
 
 t_node	*find_target(t_node *a, int data, int a_max, int a_min)
 {
@@ -118,45 +91,6 @@ void	set_targets(t_node *a, t_node *b)
 	}
 }
 
-void	set_indexes(t_node *stack)
-{
-	int	i;
-
-	i = 1;
-	while (stack)
-	{
-		stack->index = i;
-		stack = stack->next;
-		i++;
-	}
-}
-
-void print_stacks2(t_node *a, t_node *b)
-{
-	printf("\n\n");
-	while (a || b)
-	{
-		if (a && b)
-		{
-			printf("%d: %d\t%d: %d\t target: %d\t cost: %d\n",a->index, a->value,b->index, b->value, b->target->value, b->cost);
-			a = a->next;
-			b = b->next;
-		}
-		else if (a && !b)
-		{
-			printf("%d: %d\n",a->index, a->value);
-			a = a->next;
-		}
-		else if (!a && b)
-		{
-			printf(" \t%d: %d\t target: %d\t cost: %d\n", b->index, b->value, b->target->value, b->cost);
-			b = b->next;
-		}
-	}
-	printf("----------\n");
-	printf(" a\tb\n\n");
-}
-
 void	count_cost(t_node *a, t_node *b, int a_len, int b_len)
 {
 	while (b)
@@ -173,22 +107,6 @@ void	count_cost(t_node *a, t_node *b, int a_len, int b_len)
 			b->cost += b_len - b->index + 1 ; // +1
 		b = b->next;
 	}
-}
-
-int	min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	else
-		return (b);	
-}
-
-int max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	else
-		return (b);
 }
 
 t_node	*find_cheapest(t_node *stack)
