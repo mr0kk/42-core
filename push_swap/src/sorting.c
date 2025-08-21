@@ -6,166 +6,100 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:30:59 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/21 15:47:14 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 23:50:28 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sort_three(t_node **stack)
+void	sort_three(t_node **stack)
 {
-	int top;
-	int mid;
-	int bot;
+	int	biggest;
 
 	if (!stack || !*stack || !(*stack)->next || !(*stack)->next->next)
-		return;
-	top = (*stack)->value;
-	mid = (*stack)->next->value;
-	bot = (*stack)->next->next->value;
-	if (top < mid && mid > bot)
-		if (top < bot)
-		{
-			sa(stack);
-			ra(stack);
-		}
-		else
-			rra(stack);
-	else if (top > mid)
-		if (mid > bot)
-		{
-			ra(stack);
-			sa(stack);
-		}
-		else if (top < bot)
-			sa(stack);
-		else
-			ra(stack);
+		return ;
+	biggest = max(max((*stack)->value, (*stack)->next->value),
+			(*stack)->next->next->value);
+	if ((*stack)->value == biggest)
+		ra(stack);
+	else if ((*stack)->next->value == biggest)
+		rra(stack);
+	if ((*stack)->value > (*stack)->next->value)
+		sa(stack);
 }
 
-t_node *find_target(t_node *a, int data, int a_max, int a_min)
+void	set_targets(t_node *src, t_node *dest)
 {
-	t_node *target;
-	int closest_bigger;
+	int	data;
+	int	dest_max;
+	int	dest_min;
 
-	target = NULL;
-	if (data > a_max)
+	if (!src || !dest)
+		return ;
+	dest_max = find_max(dest);
+	dest_min = find_min(dest);
+	while (src)
 	{
-		while (a->value != a_min)
-			a = a->next;
-		target = a;
+		data = src->value;
+		src->target = find_target(dest, data, dest_max, dest_min);
+		src = src->next;
 	}
+}
+
+void	count_cost(t_node *src, int src_len, int dest_len)
+{
+	while (src)
+	{
+		if (src->target->index <= dest_len / 2)
+			src->cost = src->target->index - 1;
+		else
+			src->cost = dest_len - src->target->index + 1;
+		if (src->index <= src_len / 2)
+			src->cost += src->index - 1 + 1;
+		else if (src_len == 1 && src->index == 1)
+			src->cost += 1;
+		else
+			src->cost += src_len - src->index + 1 + 1;
+		src = src->next;
+	}
+}
+
+void	targeting(t_node **src, t_node **dest)
+{
+	int	src_len;
+	int	dest_len;
+
+	src_len = get_stack_size(*src);
+	dest_len = get_stack_size(*dest);
+	set_indexes(*src);
+	set_indexes(*dest);
+	set_targets(*src, *dest);
+	count_cost(*src, src_len, dest_len);
+}
+
+void	turk_algorithm(t_node **a, t_node **b)
+{
+	pb(a, b);
+	if (get_stack_size(*a) > 3)
+		pb(a, b);
+	while (get_stack_size(*a) > 3)
+	{
+		targeting(a, b);
+		cheapest2top(a, b);
+		pb(a, b);
+	}
+	sort_three(a);
+	while (*b)
+	{
+		targeting(b, a);
+		cheapest2top_b(a, b);
+		pa(a, b);
+	}
+	set_indexes(*a);
+	if (get_min_index(*a) <= get_stack_size(*a) / 2)
+		while (!is_sorted(*a))
+			ra(a);
 	else
-	{
-		closest_bigger = INT_MAX;
-		while (a)
-		{
-
-			if (a->value > data && a->value < closest_bigger && closest_bigger > data)
-			{
-				closest_bigger = a->value;
-				target = a;
-			}
-			a = a->next;
-		}
-	}
-	return (target);
-}
-
-void set_targets(t_node *a, t_node *b)
-{
-	int data;
-	int a_max;
-	int a_min;
-
-	if (!a || !b)
-		return;
-	a_max = find_max(a);
-	a_min = find_min(a);
-	while (b)
-	{
-		data = b->value;
-		b->target = find_target(a, data, a_max, a_min);
-		b = b->next;
-	}
-}
-
-void count_cost(t_node *a, t_node *b, int a_len, int b_len)
-{
-	while (b)
-	{
-		if (b->target->index <= a_len / 2)
-			b->cost = b->target->index - 1;
-		else
-			b->cost = a_len - b->target->index + 1;
-		if (b->index <= b_len / 2)
-			b->cost += b->index - 1 + 1;
-		else if (b_len == 1 && b->index == 1)
-			b->cost += 1;
-		else
-			b->cost += b_len - b->index + 1; // +1
-		b = b->next;
-	}
-}
-
-t_node *find_cheapest(t_node *stack)
-{
-	int min_cost;
-	t_node *cheapest;
-
-	min_cost = stack->cost;
-	cheapest = stack;
-	while (stack)
-	{
-		if (stack->cost < min_cost)
-		{
-			min_cost = stack->cost;
-			cheapest = stack;
-		}
-		stack = stack->next;
-	}
-	return (cheapest);
-}
-
-void push_cheapest(t_node **a, t_node **b, int a_len, int b_len)
-{
-	t_node *cheapest;
-	t_rdata rot;
-
-	cheapest = find_cheapest(*a);
-	printf("cheapest: %d\tc_index: %d\t target: %d\tt_index: %d\n", cheapest->value, cheapest->index, cheapest->target->value, cheapest->target->index);
-	rot.ra_counter = count_rotate(cheapest->target->index, a_len);
-	rot.rb_counter = count_rotate(cheapest->index, b_len);
-	rot.rra_counter = count_rrotate(cheapest->target->index, a_len);
-	rot.rrb_counter = count_rrotate(cheapest->index, b_len);
-	printf("ra: %d\trb: %d\trra: %d\trrb: %d\n", rot.ra_counter, rot.rb_counter, rot.rra_counter, rot.rrb_counter);
-	menage_rotation(&rot, a, b);
-	pb(a, b);
-}
-
-void turk_algorithm(t_node **a, t_node **b)
-{
-	int a_len;
-	int b_len;
-
-	print_stacks(*a, *b);
-	if ((*a)->value < (*a)->next->value)
-		sa(a);
-	pb(a, b);
-	pb(a, b);
-	print_stacks(*a, *b);
-	while (get_stack_size(*a) != 3)
-	{
-		a_len = get_stack_size(*a);
-		b_len = get_stack_size(*b);
-		set_indexes(*a);
-		set_indexes(*b);
-		set_targets(*b, *a);
-		count_cost(*b, *a, b_len, a_len);
-		printf("after seting costs and targets:\n");
-		print_stacks2(*a, *b);
-		printf("after push cheapest:\n");
-		push_cheapest(a, b, a_len, a_len);
-	}
-	print_stacks(*a, *b);
+		while (!is_sorted(*a))
+			rra(a);
 }

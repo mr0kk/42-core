@@ -6,23 +6,13 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 00:05:37 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/21 15:16:48 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 23:38:30 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	exit_with_error(t_node **head_a, t_node **head_b)
-{
-	if (head_a && *head_a)
-		free_stack(head_a);
-	if (head_b && *head_b)
-		free_stack(head_b);
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-void push_swap(t_node **head_a, t_node **head_b, int stack_size)
+void	push_swap(t_node **head_a, t_node **head_b, int stack_size)
 {
 	if (stack_size == 2)
 	{
@@ -35,9 +25,8 @@ void push_swap(t_node **head_a, t_node **head_b, int stack_size)
 		turk_algorithm(head_a, head_b);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-
 	t_node	*head_a;
 	t_node	*head_b;
 	int		stack_size;
@@ -53,12 +42,8 @@ int main(int argc, char *argv[])
 	else
 		head_a = read_input(argc, argv);
 	stack_size = get_stack_size(head_a);
-
 	if (!is_sorted(head_a))
 		push_swap(&head_a, &head_b, stack_size);
-
-	// print_stacks(head_a, head_b);
-
 	free_stack(&head_a);
 	free_stack(&head_b);
 	exit(0);

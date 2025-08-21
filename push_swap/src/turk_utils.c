@@ -6,46 +6,56 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:48:47 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/21 15:38:54 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 23:58:44 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_min_index(t_node *s)
+t_node	*find_target(t_node *a, int data, int a_max, int a_min)
 {
-	int min_index;
-	int min_val;
+	t_node	*target;
+	int		closest_bigger;
 
-	min_index = s->index;
-	min_val = s->value;
-	while (s)
+	target = NULL;
+	if (data > a_max)
 	{
-		if (s->value < min_val)
-		{
-			min_val = s->value;
-			min_index - s->index;
-		}
-		s = s->next;
+		while (a->value != a_min)
+			a = a->next;
+		target = a;
 	}
-	return (min_index);
+	else
+	{
+		closest_bigger = INT_MAX;
+		while (a)
+		{
+			if (a->value > data && a->value <= closest_bigger
+				&& closest_bigger > data)
+			{
+				closest_bigger = a->value;
+				target = a;
+			}
+			a = a->next;
+		}
+	}
+	return (target);
 }
 
-int count_rotate(int index, int len)
+int	count_rotate(int index, int len)
 {
-	if (index <= (len / 2) + 1 && index != 1)
+	if (index <= len / 2 + 1 && index != 1)
 		return (index - 1);
 	return (0);
 }
 
-int count_rrotate(int index, int len)
+int	count_rrotate(int index, int len)
 {
-	if (index > (len / 2) + 1 && index != 1)
+	if (index > len / 2 + 1 && index != 1)
 		return (len - index + 1);
 	return (0);
 }
 
-void do_operation(int counter, t_node **s, void (*operation)(t_node **stack))
+void	do_operation(int counter, t_node **s, void (*operation)(t_node **stack))
 {
 	while (counter != 0)
 	{
@@ -54,7 +64,7 @@ void do_operation(int counter, t_node **s, void (*operation)(t_node **stack))
 	}
 }
 
-void menage_rotation(t_rdata *data, t_node **a, t_node **b)
+void	menage_rotation(t_rdata *data, t_node **a, t_node **b)
 {
 	while (data->ra_counter != 0 && data->rb_counter != 0)
 	{

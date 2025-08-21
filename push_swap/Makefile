@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR) -g #-Wall -Wextra -Werror
+CFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR) -g -Wall -Wextra -Werror
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -19,7 +19,10 @@ SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/sorting.c \
 			$(SRC_DIR)/stack_utils.c \
 			$(SRC_DIR)/sort_utils.c \
-			$(SRC_DIR)/turk_utils.c
+			$(SRC_DIR)/turk_utils.c \
+			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/turk.c \
+			$(SRC_DIR)/printing_stack.c 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:  $(LIBFT_DIR)/libft.a $(NAME)

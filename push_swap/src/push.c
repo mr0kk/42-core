@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 22:14:54 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/20 18:01:26 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 21:49:32 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	push(t_node **src, t_node **dest)
 		return ;
 	new_dest_head = *src;
 	if (get_stack_size(*src) > 1)
+	{
 		*src = (*src)->next;
+		(*src)->prev = NULL;
+	}
 	else
 		*src = NULL;
 	new_dest_head->next = *dest;

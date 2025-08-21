@@ -6,22 +6,22 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:38:54 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/19 17:55:36 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 21:54:07 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void add_node(t_node **head, int value)
+void	add_node(t_node **head, int value)
 {
-	t_node *new;
-	t_node *tmp;
+	t_node	*new;
+	t_node	*tmp;
 
 	new = create_node(value);
 	if (!(*head))
 	{
 		*head = new;
-		return;
+		return ;
 	}
 	tmp = *head;
 	while (tmp->next)
@@ -30,9 +30,9 @@ void add_node(t_node **head, int value)
 	new->prev = tmp;
 }
 
-t_node *create_node(int value)
+t_node	*create_node(int value)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)

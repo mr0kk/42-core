@@ -6,50 +6,15 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:53:50 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/21 15:34:38 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 23:56:20 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void print_stacks(t_node *a, t_node *b) //delete later
+int	get_stack_size(t_node *stack)
 {
-	printf("\n\n");
-	while (a || b)
-	{
-		if (a && b)
-		{
-			printf(" %d\t%d\n", a->value, b->value);
-			a = a->next;
-			b = b->next;
-		}
-		else if (a && !b)
-		{
-			printf(" %d\n", a->value);
-			a = a->next;
-		}
-		else if (!a && b)
-		{
-			printf(" \t%d\n", b->value);
-			b = b->next;
-		}
-	}
-	printf("----------\n");
-	printf(" a\tb\n");
-}
-
-void print_stack(t_node *head) //delete later
-{
-	while (head)
-	{
-		ft_printf("%d\tnext: %p\tcurrent: %p\t prev: %p\n", head->value, head->next, head, head->prev);
-		head = head->next;
-	}
-}
-
-int get_stack_size(t_node *stack)
-{
-	int res;
+	int	res;
 
 	res = 1;
 	while (stack->next)
@@ -60,7 +25,7 @@ int get_stack_size(t_node *stack)
 	return (res);
 }
 
-int is_sorted(t_node *stack)
+int	is_sorted(t_node *stack)
 {
 	while (stack->next)
 	{
@@ -84,12 +49,12 @@ void	set_indexes(t_node *stack)
 	}
 }
 
-void free_stack(t_node **head)
+void	free_stack(t_node **head)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (!(*head) || !head)
-		return;
+		return ;
 	while (*head)
 	{
 		tmp = (*head)->next;
@@ -99,28 +64,21 @@ void free_stack(t_node **head)
 	*head = NULL;
 }
 
-void print_stacks2(t_node *a, t_node *b) // to delete later
+int	get_min_index(t_node *s)
 {
-	printf("\n\n");
-	while (a || b)
+	int	min_index;
+	int	min_val;
+
+	min_index = s->index;
+	min_val = s->value;
+	while (s)
 	{
-		if (a && b)
+		if (s->value < min_val)
 		{
-			printf("A: %d. %d\t target: %d\t cost: %d\tB: %d. %d\n", a->index, a->value, a->target->value, a->cost, b->index, b->value);
-			a = a->next;
-			b = b->next;
+			min_val = s->value;
+			min_index = s->index;
 		}
-		else if (a && !b)
-		{
-			printf("A: %d. %d\t target: %d\t cost: %d\n", a->index, a->value, a->target->value, a->cost);
-			a = a->next;
-		}
-		else if (!a && b)
-		{
-			printf(" \t\t\tB: %d. %d\n", b->index, b->value);
-			b = b->next;
-		}
+		s = s->next;
 	}
-	printf("----------\n");
-	printf(" a\tb\n\n");
+	return (min_index);
 }

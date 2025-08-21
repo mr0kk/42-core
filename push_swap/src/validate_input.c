@@ -6,31 +6,21 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:32:15 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/14 21:42:55 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/21 22:02:12 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_digit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-int	is_sign(char c)
-{
-	return (c == '-' || c == '+');
-}
-
 int	fits_int(char *s)
 {
 	size_t	len;
 	char	*num;
-	int res;
-	
+	int		res;
+
 	num = ft_strtrim(s, "+ \t");
 	len = ft_strlen(num);
-	if (num[0] == '-') 
+	if (num[0] == '-')
 	{
 		if (len > 11)
 			return (0);
