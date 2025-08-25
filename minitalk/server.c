@@ -6,7 +6,7 @@
 /*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:54:29 by rmrok             #+#    #+#             */
-/*   Updated: 2025/08/25 23:36:14 by rmrok            ###   ########.fr       */
+/*   Updated: 2025/08/25 23:47:49 by rmrok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	main(void)
 	sigaction(SIGUSR1, &s_action, NULL);
 	sigaction(SIGUSR2, &s_action, NULL);
 	while (1)
-		pause();	
+		;
 	return (0);
 }
