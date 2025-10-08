@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmrok <rmrok@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/06 21:20:30 by rmrok             #+#    #+#             */
+/*   Updated: 2025/10/08 20:44:20 by rmrok            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 #define PHILO_H
 
 #include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
 #include <time.h>
 
 typedef struct s_philo_data
