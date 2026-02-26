@@ -1,8 +1,9 @@
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -pthread #-Wall -Wextra -Werror
 
 SRC_DIR = src
 OBJ_DIR = obj
+INC_PATH = ./include/
 
 NAME = philo
 SRCS = $(SRC_DIR)/main.c
@@ -12,7 +13,7 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC_PATH) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

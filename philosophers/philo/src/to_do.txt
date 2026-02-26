@@ -1,0 +1,4 @@
+
+
+- napisać własną funkcję liczącą czas -> smart_sleep
+- gdy jeden filozof umrze -> symulacja się kończy
