@@ -14,16 +14,34 @@
 
 void *test_func(void *arg)
 {
-	printf("in thread\n");
+	int *id_ptr = (int *)arg;
+
+	int id = *id_ptr;
+	printf("zaczynam prace w watku %d\n", id);
+	sleep(2);
+	printf("koniec pracy watku: %d\n", id);
 	return (NULL);
 }
 
 int main(int argc, char *argv[])
 {
 	pthread_t thread1;
+	pthread_t thread2;
 
-	pthread_create(&thread1, NULL, test_func, NULL);
+	int id1 = 1;
+	int	id2 = 2;
+
+	printf("main: tworzymy watek\n");
+
+
+	pthread_create(&thread1, NULL, &test_func, &id1);
+	pthread_create(&thread1, NULL, &test_func, &id2);
 	
+	printf("main: czekam az watki sie skoncza..\n");
+
 	pthread_join(thread1, NULL);
+	pthread_join(thread2, NULL);
+
+	printf("main: koniec watkow zamykamy\n");
 	return (0);
 }
