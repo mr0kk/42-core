@@ -2,3 +2,13 @@
 
 - napisać własną funkcję liczącą czas -> smart_sleep
 - gdy jeden filozof umrze -> symulacja się kończy
+- dodać mutexy też na funkcje printf zeby tylko jeden filozof na raz mógł wypisywac info na terminal
+
+
+argumenty programu:
+number_of_philosophers 
+time_to_die
+time_to_eat
+time_to_sleep
+[number_of_times_each_philosopher_must_eat] - opcjonalnie
+

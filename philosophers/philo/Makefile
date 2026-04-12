@@ -6,7 +6,9 @@ OBJ_DIR = obj
 INC_PATH = ./include/
 
 NAME = philo
-SRCS = $(SRC_DIR)/main.c
+SRCS = $(SRC_DIR)/main.c \
+			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/init.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

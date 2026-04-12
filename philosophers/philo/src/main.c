@@ -12,36 +12,66 @@
 
 #include "../include/philo.h"
 
-void *test_func(void *arg)
+int	free_everything(t_table *table, int return_val)
 {
-	int *id_ptr = (int *)arg;
+	int	i;
 
-	int id = *id_ptr;
-	printf("zaczynam prace w watku %d\n", id);
-	sleep(2);
-	printf("koniec pracy watku: %d\n", id);
-	return (NULL);
+	if (!table)
+		return (return_val);
+	if (table->forks)
+	{
+		i = 0;
+		while (i < table->correct_mutexes)
+		{
+			pthread_mutex_destroy(&table->forks[i]);
+			i++;
+		}
+		free(table->forks);
+	}
+	pthread_mutex_destroy(&table->dead_lock);
+    pthread_mutex_destroy(&table->write_lock);
+	if (table->philos)
+		free(table->philos);
+	return (return_val);
+}
+
+int	check_args(int argc, char **argv)
+{
+	int	i;
+
+	if (argc < 5 || argc > 6)
+	{
+		printf("Error: Wrong number of arguments.\n");
+		return (1);
+	}
+	i = 1;
+	while (i < argc)
+	{
+		if (!is_digit_str(argv[i]))
+		{
+			printf("Error: Argument %d is not a valid positive number.\n", i);
+			return (1);
+		}
+		i++;
+	}
+	if (ft_atoi(argv[1]) <= 0)
+	{
+		printf("Error: Need at least 1 philosopher.\n");
+		return (1);
+	}
+    return (0);
 }
 
 int main(int argc, char *argv[])
 {
-	pthread_t thread1;
-	pthread_t thread2;
+	t_table table;
 
-	int id1 = 1;
-	int	id2 = 2;
+	if (check_args(argc, argv))
+		return (1);
+	if (init_table(&table, argc, argv));
+		return (free_everything(&table, 1));
 
-	printf("main: tworzymy watek\n");
-
-
-	pthread_create(&thread1, NULL, &test_func, &id1);
-	pthread_create(&thread1, NULL, &test_func, &id2);
 	
-	printf("main: czekam az watki sie skoncza..\n");
-
-	pthread_join(thread1, NULL);
-	pthread_join(thread2, NULL);
-
-	printf("main: koniec watkow zamykamy\n");
+	free_everything(&table, 0);
 	return (0);
 }
