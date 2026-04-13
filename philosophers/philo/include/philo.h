@@ -55,6 +55,10 @@ typedef struct s_table
 int	init_table(t_table *table, int	argc, char **argv);
 
 /*
+	time_management.c
+*/
+
+/*
 	utils.c
 */
 int		ft_isdigit(int c);

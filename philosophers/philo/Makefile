@@ -8,7 +8,8 @@ INC_PATH = ./include/
 NAME = philo
 SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils.c \
-			$(SRC_DIR)/init.c
+			$(SRC_DIR)/init.c \
+			$(SRC_DIR)/time_management.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
