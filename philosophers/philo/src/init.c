@@ -59,6 +59,7 @@ int	init_table(t_table *table, int	argc, char **argv)
 	int	i;
 
 	table->dead_flag = false;
+	table->threads_read = false;
 	table->philos_nb = ft_atol(argv[1]);
 	table->time_to_die = ft_atol(argv[2]) * 1e3;
 	table->time_to_eat =  ft_atol(argv[3]) * 1e3;
@@ -72,6 +73,8 @@ int	init_table(t_table *table, int	argc, char **argv)
 	if (safe_mutex_handle(&table->dead_lock, INIT) != 0)
 		return (1);
 	if (safe_mutex_handle(&table->write_lock, INIT) != 0)
+		return (1);
+	if (safe_mutex_handle(&table->table_lock, INIT) != 0)
 		return (1);
 	if (init_philo(table))
 		return (1);

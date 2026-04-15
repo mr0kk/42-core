@@ -10,7 +10,11 @@ SRCS = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/init.c \
 			$(SRC_DIR)/time_management.c \
-			$(SRC_DIR)/safe_handling.c
+			$(SRC_DIR)/safe_handling.c \
+			$(SRC_DIR)/dinner.c \
+			$(SRC_DIR)/getters_setters.c \
+			$(SRC_DIR)/synchro_utils.c \
+			$(SRC_DIR)/print_status.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

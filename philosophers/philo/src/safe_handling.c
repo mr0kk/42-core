@@ -19,6 +19,9 @@ static int	handle_mutex_error(int status, t_opcode op_code)
 			 
 }
 
+/*
+	returns 0 when everything set correctly
+*/
 int	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode op_code)
 {
 	if (op_code == LOCK)
@@ -51,6 +54,9 @@ static int	handle_thread_error(int status, t_opcode op_code)
 			 
 }
 
+/*
+	returns 0 when everything set correctly
+*/
 int	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 					 void *data,  t_opcode op_code)
 {

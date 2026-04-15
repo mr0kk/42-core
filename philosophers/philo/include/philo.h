@@ -35,8 +35,8 @@ typedef struct s_philo
 {
 	pthread_t		thread_id;
 	int				id;
-	int				meal_count;
-	int				full;
+	long			meal_counter;
+	bool			full;
 	size_t			last_meal_time;
 	pthread_mutex_t *first_fork;
 	pthread_mutex_t	*second_fork;
@@ -52,9 +52,12 @@ typedef struct s_table
 	long			must_eat_goal;
 	long			start_time;
 	bool			dead_flag;
+	bool			threads_ready;
 	int				correct_mutexes;
+	long			runned_threads;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
+	pthread_mutex_t table_lock;
 	t_philo			*philos;
 	t_fork			*forks;
 }	t_table;
@@ -73,16 +76,51 @@ typedef enum e_opcode
 	DETACH,
 }	t_opcode;
 
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}	t_philo_status;
+
 /*
 	init.c
 */
 int	init_table(t_table *table, int	argc, char **argv);
 
 /*
+	dinner.c
+*/
+void	start_dinner(t_table *table);
+
+/*
+	getters_setters.c
+*/
+void	set_bool(pthread_mutex_t *mutex, bool *dest, bool value);
+bool	get_bool(pthread_mutex_t *mutex, bool *value);
+void	set_long(pthread_mutex_t *mutex, long *dest, long value);
+long	get_long(pthread_mutex_t *mutex, long *value);
+bool	simulation_finished(t_table *table);
+
+/*
+	synchro_utils.c
+*/
+void	wait_for_all_threads(t_table *table);
+
+
+/*
 	time_management.c
 */
-long long	get_time_in_ms(void);
-void		ft_usleep(long long time_in_ms);
+long		get_time_in_ms(void);
+void		ft_usleep(long time_in_ms, t_table *table);
+
+/*
+	print_status.c
+*/
+void	print_status(t_philo *philo, t_philo_status status);
 
 /*
 	safe_handling.c

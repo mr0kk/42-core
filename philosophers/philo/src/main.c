@@ -56,17 +56,6 @@ int	check_args(int argc, char **argv)
     return (0);
 }
 
-// void	print_status(t_philo *philo, char *status)
-// {
-// 	long long time_now;
-
-// 	pthread_mutex_lock(&philo->table->write_lock);
-// 	time_now = get_time_in_ms() - philo->table->start_time;
-// 	if (!check_death(philo->table))
-// 		printf("%lld %d %s\n", time_now, philo->id, status);
-// 	pthread_mutex_unlock(&philo->table->write_lock);
-// }
-
 /*
 	./philo 5 800 200 200 [5]
 */
@@ -79,20 +68,7 @@ int main(int argc, char *argv[])
 	if (init_table(&table, argc, argv))
 		return (free_everything(&table, 1));
 
-	 
-	// tests
-	int	i = 0;
-	printf("philo number: %ld\n", table.philos_nb);
-	printf("time_to_die: %ld\n", table.time_to_die);
-	printf("time_to_eat: %ld\n", table.time_to_eat);
-	printf("time_to_sleep: %ld\n", table.time_to_sleep);
-	while (i < table.philos_nb)
-	{
-		printf("philo number: %d\tid: %d\tleft fork: %p\tright fork: %p\n",
-		i, table.philos[i].id, table.philos[i].left_fork, table.philos[i].right_fork);
-			i++;
-	}
-	// start_dinner(&table);
+	start_dinner(&table);
 
 	// clean_after_dinner(&table); // when all philo full or 1 died
 	return (free_everything(&table, 0));
