@@ -14,7 +14,7 @@ bool	get_bool(pthread_mutex_t *mutex, bool *value)
 	safe_mutex_handle(mutex, LOCK);
 	res = *value;
 	safe_mutex_handle(mutex, UNLOCK);
-	return (value);
+	return (res);
 }
 
 void	set_long(pthread_mutex_t *mutex, long *dest, long value)
@@ -36,5 +36,5 @@ long	get_long(pthread_mutex_t *mutex, long *value)
 
 bool	simulation_finished(t_table *table)
 {
-	return (get_bool(table->table_lock, &table->dead_flag));
+	return (get_bool(&table->table_lock, &table->dead_flag));
 }

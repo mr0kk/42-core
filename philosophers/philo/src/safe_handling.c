@@ -1,6 +1,6 @@
 #include "../include/philo.h"
 
-static int	handle_mutex_error(int status, t_opcode op_code)
+static int	handle_mutex_error(t_opcode op_code, int status)
 {
 	if (status == 0)
 		return (0);
@@ -25,13 +25,13 @@ static int	handle_mutex_error(int status, t_opcode op_code)
 int	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode op_code)
 {
 	if (op_code == LOCK)
-		return (handle_mutex_error(pthread_mutex_lock(mutex), LOCK));
+		return (handle_mutex_error(op_code, pthread_mutex_lock(mutex)));
 	else if (op_code == UNLOCK)
-		return (handle_mutex_error(pthread_mutex_unlock(mutex), UNLOCK));
+		return (handle_mutex_error(op_code, pthread_mutex_unlock(mutex)));
 	else if (op_code == INIT)
-	return (handle_mutex_error(pthread_mutex_init(mutex), INIT));
+	return (handle_mutex_error(op_code, pthread_mutex_init(mutex, NULL)));
 	else if (op_code == DESTROY)
-		return (handle_mutex_error(pthread_mutex_destroy(mutex), DESTROY));
+		return (handle_mutex_error(op_code, pthread_mutex_destroy(mutex)));
 	return (return_message("Error: wrong opcode for handle mutex", 1));
 }
 

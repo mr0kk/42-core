@@ -20,6 +20,7 @@
 #include <sys/time.h>
 #include <limits.h>
 #include <errno.h>
+#include <stdbool.h>
 
 typedef struct	s_table t_table;
 typedef struct	s_philo t_philo;
@@ -38,8 +39,9 @@ typedef struct s_philo
 	long			meal_counter;
 	bool			full;
 	size_t			last_meal_time;
-	pthread_mutex_t *first_fork;
-	pthread_mutex_t	*second_fork;
+	t_fork			*first_fork;
+	t_fork			*second_fork;
+	pthread_mutex_t	philo_lock; // for races with monitor
 	t_table 		*table;
 }	t_philo;
 

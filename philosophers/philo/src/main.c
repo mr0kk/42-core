@@ -40,7 +40,7 @@ int	check_args(int argc, char **argv)
 	int	i;
 
 	if (argc < 5 || argc > 6)
-		return (return_message("Error: Wrong number of arguments.", 1))
+		return (return_message("Error: Wrong number of arguments.", 1));
 	i = 1;
 	while (i < argc)
 	{

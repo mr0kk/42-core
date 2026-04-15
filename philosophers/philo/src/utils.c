@@ -69,7 +69,7 @@ long	ft_atol(const char *str)
 
 int	return_message(char *message, int value)
 {
-	printf("%s\n");
+	printf("%s\n", message);
 	return (value);
 }
 

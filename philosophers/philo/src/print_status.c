@@ -4,7 +4,7 @@ void	print_status(t_philo *philo, t_philo_status status)
 {
 	long	time_now;
 	
-	time_now = get_time_in_ms();
+	time_now = get_time_in_ms() - philo->table->start_time;
 	if (philo->full) // check if thread safe
 		return ;
 	safe_mutex_handle(&philo->table->write_lock, LOCK);

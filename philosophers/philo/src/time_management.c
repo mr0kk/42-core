@@ -19,12 +19,12 @@ void	ft_usleep(long time_in_ms, t_table *table)
 	{
 		if (simulation_finished(table))
 			break ;
-		elapsed = get_time_in_ms() - start;
+		elapsed = get_time_in_ms() - start_time;
 		rem = time_in_ms - elapsed;
 		if (rem > 1e3)
 			usleep(time_in_ms / 2);
 		else
-			while (get_time_in_ms() - start < time_in_ms)
+			while (get_time_in_ms() - start_time < time_in_ms)
 				;
 	}
 }
