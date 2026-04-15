@@ -19,8 +19,8 @@ int	init_philo(t_table *table)
 		table->philos[i].meal_counter = 0;
 		table->philos[i].last_meal_time = 0;
 		table->philos[i].table = table;
-		table->philos[i].first_fork =&table->forks[ (i + 1) % table->philos_nb];
-		table->philos[i].second_fork =  &table->forks[i];
+		table->philos[i].first_fork = &table->forks[(i + 1) % table->philos_nb];
+		table->philos[i].second_fork = &table->forks[i];
 		if (safe_mutex_handle(&table->philos[i].philo_lock, INIT))
 			return (1);
 		if (table->philos[i].id % 2 == 0)
@@ -33,7 +33,7 @@ int	init_philo(t_table *table)
 	return (0);
 }
 
-int	init_forks(t_table  *table)
+int	init_forks(t_table *table)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ int	init_forks(t_table  *table)
 	i = 0;
 	while (i < table->philos_nb)
 	{
-		if (safe_mutex_handle(&table->forks[i].fork, INIT) )
+		if (safe_mutex_handle(&table->forks[i].fork, INIT))
 			return (1);
 		table->forks[i].fork_id = i;
 		i++;
@@ -56,17 +56,18 @@ int	init_forks(t_table  *table)
 	this function assigns input values to table variables
 	and init whole simulation item: philos, forks etc
 */
-int	init_table(t_table *table, int	argc, char **argv)
+int	init_table(t_table *table, int argc, char **argv)
 {
 	table->dead_flag = false;
 	table->threads_ready = false;
 	table->philos_nb = ft_atol(argv[1]);
 	table->time_to_die = ft_atol(argv[2]);
-	table->time_to_eat =  ft_atol(argv[3]);
-	table->time_to_sleep =  ft_atol(argv[4]);
+	table->time_to_eat = ft_atol(argv[3]);
+	table->time_to_sleep = ft_atol(argv[4]);
 	table->must_eat_goal = -1;
+	table->runned_threads_num = 0;
 	if (argc == 6)
-		table->must_eat_goal =  ft_atol(argv[5]);
+		table->must_eat_goal = ft_atol(argv[5]);
 	if (init_forks(table))
 		return (1);
 	if (safe_mutex_handle(&table->dead_lock, INIT) != 0)

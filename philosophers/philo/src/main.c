@@ -29,7 +29,7 @@ int	free_everything(t_table *table, int return_val)
 		free(table->forks);
 	}
 	pthread_mutex_destroy(&table->dead_lock);
-    pthread_mutex_destroy(&table->write_lock);
+	pthread_mutex_destroy(&table->write_lock);
 	if (table->philos)
 		free(table->philos);
 	return (return_val);
@@ -53,23 +53,42 @@ int	check_args(int argc, char **argv)
 	}
 	if (ft_atol(argv[1]) <= 0)
 		return_message("Error: Need at least 1 philosopher.", 1);
-    return (0);
+	return (0);
+}
+
+void	clean_after_dinner(t_table *table)
+{
+	t_philo	*philo;
+	int		i;
+
+	i = 0;
+	while (i < table->philos_nb)
+	{
+		philo = table->philos + i;
+		safe_mutex_handle(&philo->philo_lock, DESTROY);
+		safe_mutex_handle(&table->forks[i].fork, DESTROY);
+		i++;
+	}
+	safe_mutex_handle(&table->dead_lock, DESTROY);
+	safe_mutex_handle(&table->write_lock, DESTROY);
+	safe_mutex_handle(&table->table_lock, DESTROY);
+	free(table->forks);
+	free(table->philos);
 }
 
 /*
 	./philo 5 800 200 200 [5]
 */
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_table table;
+	t_table	table;
 
 	if (check_args(argc, argv))
 		return (1);
 	if (init_table(&table, argc, argv))
 		return (free_everything(&table, 1));
-
 	start_dinner(&table);
-
-	// clean_after_dinner(&table); // when all philo full or 1 died
-	return (free_everything(&table, 0));
+	clean_after_dinner(&table); // when all philo full or 1 died
+	// return (free_everything(&table, 0));
+	return (0);
 }

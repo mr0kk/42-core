@@ -47,16 +47,17 @@ typedef struct s_philo
 
 typedef struct s_table
 {
+	pthread_t		monitor;
 	long			philos_nb;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			must_eat_goal;
 	long			start_time;
-	bool			dead_flag;
+	bool			dead_flag; //ens_simulation
 	bool			threads_ready;
 	int				correct_mutexes;
-	long			runned_threads;
+	long			runned_threads_num;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t table_lock;
@@ -97,6 +98,12 @@ int	init_table(t_table *table, int	argc, char **argv);
 	dinner.c
 */
 void	start_dinner(t_table *table);
+void	philo_thinking(t_philo *philo, bool pre_sym);
+
+/*
+	monitoring.c
+*/
+void	*dinner_monitoring(void *data);
 
 /*
 	getters_setters.c
@@ -111,7 +118,8 @@ bool	simulation_finished(t_table *table);
 	synchro_utils.c
 */
 void	wait_for_all_threads(t_table *table);
-
+bool	all_threads_running(pthread_mutex_t *mutex, long *threads, long philo);
+void	increase_long(pthread_mutex_t *mutex, long *value);
 
 /*
 	time_management.c
@@ -127,7 +135,7 @@ void	print_status(t_philo *philo, t_philo_status status);
 /*
 	safe_handling.c
 */
-int	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode op_code);
+int			safe_mutex_handle(pthread_mutex_t *mutex, t_opcode op_code);
 int			safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 					 void *data,  t_opcode op_code);
 /*
