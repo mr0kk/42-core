@@ -7,7 +7,7 @@
 
 
 ## Instructions
-To compile program use 'make' then run minishell using: ./minishell
+To compile program use 'make' then run simulation using: ./philo
 
 ```bash
 make

@@ -26,6 +26,6 @@ void	ft_usleep(long time_in_ms, t_table *table)
 			usleep(rem / 2);
 		else
 			while (get_time_in_ms() - start_time < time_in_ms)
-				;
+				usleep(100);
 	}
 }

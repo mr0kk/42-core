@@ -26,7 +26,8 @@ int	init_philo(t_table *table)
 		if (table->philos[i].id % 2 == 0)
 		{
 			table->philos[i].first_fork = &table->forks[i];
-			table->philos[i].second_fork = &table->forks[(i + 1) % table->philos_nb];
+			table->philos[i].second_fork = &table->forks[(i + 1)
+				% table->philos_nb];
 		}
 		i++;
 	}

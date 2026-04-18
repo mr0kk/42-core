@@ -24,6 +24,7 @@ void	*dinner_monitoring(void *data)
 	while (!all_threads_running(&table->table_lock, &table->runned_threads_num,
 			table->philos_nb))
 		;
+	// wait_for_all_threads(table);
 	while (!simulation_finished(table))
 	{
 		i = 0;

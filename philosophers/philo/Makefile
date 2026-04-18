@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -pthread #-Wall -Wextra -Werror
+CFLAGS = -pthread -Wall -Wextra -Werror
 
 SRC_DIR = src
 OBJ_DIR = obj

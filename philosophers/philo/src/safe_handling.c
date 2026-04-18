@@ -18,6 +18,7 @@ static int	handle_mutex_error(t_opcode op_code, int status)
 				"process cannot allocate enought memory for mutex", 1));
 	else if (status == EBUSY)
 		return (return_message("Mutex is locked", 1));
+	return (0);
 }
 
 /*
@@ -54,6 +55,7 @@ static int	handle_thread_error(int status, t_opcode op_code)
 				"no thread could be found with this thread ID", 1));
 	else if (status == EDEADLK)
 		return (return_message("deadlock was detected", 1));
+	return (0);
 }
 
 /*

@@ -17,16 +17,14 @@ int	is_digit_str(const char *str)
 
 	i = 0;
 	while (ft_is_space(str[i]))
-		str[i++];
+		i++;
 	if (str[i] == '+')
 		i++;
 	else if (str[i] == '-')
 		return (0);
-	if (!str[i] && !ft_isdigit(str[i]))
+	if (!str[i] || !ft_isdigit(str[i]))
 		return (0);
 	len = 0;
-	if (ft_isdigit(str[i]) == 0)
-		return (0);
 	while (str[i] && ft_isdigit(str[i]))
 	{
 		len++;
@@ -50,9 +48,8 @@ long	ft_atol(const char *str)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		if (str[i] == '-')
+		if (str[i++] == '-')
 			sign = -1;
-		i++;
 	}
 	while (ft_isdigit(str[i]))
 	{

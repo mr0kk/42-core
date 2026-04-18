@@ -34,7 +34,7 @@ void	de_synchronize_philos(t_philo *philo)
 	if (philo->table->philos_nb % 2 == 0)
 	{
 		if (philo->id % 2 == 0)
-			ft_usleep(3e4, philo->table);
+			ft_usleep(30, philo->table);
 	}
 	else
 	{

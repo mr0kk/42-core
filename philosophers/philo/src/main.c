@@ -52,7 +52,7 @@ int	check_args(int argc, char **argv)
 		i++;
 	}
 	if (ft_atol(argv[1]) <= 0)
-		return_message("Error: Need at least 1 philosopher.", 1);
+		return (return_message("Error: Need at least 1 philosopher.", 1));
 	return (0);
 }
 
@@ -87,8 +87,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (init_table(&table, argc, argv))
 		return (free_everything(&table, 1));
-	start_dinner(&table);
-	clean_after_dinner(&table); // when all philo full or 1 died
-	// return (free_everything(&table, 0));
+	start_dinner(&table, -1);
+	clean_after_dinner(&table);
 	return (0);
 }
