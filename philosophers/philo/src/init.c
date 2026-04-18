@@ -24,12 +24,13 @@ int	init_philo(t_table *table)
 	table->philos = malloc(table->philos_nb * sizeof(t_philo));
 	if (!table->philos)
 		return (return_message("Error: malloc error when alocating philos", 1));
-	i = 0;
-	while (i < table->philos_nb)
+	i = -1;
+	while (++i < table->philos_nb)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].meal_counter = 0;
 		table->philos[i].last_meal_time = 0;
+		table->philos[i].full = false;
 		table->philos[i].table = table;
 		table->philos[i].first_fork = &table->forks[(i + 1) % table->philos_nb];
 		table->philos[i].second_fork = &table->forks[i];
@@ -41,7 +42,6 @@ int	init_philo(t_table *table)
 			table->philos[i].second_fork = &table->forks[(i + 1)
 				% table->philos_nb];
 		}
-		i++;
 	}
 	return (0);
 }
